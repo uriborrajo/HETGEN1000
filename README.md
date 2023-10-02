@@ -1,2 +1,3 @@
 # HETGEN1000
-Genomic studies in gastropod molluscs (Heterobranchia).
+
+# Count the read data
