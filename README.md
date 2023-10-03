@@ -218,7 +218,16 @@ phyluce_assembly_get_fastas_from_match_counts \
     --incomplete-matrix all-taxa-incomplete.incomplete \
     --log-path log
 ```
-### 10.
+### 10. EXPLODING THE MONOLITHIC FASTA FILE
+```
+phyluce_assembly_explode_get_fastas_file \
+    --input all-taxa-incomplete.fasta \
+    --output exploded-fastas \
+    --by-taxon
+```
+
+
+
 
 
 
