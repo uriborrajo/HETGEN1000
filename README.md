@@ -225,6 +225,21 @@ phyluce_assembly_explode_get_fastas_file \
     --output exploded-fastas \
     --by-taxon
 ```
+### 11. ALIGNING UCE LOCI
+- ### EDGE TRIMMING
+You have to make sure that you are in the correct directory ```~/taxon-sets/all```
+```
+phyluce_align_seqcap_align \
+    --input all-taxa-incomplete.fasta \
+    --output mafft-nexus-edge-trimmed \
+    --taxa 33 \
+    --aligner mafft \
+    --cores 30 \
+    --incomplete-matrix \
+    --output-format fasta \
+    --log-path log
+```
+
 
 
 
