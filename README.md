@@ -106,6 +106,44 @@ for especie_dir in "$directorio_secundario"/*; do
   fi
 done
 ```
+### 6. SPADES
+```
+# script assembly.conf.pl para generar el documento assembly.conf
+#!/usr/bin/perl
+
+use strict;
+use warnings;
+
+my $directory = '/home/intern/Desktop/Oriol/cdhitdup';
+my $conf_file = 'assembly.conf';
+
+opendir(my $dh, $directory) or die "Cannot open directory: $!";
+my @subdirectories = grep { !/^\./ && -d "$directory/$_" } readdir($dh);
+closedir($dh);
+
+open(my $fh, '>', $conf_file) or die "Cannot open file: $!";
+
+print $fh "[samples]\n";
+
+foreach my $subdir (@subdirectories) {
+    my $subdir_path = "$directory/$subdir";
+    print $fh "$subdir:$subdir_path\n";
+}
+close($fh);
+
+print "Se ha generado el archivo $conf_file.\n";
+```
+```
+phyluce_assembly_assemblo_spades \
+    --conf assembly.conf \
+    --output spades-assemblies \
+--memory 20000 \
+    	    --cores 30 \
+
+
+
+
+
 
 
 
