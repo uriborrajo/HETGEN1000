@@ -199,7 +199,7 @@ phyluce_assembly_match_contigs_to_probes \
 ### 9. EXTRACTING UCE LOCI
 ```mkdir -p taxon-sets/all```
 
-**S'ha de crear un script per a generar el** ```taxon-sets.conf```
+**S'ha de crear un script per a generar el** ```taxon-set.conf```
 ```
 phyluce_assembly_get_match_counts \
     --locus-db ../../uce-search-results/probe.matches.sqlite \
