@@ -226,8 +226,8 @@ phyluce_assembly_explode_get_fastas_file \
     --by-taxon
 ```
 ### 11. ALIGNING UCE LOCI
-- ### EDGE TRIMMING
-You have to make sure that you are in the correct directory ```~/taxon-sets/all```
+- #### EDGE TRIMMING
+Make sure that you are in the correct directory ```~/taxon-sets/all```
 ```
 phyluce_align_seqcap_align \
     --input all-taxa-incomplete.fasta \
@@ -239,6 +239,85 @@ phyluce_align_seqcap_align \
     --output-format fasta \
     --log-path log
 ```
+- #### INTERNAL TRIMMING
+```
+phyluce_align_seqcap_align \
+    --input all-taxa-incomplete.fasta \
+    --output mafft-nexus-internal-trimmed \
+    --taxa 33 \
+    --aligner mafft \
+    --cores 35 \
+    --incomplete-matrix \
+    --output-format fasta \
+    --no-trim \
+    --log-path log
+```
+We are going to trim this loci using **Gblocks**
+
+So we can:
+- Run gblocks trimming on the edge trimmed alignments
+ ```
+phyluce_align_get_gblocks_trimmed_alignments_from_untrimmed \
+    --alignments mafft-nexus-edge-trimmed \
+    --output mafft-nexus-edge-trimmed-gblocks \
+    --cores 35 \
+    --log log
+```
+- Run gblocks trimming on the internal trimmed alignments
+```
+phyluce_align_get_gblocks_trimmed_alignments_from_untrimmed \
+    --alignments mafft-nexus-internal-trimmed \
+    --output mafft-nexus-edge-trimmed-gblocks \
+    --cores 35 \
+    --log log
+```
+### 12. ALIGNMENT CLEANING
+Make sure that you are in the correct directory ```~/taxon-sets/all```
+```
+phyluce_align_remove_locus_name_from_files \
+    --alignments mafft-nexus-edge-trimmed-gblocks \
+    --output mafft-nexus-edge-trimmed-gblocks-clean \
+    --cores 35 \
+    --log-path log
+```
+**We are using ```mafft-nexus-edge-trimmed-gblocks``` but you can also use ```mafft-nexus-internal-trimmed-gblocks```, depending on the decision you made in step 11.**
+
+### 13. FINAL DATA MATRICES
+Make sure that you are in the correct directory ```~/taxon-sets/all```
+```
+phyluce_align_get_only_loci_with_min_taxa \
+    --alignments mafft-nexus-edge-trimmed-gblocks-clean \
+    --taxa 33 \
+    --percent 0.50 \
+    --output mafft-nexus-internal-trimmed-gblocks-clean-50p \
+    --cores 35 \
+    --log-path log
+```
+### 14. PREPARING DATA FOR DOWNSTREAM ANALYSIS
+Make sure that you are in the correct directory ```~/taxon-sets/all```
+```
+phyluce_align_concatenate_alignments \
+    --alignments mafft-nexus-edge-trimmed-gblocks-clean-50p \
+    --output mafft-nexus-edge-trimmed-gblocks-clean-50p-IQTree \
+    --phylip \
+    --log-path log
+```
+### 15. DOWNSTREAM ANALYSIS
+- #### IQTree
+Make sure that you are in the correct directory ```~/taxon-sets/all/mafft-nexus-edge-trimmed-gblocks-clean-50p-IQTree```
+```
+iqtree -st DNA -ninit 10 -bb 1500 -s mafft-nexus-edge-trimmed-gblocks-clean-50p-IQTree.phylip
+-pre iqtree-GHOST-50p -m GTR+FO*H4 -rcluster 10 -mrate G,R,E
+```
+
+
+
+
+
+
+
+
+
 
 
 
