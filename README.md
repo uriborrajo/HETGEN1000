@@ -163,6 +163,33 @@ done
 
 echo "Proceso completado"
 ```
+### 7.CD-HIT
+```
+#!/bin/bash
+
+directorio_principal="/home/intern/Desktop/Oriol/spades-assemblies"
+directorio_secundario="/home/intern/Desktop/Oriol/log-cd-hit"
+directorio_cd_hit="/home/intern/Desktop/Oriol/cd-hit"
+
+mkdir -p "$directorio_secundario"
+mkdir -p "$directorio_cd_hit"
+
+for especie_contig in "$directorio_principal"/*; do
+  if [ -f "$especie_contig" ]; then
+    especie=$(basename "$especie_contig")
+    echo "Procesando especie: $especie"
+    
+    input_file="$directorio_principal/$especie"
+    output_dir="$directorio_secundario"
+
+    cd-hit -i "$input_file" -o "$output_dir/$especie" -c 0.9 -aS 0.8 -M 50000 -T 30
+
+    mv "$output_dir/$especie" "$directorio_cd_hit/"
+   
+  fi
+done
+```
+
 
 
 
