@@ -13,7 +13,7 @@ You need to activate the environment before you can use any of the Phyluce comma
 conda activate phyluce-1.7.2
 ```
 
-If you want to leave Phyluce enviroment, run:
+If you want to leave Phyluce environment, run:
 ```
 conda deactivate
 ```
