@@ -137,8 +137,34 @@ print "Se ha generado el archivo $conf_file.\n";
 phyluce_assembly_assemblo_spades \
     --conf assembly.conf \
     --output spades-assemblies \
---memory 20000 \
-    	    --cores 30 \
+    --memory 20000 \
+    --cores 30 \
+```
+```
+#!/bin/bash
+
+directorio_principal="/home/intern/Desktop/Oriol/cdhitdup/spades-assemblies"
+
+directorio_clean="${directorio_principal}/clean"
+
+mkdir -p "${directorio_clean}"
+
+for carpeta_especie in "${directorio_principal}"/*/; do
+    nombre_especie=$(basename "${carpeta_especie}")
+    nombre_especie_sin_spades="${nombre_especie/_spades/}"
+
+    if [ -e "${carpeta_especie}/contigs.fasta" ]; then
+        mv "${carpeta_especie}/contigs.fasta" "${directorio_clean}/${nombre_especie_sin_spades}.contigs.fasta"
+        echo "Renombrado y movido ${nombre_especie_sin_spades}.contigs.fasta"
+    else
+        echo "No se encontró contigs.fasta en ${nombre_especie}"
+    fi
+done
+
+echo "Proceso completado"
+```
+
+
 
 
 
