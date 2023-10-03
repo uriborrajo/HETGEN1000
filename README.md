@@ -189,6 +189,43 @@ for especie_contig in "$directorio_principal"/*; do
   fi
 done
 ```
+### 8. FINDING UCE LOCI
+```
+phyluce_assembly_match_contigs_to_probes \
+    --contigs . \
+    --probes ../../spades-assembly/Probeset-70nt.fasta \
+    --output uce-search-results \
+```
+### 9. EXTRACTING UCE LOCI
+```mkdir -p taxon-sets/all```
+**S'ha de crear un script per a generar el** ```taxon-sets.conf```
+```
+phyluce_assembly_get_match_counts \
+    --locus-db ../../uce-search-results/probe.matches.sqlite \
+    --taxon-list-config taxon-set.conf \
+    --taxon-group 'all' \
+    --incomplete-matrix \
+    --output taxon-sets/all/all-taxa-incomplete.conf
+```
+
+```
+phyluce_assembly_get_fastas_from_match_counts \
+    --contigs ../../../spades-assemblies \
+    --locus-db ../../uce-search-results/probe.matches.sqlite \
+    --match-count-output all-taxa-incomplete.conf \
+    --output all-taxa-incomplete.fasta \
+    --incomplete-matrix all-taxa-incomplete.incomplete \
+    --log-path log
+```
+
+
+
+
+
+
+
+
+
 
 
 
