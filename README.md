@@ -163,7 +163,7 @@ done
 
 echo "Proceso completado"
 ```
-### 7.CD-HIT
+### 7. CD-HIT
 ```
 #!/bin/bash
 
