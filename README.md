@@ -246,7 +246,36 @@ phyluce_assembly_match_contigs_to_probes \
 ### 9. EXTRACTING UCE LOCI
 ```mkdir -p taxon-sets/all```
 
-**S'ha de crear un script per a generar el** ```taxon-set.conf```
+ ```taxon-set.conf.pl``` 
+ ```
+#!/usr/bin/perl
+
+use strict;
+use warnings;
+
+my $directory = '/home/intern/Desktop/Oriol/UCE_mollusca/cd-hit';
+my $conf_file = 'taxon-set.conf';
+
+opendir(my $dh, $directory) or die "Cannot open directory: $!";
+my @files = grep { !/^\./ && -f "$directory/$_" } readdir($dh);
+closedir($dh);
+
+open(my $fh, '>', $conf_file) or die "Cannot open file: $!";
+
+print $fh "[all]\n";
+
+foreach my $file (@files) {
+    my ($name) = $file =~ /^(.*)\.contigs.fasta$/;
+    if ($name) {
+        print $fh "$name\n";
+    }
+}
+
+close($fh);
+
+print "Se ha generado el archivo $conf_file.\n";
+```
+
 ```
 phyluce_assembly_get_match_counts \
     --locus-db ../../uce-search-results/probe.matches.sqlite \
