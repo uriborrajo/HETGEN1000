@@ -126,20 +126,21 @@ for especie_dir in "$directorio_principal"/*; do
     if [ -n "$read1" ] && [ -n "$read2" ]; then
       gunzip -c -k "$read1" "$read2"
 
-    read1.1=$(find "$especie_dir" -type f -name "*-READ1.fastq")
-    read2.1=$(find "$especie_dir" -type f -name "*-READ2.fastq")
+      read1_1=$(find "$especie_dir" -type f -name "*-READ1.fastq")
+      read2_1=$(find "$especie_dir" -type f -name "*-READ2.fastq")
 
-    if [ -n "$read1.1" ] && [ -n "$read2.1" ]; then
-      output_dir="$directorio_secundario/$especie"
-      mkdir -p "$output_dir"
-      cd-hit-dup -u 30 -m false -i "$read1.1" -i2 "$read2.1" -o "$output_dir/${especie}-READ1.fastq" -o2 "$output_dir/${especie}-READ2.fastq"
+      if [ -n "$read1_1" ] && [ -n "$read2_1" ]; then
+        output_dir="$directorio_secundario/$especie"
+        mkdir -p "$output_dir"
+        cd-hit-dup -u 30 -m false -i "$read1_1" -i2 "$read2_1" -o "$output_dir/${especie}-READ1.fastq" -o2 "$output_dir/${especie}-READ2.fastq"
 
-      gzip -k "$output_dir/${especie}-READ1.fastq"
-      gzip -k "$output_dir/${especie}-READ2.fastq"
-      
-      echo "Duplicados eliminados para $especie"
-    else
-      echo "No se encontraron archivos READ1 o READ2 para $especie"
+        gzip -k "$output_dir/${especie}-READ1.fastq"
+        gzip -k "$output_dir/${especie}-READ2.fastq"
+
+        echo "Duplicados eliminados para $especie"
+      else
+        echo "No se encontraron archivos READ1 o READ2 para $especie"
+      fi
     fi
   fi
 done
