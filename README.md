@@ -379,7 +379,7 @@ So we can:
  ```
 phyluce_align_get_gblocks_trimmed_alignments_from_untrimmed \
         --alignments mafft-nexus-edge-trimmed \
-        --output mafft-nexus-internal-trimmed-gblocks \
+        --output mafft-nexus-edge-trimmed-gblocks \
         --b1 0.5 \
         --b2 0.85 \
         --b3 4 \
