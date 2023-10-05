@@ -378,19 +378,31 @@ So we can:
 - Run gblocks trimming on the edge trimmed alignments
  ```
 phyluce_align_get_gblocks_trimmed_alignments_from_untrimmed \
-    --alignments mafft-nexus-edge-trimmed \
-    --output mafft-nexus-edge-trimmed-gblocks \
-    --cores 35 \
-    --log log
+        --alignments mafft-nexus-edge-trimmed \
+        --output mafft-nexus-internal-trimmed-gblocks \
+        --b1 0.5 \
+        --b2 0.85 \
+        --b3 4 \
+        --b4 8 \
+        --cores 12 \
+        --log-path log
 ```
 - Run gblocks trimming on the internal trimmed alignments
 ```
 phyluce_align_get_gblocks_trimmed_alignments_from_untrimmed \
-    --alignments mafft-nexus-internal-trimmed \
-    --output mafft-nexus-edge-trimmed-gblocks \
-    --cores 35 \
-    --log log
+        --alignments mafft-nexus-internal-trimmed \
+        --output mafft-nexus-internal-trimmed-gblocks \
+        --b1 0.5 \
+        --b2 0.85 \
+        --b3 4 \
+        --b4 8 \
+        --cores 12 \
+        --log-path log
 ```
+*higher level:  --b1 0.5 --b2 0.85 --b3 4 --b4 8  #Very conservative*
+*mid level: --b1 0.5 --b2 0.5 --b3 6 --b4 6 #This is what I start with, and use in most pubs, higher-level*
+*species level: --b1 0.5 --b2 0.5 --b3 10 --b4 4  #Use this with shallow datasets (species- and population-level)*
+
 ### 12. ALIGNMENT CLEANING
 Make sure that you are in the correct directory ```~/taxon-sets/all```
 ```
