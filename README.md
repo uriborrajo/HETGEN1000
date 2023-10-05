@@ -346,6 +346,9 @@ phyluce_assembly_explode_get_fastas_file \
     --by-taxon
 ```
 ### 11. ALIGNING UCE LOCI
+
+When taxa are “closely” related (< 30-50 MYA, perhaps), I think that edge-trimming alignments is reasonable. When the taxa you are interested in span a wider range of divergence times (> 50 MYA), you may want to think about internal trimming.
+
 - #### EDGE TRIMMING
 Make sure that you are in the correct directory ```~/taxon-sets/all```
 ```
