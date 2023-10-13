@@ -75,36 +75,36 @@ perl fastp.pl
 
 mkdir -p "/home/intern/Desktop/Oriol/cdhitdup"
 
-directorio_principal="/home/intern/Desktop/Oriol/UCE_clean_reads_mollusca"
-directorio_secundario="/home/intern/Desktop/Oriol/cdhitdup"
+main_directory="/home/intern/Desktop/Oriol/UCE_clean_reads_mollusca"
+secondary_directory="/home/intern/Desktop/Oriol/cdhitdup"
 
-for especie_dir in "$directorio_principal"/*; do
-  if [ -d "$especie_dir" ]; then
-    especie=$(basename "$especie_dir")
-    echo "Procesando especie: $especie"
+for species_dir in "$main_directory"/*; do
+  if [ -d "$species_dir" ]; then
+    species=$(basename "$species_dir")
+    echo "Procesando especie: $species"
 
-    read1=$(find "$especie_dir" -type f -name "*-READ1.fastq")
-    read2=$(find "$especie_dir" -type f -name "*-READ2.fastq")
+    read1=$(find "$species_dir" -type f -name "*-READ1.fastq")
+    read2=$(find "$species_dir" -type f -name "*-READ2.fastq")
 
     if [ -n "$read1" ] && [ -n "$read2" ]; then
-      output_dir="$directorio_secundario/$especie"
+      output_dir="$secondary_directory/$species_dir"
       mkdir -p "$output_dir"  
       gunzip -c -k "$read1" "$read2" | cd-hit-dup -u 30 -m false -i "$read1" -i2 "$read2" \
         -o "$output_dir/${especie}-READ1.fastq" -o2 "$output_dir/${especie}-READ2.fastq"
 
-      gzip -k "$output_dir/${especie}-READ1.fastq"
-      gzip -k "$output_dir/${especie}-READ2.fastq"
+      gzip -k "$output_dir/${species}-READ1.fastq"
+      gzip -k "$output_dir/${species}-READ2.fastq"
       
-      echo "Duplicados eliminados para $especie"
+      echo "Duplicados eliminados para $species"
     else
-      echo "No se encontraron archivos READ1 o READ2 para $especie"
+      echo "No se encontraron archivos READ1 o READ2 para $species"
     fi
   fi
 done
 
-for especie_dir in "$directorio_secundario"/*; do
-  if [ -d "$especie_dir" ]; then
-    find "$especie_dir" -type f ! -name "*.gz" -exec rm -f {} \;
+for species_dir in "$secondary_directory"/*; do
+  if [ -d "$species_dir" ]; then
+    find "$species_dir" -type f ! -name "*.gz" -exec rm -f {} \;
   fi
 done
 ```
