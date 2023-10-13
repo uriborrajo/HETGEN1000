@@ -24,7 +24,9 @@ for i in *_R1_*.fastq.gz; do echo $i; gunzip -c $i | wc -l | awk '{print $1/4}';
 
 ### 4. FASTP
 
-We will create a script that we will call ```fastp.pl``` to automate the usage of **fastp** for all species. 
+We will create a script that we will call ```fastp.pl``` to automate the usage of **fastp** for all species.
+
+*Script created by Zeyuan Chen*
 
 This script is in Perl ```.pl``` format:
 ```
