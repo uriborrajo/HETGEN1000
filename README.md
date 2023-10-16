@@ -282,6 +282,52 @@ for especie_contig in "$directorio_principal"/*; do
   fi
 done
 ```
+```
+http://www.bioinformatics.org/cd-hit/cd-hit-user-guide
+
+-i  input input filename in fasta format, required
+-o  output filename, required
+-c  sequence identity threshold, default 0.9
+this is the default cd-hit's "global sequence identity"
+calculated as:
+    number of identical amino acids in alignment
+    divided by the full length of the shorter sequence
+-G  use global sequence identity, default 1
+    if set to 0, then use local sequence identity, calculated as :
+    number of identical amino acids in alignment
+    divided by the length of the alignment
+    NOTE!!! don't use -G 0 unless you use alignment coverage controls
+    see options -aL, -AL, -aS, -AS
+-b  band_width of alignment, default 20
+-M  max available memory (Mbyte), default 400
+-n  word_length, default 5, see user's guide for choosing it
+-l  length of throw_away_sequences, default 10
+-t  tolerance for redundance, default 2
+-d  length of description in .clstr file, default 20
+    if set to 0, it takes the fasta defline and stops at first space
+-s  length difference cutoff, default 0.0
+    if set to 0.9, the shorter sequences need to be
+    at least 90% length of the representative of the cluster
+-S  length difference cutoff in amino acid, default 999999
+    if set to 60, the length difference between the shorter sequences
+    and the representative of the cluster can not be bigger than 60
+-aL alignment coverage for the longer sequence, default 0.0
+    if set to 0.9, the alignment must covers 90% of the sequence
+-AL alignment coverage control for the longer sequence, default 99999999
+    if set to 60, and the length of the sequence is 400,
+    then the alignment must be >= 340 (400-60) residues
+-aS alignment coverage for the shorter sequence, default 0.0
+    if set to 0.9, the alignment must covers 90% of the sequence
+-AS alignment coverage control for the shorter sequence, default 99999999
+    if set to 60, and the length of the sequence is 400,
+    then the alignment must be >= 340 (400-60) residues
+-B  1 or 0, default 0, by default, sequences are stored in RAM
+    if set to 1, sequence are stored on hard drive
+    it is recommended to use -B 1 for huge databases
+-p  1 or 0, default 0
+    if set to 1, print alignment overlap in .clstr file
+```
+
 ### 8. FINDING UCE LOCI
 ```
 phyluce_assembly_match_contigs_to_probes \
