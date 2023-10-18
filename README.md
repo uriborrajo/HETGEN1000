@@ -494,6 +494,27 @@ Make sure that you are in the correct directory ```~/taxon-sets/all/mafft-nexus-
 iqtree -st DNA -ninit 10 -bb 1500 -s mafft-nexus-edge-trimmed-gblocks-clean-50p-IQTree.phylip
 -pre iqtree-GHOST-50p -m GTR+FO*H4 -rcluster 10 -mrate G,R,E
 ```
+```
+iqtree -st DNA -ninit 10 -bb 1500 -s mafft-nexus-internal-trimmed-gblocks-clean-50p-IQTree.phylip -sp mafft-nexus-internal-trimmed-gblocks-clean-50p-IQTree.charsets -pre iqtree-GHOST-50p -m MFP+MERGE -rcluster 10 -mrate G,R,E
+```
+```
+Unpaired fastq files? Compare and discard single read data:
+https://github.com/enormandeau/Scripts/blob/master/fastqCombinePairedEnd.py
+Resynchronize 2 fastq or fastq.gz files (R1 and R2) after they have been trimmed and cleaned
+WARNING! This program assumes that the fastq file uses EXACTLY four lines per sequence
+Three output files are generated. The first two files contain the reads of the pairs that match and the third contains the solitary reads.
+Usage: python fastqCombinePairedEnd.py input1 input2 separator
+input1 = LEFT  fastq or fastq.gz file (R1)
+input2 = RIGHT fastq or fastq.gz file (R2)
+separator = character that separates the name of the read from the part that
+    describes if it goes on the left or right, usually with characters '1' or
+    '2'.  The separator is often a space, but could be another character (e.g. ‘/’). A
+    space is used by default. If the sequence names do not contain two parts
+    and you want to use the full name info to pair your sequences, use 'None'
+    (as text) for the separator. Eg: python fastqCombinePairedEnd.py input1 input2 None
+```
+
+
 
 
 
