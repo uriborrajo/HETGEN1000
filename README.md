@@ -514,6 +514,11 @@ separator = character that separates the name of the read from the part that
     (as text) for the separator. Eg: python fastqCombinePairedEnd.py input1 input2 None
 ```
 
+```
+while read i; do cd /home/intern/Desktop/data/UCE_clean_reads/${i}/split-adapter-quality-trimmed; python ../../../scripts/Oriol/fastqCombinePairedEnd.py ${i}-READ1.fastq ${i}-READ2.fastq separator; done < especies_sin_archivos.txt
+```
+
+
 
 
 
