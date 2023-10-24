@@ -461,6 +461,7 @@ phyluce_align_seqcap_align \
 ```
 *Replace ```--taxa``` with the number of taxa you have in your analysis. Furthermore, we specify ```--log-path``` to indicate the path where we will save the command's log, so you need to create that directory using ```mkdir log```.*
 
+- #### GBLOCKS
 We are going to trim this loci using **Gblocks**
 
 So we can:
