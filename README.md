@@ -329,7 +329,7 @@ calculated as:
 ```
 
 ### 8. FINDING UCE LOCI
-We want to see which CONTIGS are in a UCE loci and remove those that are not. Hence, we need the Probeset that is in the folder *../../spades-assembly/* and is called *Probeset-70nt.fasta*. 
+We want to locate which CONTIGS are in a UCE loci and remove those that are not. Hence, we need the Probeset that is in the folder *../../spades-assembly/* and is called *Probeset-70nt.fasta*. 
 
 **The probeset was provided by Dr. Juan Moles.**
 ```
@@ -339,6 +339,10 @@ phyluce_assembly_match_contigs_to_probes \
     --output uce-search-results \
 ```
 ### 9. EXTRACTING UCE LOCI
+Now that we have located UCE loci, we need to determine which taxa we want to include in our analysis, create a list of those taxa, and then generate a list specifying which UCE loci we enriched in each taxon (the “data matrix configuration file”). We will then use this list to extract FASTA data for each taxon for each UCE locus.
+
+First, we need to decide which taxa we want in our “taxon set”. So, we create a configuration file like so:
+
 ```mkdir -p taxon-sets/all```
 
  ```taxon-set.conf.pl``` 
