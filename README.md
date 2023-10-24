@@ -345,7 +345,7 @@ First, we make de directory where we will use to locate the output of the "data 
 
 ```mkdir -p taxon-sets/all```
 
-Then, we need to decide which taxa we want in our 'taxon set.' So, we create a Perl script that will generate the 'taxon-file.conf' with the list of those taxa that we want for our analysis.
+Then, we need to decide which taxa we want in our *taxon set*. So, we create a Perl script that will generate the *taxon-set.conf* with the list of those taxa that we want for our analysis.
 
 To create the Perl script, use the following command: ```vim taxon-set.conf.pl```
 
