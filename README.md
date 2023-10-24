@@ -377,7 +377,7 @@ close($fh);
 
 print "Se ha generado el archivo $conf_file.\n";
 ```
-Once we have created the conf file, we run the following command to generate the initial list of loci for each taxon:
+Once we have created the conf file, we run the following command to generate the initial list of UCE loci we enriched in each taxon:
 
 *In the command, we specify that the loci are two folders back because we are in the '/all' directory. However, if you are in a different directory, you'll need to change it to the correct path.*
 
@@ -389,6 +389,7 @@ phyluce_assembly_get_match_counts \
     --incomplete-matrix \
     --output taxon-sets/all/all-taxa-incomplete.conf
 ```
+Finally, we have to use that list to extract the FASTA data for each taxon for each UCE loci:
 
 ```
 phyluce_assembly_get_fastas_from_match_counts \
@@ -399,6 +400,9 @@ phyluce_assembly_get_fastas_from_match_counts \
     --incomplete-matrix all-taxa-incomplete.incomplete \
     --log-path log
 ```
+
+*The extracted FASTA data are in a monolithic FASTA file (all data for all organisms) named all-taxa-incomplete.fasta.*
+
 ### 10. EXPLODING THE MONOLITHIC FASTA FILE
 ```
 phyluce_assembly_explode_get_fastas_file \
