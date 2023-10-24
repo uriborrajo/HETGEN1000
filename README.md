@@ -339,13 +339,16 @@ phyluce_assembly_match_contigs_to_probes \
     --output uce-search-results \
 ```
 ### 9. EXTRACTING UCE LOCI
-Now that we have located UCE loci, we need to determine which taxa we want to include in our analysis, create a list of those taxa, and then generate a list specifying which UCE loci we enriched in each taxon (the “data matrix configuration file”). We will then use this list to extract FASTA data for each taxon for each UCE locus.
+Now that we have located UCE loci, we need to determine which taxa we want to include in our analysis.
 
-First, we need to decide which taxa we want in our “taxon set”. So, we create a configuration file like so:
+First, we make de directory where we will use to locate the output of the "data matrix configuration file".
 
 ```mkdir -p taxon-sets/all```
 
- ```taxon-set.conf.pl``` 
+Then, we need to decide which taxa we want in our 'taxon set.' So, we create a Perl script that will generate the 'taxon-file.conf' with the list of those taxa that we want for our analysis.
+
+To create the Perl script, use the following command: ```vim taxon-set.conf.pl```
+
  ```
 #!/usr/bin/perl
 
