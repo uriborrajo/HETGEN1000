@@ -428,10 +428,11 @@ done
 
 ### 11. ALIGNING UCE LOCI
 
-When taxa are “closely” related (< 30-50 MYA, perhaps), I think that edge-trimming alignments is reasonable. When the taxa you are interested in span a wider range of divergence times (> 50 MYA), you may want to think about internal trimming.
+When taxa are "closely" related (<30-50 million years ago, perhaps), I consider edge-trimming alignments to be a reasonable approach. However, when the taxa you are interested in have a broader range of divergence times (>50 million years), you might want to consider internal-trimming.
+
+Here, we show the commands for both methods:
 
 - #### EDGE TRIMMING
-Make sure that you are in the correct directory ```~/taxon-sets/all```
 ```
 phyluce_align_seqcap_align \
     --input all-taxa-incomplete.fasta \
@@ -443,6 +444,8 @@ phyluce_align_seqcap_align \
     --output-format fasta \
     --log-path log
 ```
+*Replace ```--taxa``` with the number of taxa you have in your analysis. Furthermore, we specify ```--log-path``` to indicate the path where we will save the command's log, so you need to create that directory using ```mkdir log```.*
+
 - #### INTERNAL TRIMMING
 ```
 phyluce_align_seqcap_align \
@@ -456,6 +459,8 @@ phyluce_align_seqcap_align \
     --no-trim \
     --log-path log
 ```
+*Replace ```--taxa``` with the number of taxa you have in your analysis. Furthermore, we specify ```--log-path``` to indicate the path where we will save the command's log, so you need to create that directory using ```mkdir log```.*
+
 We are going to trim this loci using **Gblocks**
 
 So we can:
