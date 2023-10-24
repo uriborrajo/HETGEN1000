@@ -404,12 +404,28 @@ phyluce_assembly_get_fastas_from_match_counts \
 *The extracted FASTA data are in a monolithic FASTA file (all data for all organisms) named all-taxa-incomplete.fasta.*
 
 ### 10. EXPLODING THE MONOLITHIC FASTA FILE
+
+Sometimes, we want to know the individual statistics on UCE assemblies for each taxon. We can do that, exploding the monolithic FASTA file into a file with the UCE loci we have enriched by taxon:
+
 ```
 phyluce_assembly_explode_get_fastas_file \
     --input all-taxa-incomplete.fasta \
     --output exploded-fastas \
     --by-taxon
 ```
+Then, run the stats on those exploded files:
+
+```
+for i in exploded-fastas/*.fasta;
+do
+    phyluce_assembly_get_fasta_lengths --input $i --csv;
+done
+```
+*samples,contigs,total bp,mean length,95 CI length,min length,max length,median legnth,contigs >1kb*
+
+*Acteocina-exilis.unaligned.fasta,1295,656310,506.8030888030888,4.657000046699546,184,1477,501.0,12*
+
+
 ### 11. ALIGNING UCE LOCI
 
 When taxa are “closely” related (< 30-50 MYA, perhaps), I think that edge-trimming alignments is reasonable. When the taxa you are interested in span a wider range of divergence times (> 50 MYA), you may want to think about internal trimming.
