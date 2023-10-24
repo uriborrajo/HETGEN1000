@@ -330,6 +330,7 @@ calculated as:
 
 ### 8. FINDING UCE LOCI
 We want to see which CONTIGS are in a UCE loci and remove those that are not. Hence, we need the Probeset that is in the folder *../../spades-assembly/* and is called *Probeset-70nt.fasta*. 
+
 **The probeset was provided by Dr. Juan Moles.**
 ```
 phyluce_assembly_match_contigs_to_probes \
