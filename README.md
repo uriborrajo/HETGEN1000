@@ -256,6 +256,10 @@ done
 
 echo "Proceso completado"
 ```
+
+-p, --parents     no error if existing, make parent directories as needed
+
+
 ### 7. CD-HIT
 ```
 #!/bin/bash
