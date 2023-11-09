@@ -92,7 +92,7 @@ for species_directory in "$input"/*; do
       output_species="$output/$species_directory" #Get output path of each species as output_species
       mkdir -p "$output_species" #make dir if parents don't exists
       cd-hit-dup -u 30 -m false -i "$read1" -i2 "$read2" -o "$output_directory/${species}-READ1.fastq" -o2 "$output_dir/${species}-READ2.fastq" \
-#### c. Compressing cdhitdup's output
+#### c. Compressing output
       gzip -k "$output_species/${species}-READ1.fastq"
       gzip -k "$output_species/${species}-READ2.fastq"
 
@@ -102,7 +102,7 @@ for species_directory in "$input"/*; do
     fi
   fi
 done
-#### d. Removing the output we don't want
+#### d. Removing unnecessary files
 for species_directory in "$output"/*; do
   if [ -d "$species_dir" ]; then
     find "$species_dir" -type f ! -name "*.gz" -exec rm -fr {} \;
