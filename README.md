@@ -4,7 +4,6 @@
 
 ### 1. PHYLUCE INSTALLATION
 
-![algo]
 To perform the phylogeny of the HETGEN project, we will use the Phyluce package. Therefore, the first step will be its installation via Miniconda2.
 ```
 conda install phyluce-1.7.2
@@ -75,127 +74,38 @@ perl fastp.pl
 ```
 #!/bin/bash
 
-input="/home/intern/Desktop/Oriol/UCE_clean_reads_mollusca"
-output="/home/intern/Desktop/Oriol/cdhitdup"
+#### a. Specify input and output paths
+input="/home/intern/Desktop/Oriol/clean-fastq/faltantes"
+output="/home/intern/Desktop/Oriol/clean-fastq/faltantes/cdhitdup"
+mkdir -p "/home/intern/Desktop/Oriol/clean-fastq/faltantes/cdhitdup" #make dir if parents don't exists
 
-mkdir -p "/home/intern/Desktop/Oriol/cdhitdup"
-
+#### b. Loop
 for species_directory in "$input"/*; do
-  if [ -d "$species_directory" ]; then
-    species=$(basename "$species_directory")
-    echo "===== Processing $species ====="
+  if [ -d "$species_directory" ]; then #Check if species directory exist.
+    species=$(basename "$species_directory") #Save the name of the species as $species
+    echo "================================ Processing $species ================================"
 
-    READ1=$(find "$species_directory" -type f -name "*-READ1.fastq")
-    READ2=$(find "$species_directory" -type f -name "*-READ2.fastq")
+    read1=$(find "$species_directory" -type f -name "*-READ1.fastq") #Find in species directory the file (-type f) named *-READ1.fastq and save it as $READ1
+    read2=$(find "$species_directory" -type f -name "*-READ2.fastq") #Find in species directory the file (-type f) named *-READ2.fastq and save it as $READ2
 
-    if [ -n "$READ1" ] && [ -n "$READ2" ]; then
-      output_species="$output/$species_directory"
-      mkdir -p "$output_species"  
-      gunzip -c -k "$READ1" "$READ2" | cd-hit-dup -u 30 -m false -i "$READ1" -i2 "$READ2" \
-        -o "$output_directory/${species}-READ1.fastq" -o2 "$output_dir/${species}-READ2.fastq"
-
+    if [ -n "$read" ] && [ -n "$read2" ]; then
+      output_species="$output/$species_directory" #Get output path of each species as output_species
+      mkdir -p "$output_species" #make dir if parents don't exists
+      cd-hit-dup -u 30 -m false -i "$read1" -i2 "$read2" -o "$output_directory/${species}-READ1.fastq" -o2 "$output_dir/${species}-READ2.fastq" \
+#### c. Compressing cdhitdup's output
       gzip -k "$output_species/${species}-READ1.fastq"
       gzip -k "$output_species/${species}-READ2.fastq"
-      
-      echo "===== Duplicates removed of $species ====="
+
+      echo "========================  Duplicates removed of $species ========================"
     else
-      echo "No "
+      echo "==================== [ERROR] READ1 & READ2 don't found for $species ===================="
     fi
   fi
 done
-
-for species_dir in "$secondary_directory"/*; do
+#### d. Removing the output we don't want
+for species_directory in "$output"/*; do
   if [ -d "$species_dir" ]; then
-    find "$species_dir" -type f ! -name "*.gz" -exec rm -f {} \;
-  fi
-done
-```
-```
-#!/bin/bash
-
-mkdir -p "/home/intern/Desktop/Oriol/cdhitdup"
-
-directorio_principal="/home/intern/Desktop/Oriol/UCE_clean_reads_mollusca"
-directorio_secundario="/home/intern/Desktop/Oriol/cdhitdup"
-
-for especie_dir in "$directorio_principal"/split-adapter-quality-trimmed/*; do
-  if [ -d "$especie_dir" ]; then
-    especie=$(basename "$especie_dir")
-    echo "Procesando especie: $especie"
-
-    read1=$(find "$especie_dir" -type f -name "*-READ1.fastq.gz")
-    read2=$(find "$especie_dir" -type f -name "*-READ2.fastq.gz")
-
-    if [ -n "$read1" ] && [ -n "$read2" ]; then
-      gunzip -c -k "$read1" "$read2"
-
-      read1_1=$(find "$especie_dir" -type f -name "*-READ1.fastq")
-      read2_1=$(find "$especie_dir" -type f -name "*-READ2.fastq")
-
-      if [ -n "$read1_1" ] && [ -n "$read2_1" ]; then
-        output_dir="$directorio_secundario/$especie"
-        mkdir -p "$output_dir"
-        cd-hit-dup -u 30 -m false -i "$read1_1" -i2 "$read2_1" -o "$output_dir/${especie}-READ1.fastq" -o2 "$output_dir/${especie}-READ2.fastq"
-
-        gzip -k "$output_dir/${especie}-READ1.fastq"
-        gzip -k "$output_dir/${especie}-READ2.fastq"
-
-        echo "Duplicados eliminados para $especie"
-      else
-        echo "No se encontraron archivos READ1 o READ2 para $especie"
-      fi
-    fi
-  fi
-done
-
-for especie_dir in "$directorio_secundario"/*; do
-  if [ -d "$especie_dir" ]; then
-    find "$especie_dir" -type f ! -name "*.gz" -exec rm -f {} \;
-  fi
-done
-```
-```
-#prueba script
-#!/bin/bash
-
-mkdir -p "/home/intern/Desktop/Oriol/cdhitdup"
-
-directorio_principal="/home/intern/Desktop/Oriol/UCE_clean_reads_mollusca"
-directorio_secundario="/home/intern/Desktop/Oriol/cdhitdup"
-
-for especie_dir in "$directorio_principal"/*; do
-  if [ -d "$especie_dir" ]; then
-    especie=$(basename "$especie_dir")
-    echo "Procesando especie: $especie"
-
-    read1=$(find "$especie_dir" -type f -name "*-READ1.fastq.gz")
-    read2=$(find "$especie_dir" -type f -name "*-READ2.fastq.gz")
-
-    if [ -n "$read1" ] && [ -n "$read2" ]; then
-      gunzip -c -k "$read1" "$read2"
-
-      read1_1=$(find "$especie_dir" -type f -name "*-READ1.fastq")
-      read2_1=$(find "$especie_dir" -type f -name "*-READ2.fastq")
-
-      if [ -n "$read1_1" ] && [ -n "$read2_1" ]; then
-        output_dir="$directorio_secundario/$especie"
-        mkdir -p "$output_dir"
-        cd-hit-dup -u 30 -m false -i "$read1_1" -i2 "$read2_1" -o "$output_dir/${especie}-READ1.fastq" -o2 "$output_dir/${especie}-READ2.fastq"
-
-        gzip -k "$output_dir/${especie}-READ1.fastq"
-        gzip -k "$output_dir/${especie}-READ2.fastq"
-
-        echo "Duplicados eliminados para $especie"
-      else
-        echo "No se encontraron archivos READ1 o READ2 para $especie"
-      fi
-    fi
-  fi
-done
-
-for especie_dir in "$directorio_secundario"/*; do
-  if [ -d "$especie_dir" ]; then
-    find "$especie_dir" -type f ! -name "*.gz" -exec rm -f {} \;
+    find "$species_dir" -type f ! -name "*.gz" -exec rm -fr {} \;
   fi
 done
 ```
