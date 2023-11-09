@@ -77,7 +77,7 @@ perl fastp.pl
 #### a. Specify input and output paths
 input="/home/intern/Desktop/Oriol/clean-fastq/faltantes"
 output="/home/intern/Desktop/Oriol/clean-fastq/faltantes/cdhitdup"
-mkdir -p "/home/intern/Desktop/Oriol/clean-fastq/faltantes/cdhitdup" #make dir if parents don't exists
+mkdir -p "/home/intern/Desktop/Oriol/clean-fastq/faltantes/cdhitdup" #make dir if parents don't exist
 
 #### b. Loop
 for species_directory in "$input"/*; do
