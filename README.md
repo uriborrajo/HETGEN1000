@@ -73,31 +73,31 @@ perl fastp.pl
 ```
 #!/bin/bash
 
+input="/home/intern/Desktop/Oriol/UCE_clean_reads_mollusca"
+output="/home/intern/Desktop/Oriol/cdhitdup"
+
 mkdir -p "/home/intern/Desktop/Oriol/cdhitdup"
 
-main_directory="/home/intern/Desktop/Oriol/UCE_clean_reads_mollusca"
-secondary_directory="/home/intern/Desktop/Oriol/cdhitdup"
+for species_directory in "$input"/*; do
+  if [ -d "$species_directory" ]; then
+    species=$(basename "$species_directory")
+    echo "===== Processing $species ====="
 
-for species_dir in "$main_directory"/*; do
-  if [ -d "$species_dir" ]; then
-    species=$(basename "$species_dir")
-    echo "Procesando especie: $species"
+    READ1=$(find "$species_directory" -type f -name "*-READ1.fastq")
+    READ2=$(find "$species_directory" -type f -name "*-READ2.fastq")
 
-    read1=$(find "$species_dir" -type f -name "*-READ1.fastq")
-    read2=$(find "$species_dir" -type f -name "*-READ2.fastq")
+    if [ -n "$READ1" ] && [ -n "$READ2" ]; then
+      output_species="$output/$species_directory"
+      mkdir -p "$output_species"  
+      gunzip -c -k "$READ1" "$READ2" | cd-hit-dup -u 30 -m false -i "$READ1" -i2 "$READ2" \
+        -o "$output_directory/${species}-READ1.fastq" -o2 "$output_dir/${species}-READ2.fastq"
 
-    if [ -n "$read1" ] && [ -n "$read2" ]; then
-      output_dir="$secondary_directory/$species_dir"
-      mkdir -p "$output_dir"  
-      gunzip -c -k "$read1" "$read2" | cd-hit-dup -u 30 -m false -i "$read1" -i2 "$read2" \
-        -o "$output_dir/${especie}-READ1.fastq" -o2 "$output_dir/${especie}-READ2.fastq"
-
-      gzip -k "$output_dir/${species}-READ1.fastq"
-      gzip -k "$output_dir/${species}-READ2.fastq"
+      gzip -k "$output_species/${species}-READ1.fastq"
+      gzip -k "$output_species/${species}-READ2.fastq"
       
-      echo "Duplicados eliminados para $species"
+      echo "===== Duplicates removed of $species ====="
     else
-      echo "No se encontraron archivos READ1 o READ2 para $species"
+      echo "No "
     fi
   fi
 done
