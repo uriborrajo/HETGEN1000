@@ -96,7 +96,7 @@ for species_directory in "$input"/*; do
       gzip -k "$output_species/${species}-READ1.fastq"
       gzip -k "$output_species/${species}-READ2.fastq"
 
-      echo "========================  Duplicates removed of $species ========================"
+      echo "======================== Duplicates removed of $species ========================"
     else
       echo "==================== [ERROR] READ1 & READ2 don't found for $species ===================="
     fi
