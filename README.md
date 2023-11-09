@@ -3,6 +3,8 @@
 ## GUIDE FOR UCE ANALYSIS
 
 ### 1. PHYLUCE INSTALLATION
+
+![algo]
 To perform the phylogeny of the HETGEN project, we will use the Phyluce package. Therefore, the first step will be its installation via Miniconda2.
 ```
 conda install phyluce-1.7.2
