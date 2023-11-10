@@ -90,7 +90,7 @@ for species_directory in "$input"/*; do
 
     if [ -n "$read" ] && [ -n "$read2" ]; then
       output_species="$output/$species_directory" #Get output path of each species as output_species
-      mkdir -p "$output_species" #make dir if parents don't exists
+      mkdir -p "$output_species" #make dir if parents don't exist
       cd-hit-dup -u 30 -m false -i "$read1" -i2 "$read2" -o "$output_directory/${species}-READ1.fastq" -o2 "$output_dir/${species}-READ2.fastq" \
 #### c. Compressing output
       gzip -k "$output_species/${species}-READ1.fastq"
@@ -104,8 +104,8 @@ for species_directory in "$input"/*; do
 done
 #### d. Removing unnecessary files
 for species_directory in "$output"/*; do
-  if [ -d "$species_dir" ]; then
-    find "$species_dir" -type f ! -name "*.gz" -exec rm -fr {} \;
+  if [ -d "$species_directory" ]; then
+    find "$species_directory" -type f ! -name "*.gz" -exec rm -fr {} \;
   fi
 done
 ```
@@ -148,25 +148,20 @@ phyluce_assembly_assemblo_spades \
 ```
 #!/bin/bash
 
-directorio_principal="/home/intern/Desktop/Oriol/cdhitdup/spades-assemblies"
+input="/home/intern/Desktop/Oriol/cdhitdup/spades-assemblies"
+output="${directorio_principal}/clean"
+mkdir -p "${output}"
+for species_directory in "${input}"/*/; do
+    species=$(basename "${species_directory}")
+    rspecies="${species/_spades/}"
 
-directorio_clean="${directorio_principal}/clean"
-
-mkdir -p "${directorio_clean}"
-
-for carpeta_especie in "${directorio_principal}"/*/; do
-    nombre_especie=$(basename "${carpeta_especie}")
-    nombre_especie_sin_spades="${nombre_especie/_spades/}"
-
-    if [ -e "${carpeta_especie}/contigs.fasta" ]; then
-        mv "${carpeta_especie}/contigs.fasta" "${directorio_clean}/${nombre_especie_sin_spades}.contigs.fasta"
-        echo "Renombrado y movido ${nombre_especie_sin_spades}.contigs.fasta"
+    if [ -e "${species}/contigs.fasta" ]; then
+        mv "${species_directory}/contigs.fasta" "${output}/${rspecies}.contigs.fasta"
+        echo "========= ${nombre_especie_sin_spades}.contigs.fasta renamed and moved ========="
     else
-        echo "No se encontró contigs.fasta en ${nombre_especie}"
+        echo "================== [ERROR] No contigs.fasta for ${species} =================="
     fi
 done
-
-echo "Proceso completado"
 ```
 
 -p, --parents     no error if existing, make parent directories as needed
