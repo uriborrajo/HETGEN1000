@@ -155,7 +155,7 @@ for species_directory in "${input}"/*/; do
     species=$(basename "${species_directory}")
     rspecies="${species/_spades/}"
 
-    if [ -e "${species}/contigs.fasta" ]; then
+    if [ -e "${species_directory}/contigs.fasta" ]; then
         mv "${species_directory}/contigs.fasta" "${output}/${rspecies}.contigs.fasta"
         echo "========= ${nombre_especie_sin_spades}.contigs.fasta renamed and moved ========="
     else
