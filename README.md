@@ -338,7 +338,8 @@ phyluce_align_concatenate_alignments \
 - #### IQTree
 Make sure that you are in the correct directory ```~/taxon-sets/all/mafft-nexus-edge-trimmed-gblocks-clean-50p-IQTree```
 ```
-iqtree -st DNA -ninit 10 -bb 1500 -s mafft-nexus-internal-trimmed-gblocks-clean-50p-IQTree.phylip -sp mafft-nexus-internal-trimmed-gblocks-clean-50p-IQTree.charsets -pre iqtree-PART-50p -m MFP+MERGE -rcluster 10 -mrate G,R,E
+iqtree -st DNA -ninit 10 -bb 1500 -s mafft-nexus-edge-trimmed-gblocks-clean-50p-IQTree.phylip \
+-pre iqtree-GHOST-50p -m GTR+FO*H4 -rcluster 10 -mrate G,R,E
 ```
 - #### ExaBayes
 ```
