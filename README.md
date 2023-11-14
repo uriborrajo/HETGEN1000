@@ -367,7 +367,7 @@ begin run;
  numcoupledchains 4
 end;
 ```
-
+###### FASTQ COMBINE PAIRED END (UNPAIRED FASTQ FILES)
 
 
 ```
