@@ -338,12 +338,37 @@ phyluce_align_concatenate_alignments \
 - #### IQTree
 Make sure that you are in the correct directory ```~/taxon-sets/all/mafft-nexus-edge-trimmed-gblocks-clean-50p-IQTree```
 ```
-iqtree -st DNA -ninit 10 -bb 1500 -s mafft-nexus-edge-trimmed-gblocks-clean-50p-IQTree.phylip
--pre iqtree-GHOST-50p -m GTR+FO*H4 -rcluster 10 -mrate G,R,E
-```
-```
 iqtree -st DNA -ninit 10 -bb 1500 -s mafft-nexus-internal-trimmed-gblocks-clean-50p-IQTree.phylip -sp mafft-nexus-internal-trimmed-gblocks-clean-50p-IQTree.charsets -pre iqtree-PART-50p -m MFP+MERGE -rcluster 10 -mrate G,R,E
 ```
+- #### ExaBayes
+```
+#!/bin/bash
+
+mpirun exabayes -np 4 -R 1 -C 4 -f *.phylip -m DNA -c config.nex -n run1 -s 1234 -M 3
+# mpirun exabayes -np 4 -R 1 -C 4 -f *.phylip -m DNA -c config.nex -n run2 -s 1234 -M 3
+# mpirun exabayes -np 4 -R 1 -C 4 -f *.phylip -m DNA -c config.nex -n run3 -s 1234 -M 3
+# mpirun exabayes -np 4 -R 1 -C 4 -f *.phylip -m DNA -c config.nex -n run4 -s 1234 -M 3
+
+# mpirun exabayes -np 16 -R 4 -C 4 -f *.phylip -m DNA -c config.nexus -n run1 -s 1234 -M 3
+```
+
+config.nex:
+```
+begin run;
+ numruns 1
+ numgen 5e6
+ diagfreq 5000
+ samplingfreq 500
+ printfreq 100
+ burninproportion 0.25
+ parsimonyStart  true
+ printFreq 10
+ numcoupledchains 4
+end;
+```
+
+
+
 ```
 Unpaired fastq files? Compare and discard single read data:
 https://github.com/enormandeau/Scripts/blob/master/fastqCombinePairedEnd.py
