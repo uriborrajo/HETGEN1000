@@ -149,7 +149,7 @@ phyluce_assembly_assemblo_spades \
 #!/bin/bash
 
 input="/home/intern/Desktop/Oriol/cdhitdup/spades-assemblies"
-output="${directorio_principal}/clean"
+output="${input}/clean"
 mkdir -p "${output}"
 for species_directory in "${input}"/*/; do
     species=$(basename "${species_directory}")
@@ -183,38 +183,8 @@ First, we make de directory where we will use to locate the output of the "data 
 
 ```mkdir -p taxon-sets/all```
 
-Then, we need to decide which taxa we want in our *taxon set*. So, we create a Perl script that will generate the *taxon-set.conf* with the list of those taxa that we want for our analysis.
+Then, we need to decide which taxa we want in our *taxon set*. Create taxon-set.conf with the taxa we want in our analysis.
 
-To create the Perl script, use the following command: ```vim taxon-set.conf.pl```
-
- ```
-#!/usr/bin/perl
-
-use strict;
-use warnings;
-
-my $directory = '/home/intern/Desktop/Oriol/UCE_mollusca/cd-hit';
-my $conf_file = 'taxon-set.conf';
-
-opendir(my $dh, $directory) or die "Cannot open directory: $!";
-my @files = grep { !/^\./ && -f "$directory/$_" } readdir($dh);
-closedir($dh);
-
-open(my $fh, '>', $conf_file) or die "Cannot open file: $!";
-
-print $fh "[all]\n";
-
-foreach my $file (@files) {
-    my ($name) = $file =~ /^(.*)\.contigs.fasta$/;
-    if ($name) {
-        print $fh "$name\n";
-    }
-}
-
-close($fh);
-
-print "Se ha generado el archivo $conf_file.\n";
-```
 Once we have created the conf file, we run the following command to generate the initial list of UCE loci we enriched in each taxon:
 
 *In the command, we specify that the loci are two folders back because we are in the '/all' directory. However, if you are in a different directory, you'll need to change it to the correct path.*
