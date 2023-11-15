@@ -338,19 +338,24 @@ phyluce_align_concatenate_alignments \
 - #### IQTree
 Make sure that you are in the correct directory ```~/taxon-sets/all/mafft-nexus-edge-trimmed-gblocks-clean-50p-IQTree```
 ```
-iqtree -st DNA -ninit 10 -bb 1500 -s mafft-nexus-edge-trimmed-gblocks-clean-50p-IQTree.phylip \
--pre iqtree-GHOST-50p -m GTR+FO*H4 -rcluster 10 -mrate G,R,E
+#!/bin/bash
+
+## ./iqtree.sh *.phylip
+iqtree -st DNA -ninit 10 -bb 1500 -s "$1" -pre iqtree-GHOST-50p -m GTR+FO*H4 -rcluster 10 -mrate G,R,E
+
 ```
 - #### ExaBayes
 ```
 #!/bin/bash
 
-mpirun exabayes -np 4 -R 1 -C 4 -f *.phylip -m DNA -c config.nex -n run1 -s 1234 -M 3
-# mpirun exabayes -np 4 -R 1 -C 4 -f *.phylip -m DNA -c config.nex -n run2 -s 1234 -M 3
-# mpirun exabayes -np 4 -R 1 -C 4 -f *.phylip -m DNA -c config.nex -n run3 -s 1234 -M 3
-# mpirun exabayes -np 4 -R 1 -C 4 -f *.phylip -m DNA -c config.nex -n run4 -s 1234 -M 3
+## ./exabayes.sh *.phylip config.nex
 
-# mpirun exabayes -np 16 -R 4 -C 4 -f *.phylip -m DNA -c config.nexus -n run1 -s 1234 -M 3
+mpirun exabayes -np 4 -R 1 -C 4 -f "$1" -m DNA -c "$2" -n run1 -s 1234 -M 3 #exabayes run1
+mpirun exabayes -np 4 -R 1 -C 4 -f "$1" -m DNA -c "$2" -n run2 -s 1234 -M 3 #exabayes run2
+mpirun exabayes -np 4 -R 1 -C 4 -f "$1" -m DNA -c "$2" -n run3 -s 1234 -M 3 #exabayes run3
+mpirun exabayes -np 4 -R 1 -C 4 -f "$1" -m DNA -c "$2" -n run4 -s 1234 -M 3 #exabayes run4
+
+# mpirun exabayes -np 16 -R 4 -C 4 -f "$1" -m DNA -c "$2" -n run1 -s 1234 -M 3 
 ```
 
 config.nex:
