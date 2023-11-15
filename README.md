@@ -343,19 +343,27 @@ Make sure that you are in the correct directory ```~/taxon-sets/all/mafft-nexus-
 ## ./iqtree.sh *.phylip
 iqtree -st DNA -ninit 10 -bb 1500 -s "$1" -pre iqtree-GHOST-50p -m GTR+FO*H4 -rcluster 10 -mrate G,R,E
 
+## ./iqtree.sh *.phylip *.charsets
+# iqtree -st DNA -ninit 10 -bb 1500 -s "$1" -sp "$2" -pre iqtree-PART-50p -m MFP+MERGE -rcluster 10 -mrate G,R,E
 ```
 - #### ExaBayes
 ```
 #!/bin/bash
 
 ## ./exabayes.sh *.phylip config.nex
-
 mpirun exabayes -np 4 -R 1 -C 4 -f "$1" -m DNA -c "$2" -n run1 -s 1234 -M 3 #exabayes run1
 mpirun exabayes -np 4 -R 1 -C 4 -f "$1" -m DNA -c "$2" -n run2 -s 1234 -M 3 #exabayes run2
 mpirun exabayes -np 4 -R 1 -C 4 -f "$1" -m DNA -c "$2" -n run3 -s 1234 -M 3 #exabayes run3
 mpirun exabayes -np 4 -R 1 -C 4 -f "$1" -m DNA -c "$2" -n run4 -s 1234 -M 3 #exabayes run4
-
 # mpirun exabayes -np 16 -R 4 -C 4 -f "$1" -m DNA -c "$2" -n run1 -s 1234 -M 3 
+
+## ./exabayes.sh *.phylip config.nex aln.part
+# mpirun exabayes -np 4 -R 1 -C 4 -f "$1" -m DNA -c "$2" -q "$3" -n run1 -s 1234 -M 3 #exabayes run1 w/ partition file
+# mpirun exabayes -np 4 -R 1 -C 4 -f "$1" -m DNA -c "$2" -q "$3" -n run2 -s 1234 -M 3 #exabayes run2 w/ partition file
+# mpirun exabayes -np 4 -R 1 -C 4 -f "$1" -m DNA -c "$2" -q "$3" -n run3 -s 1234 -M 3 #exabayes run3 w/ partition file
+# mpirun exabayes -np 4 -R 1 -C 4 -f "$1" -m DNA -c "$2" -q "$3" -n run4 -s 1234 -M 3 #exabayes run4 w/ partition file
+# mpirun exabayes -np 16 -R 4 -C 4 -f "$1" -m DNA -c "$2" -q "$3" -n run1 -s 1234 -M 3
+
 ```
 
 config.nex:
