@@ -351,18 +351,18 @@ iqtree -st DNA -ninit 10 -bb 1500 -s "$1" -pre "$2" -m GTR+FO*H4 -rcluster 10 -m
 #!/bin/bash
 
 ## ./exabayes.sh *.phylip config.nex
-mpirun exabayes -np 4 -R 1 -C 4 -f "$1" -m DNA -c "$2" -n run1 -s 1234 -M 3 #exabayes run1
-mpirun exabayes -np 4 -R 1 -C 4 -f "$1" -m DNA -c "$2" -n run2 -s 1234 -M 3 #exabayes run2
-mpirun exabayes -np 4 -R 1 -C 4 -f "$1" -m DNA -c "$2" -n run3 -s 1234 -M 3 #exabayes run3
-mpirun exabayes -np 4 -R 1 -C 4 -f "$1" -m DNA -c "$2" -n run4 -s 1234 -M 3 #exabayes run4
-# mpirun exabayes -np 16 -R 4 -C 4 -f "$1" -m DNA -c "$2" -n run1 -s 1234 -M 3 
+mpirun exabayes -np 4 -R 1 -C 4 -f "$1" -m DNA -c "$2" -n run1 -s 1234 -M 1 #exabayes run1
+mpirun exabayes -np 4 -R 1 -C 4 -f "$1" -m DNA -c "$2" -n run2 -s 1234 -M 1 #exabayes run2
+mpirun exabayes -np 4 -R 1 -C 4 -f "$1" -m DNA -c "$2" -n run3 -s 1234 -M 1 #exabayes run3
+mpirun exabayes -np 4 -R 1 -C 4 -f "$1" -m DNA -c "$2" -n run4 -s 1234 -M 1 #exabayes run4
+# mpirun exabayes -np 16 -R 4 -C 4 -f "$1" -m DNA -c "$2" -n run1 -s 1234 -M 1 
 
 ## ./exabayes.sh *.phylip config.nex aln.part
-# mpirun exabayes -np 4 -R 1 -C 4 -f "$1" -m DNA -c "$2" -q "$3" -n run1 -s 1234 -M 3 #exabayes run1 w/ partition file
-# mpirun exabayes -np 4 -R 1 -C 4 -f "$1" -m DNA -c "$2" -q "$3" -n run2 -s 1234 -M 3 #exabayes run2 w/ partition file
-# mpirun exabayes -np 4 -R 1 -C 4 -f "$1" -m DNA -c "$2" -q "$3" -n run3 -s 1234 -M 3 #exabayes run3 w/ partition file
-# mpirun exabayes -np 4 -R 1 -C 4 -f "$1" -m DNA -c "$2" -q "$3" -n run4 -s 1234 -M 3 #exabayes run4 w/ partition file
-# mpirun exabayes -np 16 -R 4 -C 4 -f "$1" -m DNA -c "$2" -q "$3" -n run1 -s 1234 -M 3
+# mpirun exabayes -np 4 -R 1 -C 4 -f "$1" -m DNA -c "$2" -q "$3" -n run1 -s 1234 -M 1 #exabayes run1 w/ partition file
+# mpirun exabayes -np 4 -R 1 -C 4 -f "$1" -m DNA -c "$2" -q "$3" -n run2 -s 1234 -M 1 #exabayes run2 w/ partition file
+# mpirun exabayes -np 4 -R 1 -C 4 -f "$1" -m DNA -c "$2" -q "$3" -n run3 -s 1234 -M 1 #exabayes run3 w/ partition file
+# mpirun exabayes -np 4 -R 1 -C 4 -f "$1" -m DNA -c "$2" -q "$3" -n run4 -s 1234 -M 1 #exabayes run4 w/ partition file
+# mpirun exabayes -np 16 -R 4 -C 4 -f "$1" -m DNA -c "$2" -q "$3" -n run1 -s 1234 -M 1
 
 ```
 
@@ -401,7 +401,10 @@ separator = character that separates the name of the read from the part that
 ```
 
 ```
-while read i; do cd /home/intern/Desktop/data/UCE_clean_reads/${i}/split-adapter-quality-trimmed; python ../../../scripts/Oriol/fastqCombinePairedEnd.py ${i}-READ1.fastq ${i}-READ2.fastq separator; done < especies_sin_archivos.txt
+while read i; do \
+cd /home/intern/Desktop/data/UCE_clean_reads/${i}/split-adapter-quality-trimmed; \
+python ../../../scripts/Oriol/fastqCombinePairedEnd.py ${i}-READ1.fastq ${i}-READ2.fastq separator; \
+done < especies_sin_archivos.txt
 ```
 
 
