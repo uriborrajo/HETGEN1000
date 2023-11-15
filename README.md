@@ -340,11 +340,11 @@ Make sure that you are in the correct directory ```~/taxon-sets/all/mafft-nexus-
 ```
 #!/bin/bash
 
-## ./iqtree.sh *.phylip
-iqtree -st DNA -ninit 10 -bb 1500 -s "$1" -pre iqtree-GHOST-50p -m GTR+FO*H4 -rcluster 10 -mrate G,R,E
+## ./iqtree.sh *.phylip iqtree-GHOST-50p
+iqtree -st DNA -ninit 10 -bb 1500 -s "$1" -pre "$2" -m GTR+FO*H4 -rcluster 10 -mrate G,R,E
 
-## ./iqtree.sh *.phylip *.charsets
-# iqtree -st DNA -ninit 10 -bb 1500 -s "$1" -sp "$2" -pre iqtree-PART-50p -m MFP+MERGE -rcluster 10 -mrate G,R,E
+## ./iqtree.sh *.phylip *.charsets iqtree-PART-50p
+# iqtree -st DNA -ninit 10 -bb 1500 -s "$1" -sp "$2" -pre "$3" -m MFP+MERGE -rcluster 10 -mrate G,R,E
 ```
 - #### ExaBayes
 ```
