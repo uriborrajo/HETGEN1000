@@ -307,8 +307,8 @@ phyluce_align_get_gblocks_trimmed_alignments_from_untrimmed \
 Make sure that you are in the correct directory ```~/taxon-sets/all```
 ```
 phyluce_align_remove_locus_name_from_files \
-    --alignments mafft-nexus-edge-trimmed-gblocks \
-    --output mafft-nexus-edge-trimmed-gblocks-clean \
+    --alignments mafft-nexus-internal-trimmed-gblocks \
+    --output mafft-nexus-internal-trimmed-gblocks-clean \
     --cores 35 \
     --log-path log
 ```
@@ -318,7 +318,7 @@ phyluce_align_remove_locus_name_from_files \
 Make sure that you are in the correct directory ```~/taxon-sets/all```
 ```
 phyluce_align_get_only_loci_with_min_taxa \
-    --alignments mafft-nexus-edge-trimmed-gblocks-clean \
+    --alignments mafft-nexus-internal-trimmed-gblocks-clean \
     --taxa 33 \
     --percent 0.50 \
     --output mafft-nexus-internal-trimmed-gblocks-clean-50p \
@@ -329,8 +329,8 @@ phyluce_align_get_only_loci_with_min_taxa \
 Make sure that you are in the correct directory ```~/taxon-sets/all```
 ```
 phyluce_align_concatenate_alignments \
-    --alignments mafft-nexus-edge-trimmed-gblocks-clean-50p \
-    --output mafft-nexus-edge-trimmed-gblocks-clean-50p-IQTree \
+    --alignments mafft-nexus-internal-trimmed-gblocks-clean-50p \
+    --output mafft-nexus-internal-trimmed-gblocks-clean-50p-IQTree \
     --phylip \
     --log-path log
 ```
