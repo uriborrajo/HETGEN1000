@@ -74,16 +74,16 @@ perl fastp.pl
 ```
 #!/bin/bash
 
-#### a. Specify input and output paths
+#### a. Specify input and output path
 input="/home/intern/Desktop/Oriol/clean-fastq/faltantes"
-output="/home/intern/Desktop/Oriol/clean-fastq/faltantes/cdhitdup"
-mkdir -p "/home/intern/Desktop/Oriol/clean-fastq/faltantes/cdhitdup" #make dir if parents don't exist
+output="$input/cdhitdup"
+mkdir -p "$output" #make dir if parents don't exist
 
 #### b. Loop
 for species_directory in "$input"/*; do
   if [ -d "$species_directory" ]; then #Check if species directory exist.
     species=$(basename "$species_directory") #Save the name of the species as $species
-    echo "================================ Processing $species ================================"
+    echo "================================ PROCESSING: $species ================================"
 
     read1=$(find "$species_directory" -type f -name "*-READ1.fastq") #Find in species directory the file (-type f) named *-READ1.fastq and save it as $READ1
     read2=$(find "$species_directory" -type f -name "*-READ2.fastq") #Find in species directory the file (-type f) named *-READ2.fastq and save it as $READ2
@@ -98,7 +98,7 @@ for species_directory in "$input"/*; do
 
       echo "======================== Duplicates removed of $species ========================"
     else
-      echo "==================== [ERROR] READ1 & READ2 don't found for $species ===================="
+      echo "==================== [ERROR] no READ1 & READ2: $species ===================="
     fi
   fi
 done
