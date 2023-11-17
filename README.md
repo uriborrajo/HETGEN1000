@@ -358,9 +358,11 @@ iqtree -st DNA -ninit 10 -bb 1500 -s "$2" -pre "$3" -m GTR+FO*H4 -rcluster 10 -m
 cd "$1"
 echo "ENTERING: $1" 
 mpirun exabayes -np 4 -R 1 -C 4 -f "$2" -m DNA -c "$3" -n run1 -s 1234 -M 1 #exabayes run1
-# Total walltime elapsed: 43:30:4.35 (hh:mm:ss)
-# Total CPU time elapsed: 1044:01:44.38 (hh:mm:ss)
+# Total walltime elapsed: 43:30:4.35 (hh:mm:ss) -M 3-
+# Total CPU time elapsed: 1044:01:44.38 (hh:mm:ss) -M 3-
 mpirun exabayes -np 4 -R 1 -C 4 -f "$2" -m DNA -c "$3" -n run2 -s 1234 -M 1 #exabayes run2
+# Total walltime elapsed: 39:11:50.19 (hh:mm:ss) -M 1-
+# Total CPU time elapsed: 940:44:4.51 (hh:mm:ss) -M 1-
 mpirun exabayes -np 4 -R 1 -C 4 -f "$2" -m DNA -c "$3" -n run3 -s 1234 -M 1 #exabayes run3
 mpirun exabayes -np 4 -R 1 -C 4 -f "$2" -m DNA -c "$3" -n run4 -s 1234 -M 1 #exabayes run4
 # mpirun exabayes -np 16 -R 4 -C 4 -f "$2" -m DNA -c "$3" -n run1 -s 1234 -M 1 
