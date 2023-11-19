@@ -113,19 +113,16 @@ done
 
 ### 6. SPADES
 
-```
-cd cdhitdup
-```
-```
-echo "[samples]" > ../assembly.conf
-```
-```
-for i in *; do echo $i":~/Desktop/data/cdhitdup/"$i"/"; done >> ../assembly.conf
-```
+Steps to crate "assembly.conf" file:
+``` cd cdhitdup ```
+
+``` echo "[samples]" > ../assembly.conf ```
+
+``` for i in *; do echo "$i:intern/home/Desktop/data/cdhitdup/$i/"; done >> ../assembly.conf ```
+
 or
-```
-for i in *; do echo $i":~/Desktop/data/cdhitdup/"$i"/split-adapter-quality-trimmed/"; done >> ../assembly.conf
-```
+
+``` for i in *; do echo "$i:intern/home/Desktop/data/cdhitdup/$i/split-adapter-quality-trimmed/"; done >> ../assembly.conf ```
 
 
 ```
