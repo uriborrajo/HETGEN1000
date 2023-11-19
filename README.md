@@ -372,6 +372,8 @@ mpirun exabayes -np 4 -R 1 -C 4 -f "$2" -m DNA -c "$3" -n run3 -s 1234 -M 1 #exa
 # Total walltime elapsed: 27:06:23.76 (hh:mm:ss) -M 1-
 # Total CPU time elapsed: 650:33:30.29 (hh:mm:ss) -M 1-
 mpirun exabayes -np 4 -R 1 -C 4 -f "$2" -m DNA -c "$3" -n run4 -s 1234 -M 1 #exabayes run4
+# Total walltime elapsed: 25:51:55.34 (hh:mm:ss) -M 1-
+# Total CPU time elapsed: 620:46:8.13 (hh:mm:ss) -M 1-
 # mpirun exabayes -np 16 -R 4 -C 4 -f "$2" -m DNA -c "$3" -n run1 -s 1234 -M 1 
 
 ## ./exabayes.sh {PATH} *.phylip config.nex aln.part
