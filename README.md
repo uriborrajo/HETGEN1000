@@ -163,6 +163,11 @@ for species_directory in "${input}"/*/; do
     fi
 done
 ```
+>Duplicates
+>python ./phyluce_assembly_parse_duplicates_file.py --contigs ../ --duplicates-file duplicates.txt --output duplicates.fasta --exclude-cnt 2
+>cat *-DUPE1.unaligned.fasta >> duplicates.fasta
+>sed -i 's/_DUPE1//g' duplicates.fasta
+>cat all-taxa-incomplete.fasta duplicates.fasta >> all-taxa-incomplete2.fasta
 
 -p, --parents     no error if existing, make parent directories as needed
 
