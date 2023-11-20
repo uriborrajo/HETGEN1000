@@ -150,11 +150,13 @@ for species_directory in "${input}"/*/; do
     fi
 done
 ```
->##### WARNING!!
+>### WARNING!!
 >
 >Based on [Brant's](https://gist.github.com/brantfaircloth/e48e7e4eb9748854962863d104f94095) python script we keep those loci that match more than one contig.
 >
->```python ./phyluce_assembly_parse_duplicates_file.py --contigs ../ --duplicates-file duplicates.txt --output duplicates.fasta --exclude-cnt 2 ```
+>```
+>python ./phyluce_assembly_parse_duplicates_file.py --contigs ../ --duplicates-file duplicates.txt --output duplicates.fasta --exclude-cnt 2
+>```
 >
 >```cat *-DUPE1.unaligned.fasta >> duplicates.fasta ```
 >
