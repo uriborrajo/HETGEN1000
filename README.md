@@ -25,46 +25,32 @@ for i in *_R1_*.fastq.gz; do echo $i; gunzip -c $i | wc -l | awk '{print $1/4}';
 
 ### 4. FASTP
 
-We will create a script that we will call ```fastp.pl``` to automate the usage of **fastp** for all species.
+fastp.sh
 
-*Script created by Zeyuan Chen*
-
-This script is in Perl ```.pl``` format:
 ```
-#!/usr/bin/env perl
+#!/bin/bash
 
-use strict;
+# ./fastp.sh {input PATH} {output PATH}
+# i.e. ./fastp.sh ~/Desktop/Oriol/fastq ~/Desktop/Oriol/clean-fastq
 
-my @reads_1 = glob "/dss/dsshome1/lxc00/di76tuy/Oriol/cephas-project/SRA/fastq/*_R1.fastq.gz";
+mkdir -p $2
 
-my $op_dir = "clean-fastq";
-
-`mkdir $op_dir` if (! -e $op_dir);
-
-
-foreach my $reads_1 (@reads_1) {
-
-    # Akera_bullata_ZMBN83032_R1.fastq.gz
-
-    $reads_1 =~ /(.+)\/([^\/]+)_R1.fastq.gz/;
-
-    my $path = $1;
-
-    my $id = $2;
-
-    my $id_dir = $op_dir . "/" . $id;
-
-    `mkdir $id_dir` if (! -e $id_dir);
-
-    my $reads_2 = $path . "/" . $id . "_R2.fastq.gz";
-
-    my $op1 = "$id_dir/$id\_clean1.fastq.gz";
-
-    my $op2 = "$id_dir/$id\_clean2.fastq.gz";
-
-    system("fastp -i $reads_1 -I $reads_2 -o $op1 -O $op2 --trim_poly_g --correction --overrepresentation_analysis --html --thread 10");
-
-}
+for i in $1/*; do
+	if [ -d $i ]; then
+		ssp=$(basename $i)
+		echo "PROCESSING: $ssp"
+		
+		r1=$(find $i -type f -name *_R1.fastq.gz)
+		r2=$(find $i -type f -name *_R2.fastq.gz)
+		
+		if [ -n r1 ] && [ -n r2 ]; then
+			o_spp=$2/$spp
+			mkdir -p $o_spp
+			fastp -i $r1 -I $r2 -o $o_spp/$spp-READ1.fastq -O $o_spp/$spp-READ2.fastq --trim_poly_g --correction --overrepresentation_analysis --html --thread 10 \
+			
+		fi
+	fi
+done
 ```
 To run the script:
 ```
