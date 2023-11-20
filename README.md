@@ -30,9 +30,13 @@ fastp.sh
 ```
 #!/bin/bash
 
+# Script created by Oriol Borrajo on 20 November 2023
+# https://github.com/uriborrajo/HETGEN1000/
+
 # ./fastp.sh {input PATH} {output PATH}
 # i.e. ./fastp.sh ~/Desktop/Oriol/fastq ~/Desktop/Oriol/clean-fastq
 
+conda activate phyluce-1.7.2
 mkdir -p $2
 
 for i in $1/*; do
@@ -52,10 +56,7 @@ for i in $1/*; do
     fi
 done
 ```
-To run the script:
-```
-perl fastp.pl
-```
+
 ### 5. CD-HIT-DUP
 ```
 #!/bin/bash
