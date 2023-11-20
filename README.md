@@ -152,7 +152,7 @@ done
 ```
 >### WARNING!!
 >
->Based on [Brant's](https://gist.github.com/brantfaircloth/e48e7e4eb9748854962863d104f94095) python script we keep those loci that match more than one contig.
+>Based on [Brant's](https://gist.github.com/brantfaircloth/e48e7e4eb9748854962863d104f94095) python script we keep the UCE loci that match more than one contig.
 >
 >```
 >phyluce_assembly_match_contigs_to_probes \
