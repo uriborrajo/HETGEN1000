@@ -173,20 +173,27 @@ done
 >    --output duplicates.fasta \
 >    --exclude-cnt 2
 >```
->```mv duplicates.fasta ../taxon-sets/all```
+>```
+>mv duplicates.fasta ../taxon-sets/all
+>```
 >```
 >phyluce_assembly_explode_get_fastas_file \
 >    --input duplicates.fasta \
 >    --output exploded-fastas \
 >    --by-taxon
 >```
->```cd exploded-fastas```
->
->```cat *-DUPE1.unaligned.fasta >> duplicates.fasta ```
->
->```sed -i 's/_DUPE1//g' duplicates.fasta```
->
->```cat all-taxa-incomplete.fasta duplicates.fasta >> all-taxa-incomplete2.fasta```
+>```
+>cd exploded-fastas
+>```
+>```
+>cat *-DUPE1.unaligned.fasta >> duplicates.fasta
+>```
+>```
+>sed -i 's/_DUPE1//g' duplicates.fasta
+>```
+>```
+>cat all-taxa-incomplete.fasta duplicates.fasta >> all-taxa-incomplete2.fasta
+>```
 
 
 ### 8. FINDING UCE LOCI
