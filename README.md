@@ -192,6 +192,9 @@ done
 >sed -i 's/_DUPE1//g' duplicates.fasta
 >```
 >```
+>cd ../
+>```
+>```
 >cat all-taxa-incomplete.fasta duplicates.fasta >> all-taxa-incomplete2.fasta
 >```
 
