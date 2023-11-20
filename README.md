@@ -150,17 +150,18 @@ for species_directory in "${input}"/*/; do
     fi
 done
 ```
->Duplicates
+>##### WARNING!!
 >
->python ./phyluce_assembly_parse_duplicates_file.py --contigs ../ --duplicates-file duplicates.txt --output duplicates.fasta --exclude-cnt 2
+>Based on [Brant's](https://gist.github.com/brantfaircloth/e48e7e4eb9748854962863d104f94095) python script we keep those loci that match more than one contig.
 >
->cat *-DUPE1.unaligned.fasta >> duplicates.fasta
+>```python ./phyluce_assembly_parse_duplicates_file.py --contigs ../ --duplicates-file duplicates.txt --output duplicates.fasta --exclude-cnt 2 ```
 >
->sed -i 's/_DUPE1//g' duplicates.fasta
+>```cat *-DUPE1.unaligned.fasta >> duplicates.fasta ```
 >
->cat all-taxa-incomplete.fasta duplicates.fasta >> all-taxa-incomplete2.fasta
+>```sed -i 's/_DUPE1//g' duplicates.fasta```
+>
+>```cat all-taxa-incomplete.fasta duplicates.fasta >> all-taxa-incomplete2.fasta```
 
--p, --parents     no error if existing, make parent directories as needed
 
 ### 8. FINDING UCE LOCI
 We want to locate which CONTIGS are in a UCE loci and remove those that are not. Hence, we need the Probeset that is in the folder *../../spades-assembly/* and is called *Probeset-70nt.fasta*. 
