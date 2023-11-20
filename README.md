@@ -33,6 +33,7 @@ fastp.sh
 # ./fastp.sh {input PATH} {output PATH}
 # i.e. ./fastp.sh ~/Desktop/Oriol/fastq ~/Desktop/Oriol/clean-fastq
 
+conda activate phyluce-1.7.2
 mkdir -p $2
 
 for i in $1/*; do
