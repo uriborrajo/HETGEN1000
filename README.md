@@ -119,27 +119,10 @@ phyluce_assembly_assemblo_spades \
     --memory 20000 \
     --cores 30 \
 ```
-```
-#!/bin/bash
 
-input="/home/intern/Desktop/Oriol/cdhitdup/spades-assemblies"
-output="${input}/clean"
-mkdir -p "${output}"
-for species_directory in "${input}"/*/; do
-    species=$(basename "${species_directory}")
-    rspecies="${species/_spades/}"
-
-    if [ -e "${species_directory}/contigs.fasta" ]; then
-        mv "${species_directory}/contigs.fasta" "${output}/${rspecies}.contigs.fasta"
-        echo "========= ${nombre_especie_sin_spades}.contigs.fasta renamed and moved ========="
-    else
-        echo "================== [ERROR] No contigs.fasta for ${species} =================="
-    fi
-done
-```
 >### WARNING!!
 >
->Based on [Brant's](https://gist.github.com/brantfaircloth/e48e7e4eb9748854962863d104f94095) python script we keep the UCE loci that match more than one contig.
+>Based on [Brant's](https://gist.github.com/brantfaircloth/e48e7e4eb9748854962863d104f94095) python script we keep UCE loci that match more than one contig.
 >
 >```
 >phyluce_assembly_match_contigs_to_probes \
@@ -360,6 +343,9 @@ Make sure that you are in the correct directory ```~/taxon-sets/all/mafft-nexus-
 ```
 #!/bin/bash
 
+# Script created by Oriol Borrajo on 20 November 2023
+# https://github.com/uriborrajo/HETGEN1000/
+
 ## ./iqtree.sh {PATH} *.phylip iqtree-GHOST-50p
 cd "$1"
 echo "ENTERING: $1" 
@@ -378,6 +364,9 @@ iqtree -st DNA -ninit 10 -bb 1500 -s mafft-nexus-edge-trimmed-gblocks-clean-50p-
 - #### ExaBayes
 ```
 #!/bin/bash
+
+# Script created by Oriol Borrajo on 20 November 2023
+# https://github.com/uriborrajo/HETGEN1000/
 
 ## ./exabayes.sh {PATH} *.phylip config.nex
 cd "$1"
