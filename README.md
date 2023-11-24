@@ -5,7 +5,7 @@
 [![Instagram Follow](https://img.shields.io/badge/Follow_us-blue?logo=Instagram)](https://www.instagram.com/slug_lab/) 
 [![Website](https://img.shields.io/badge/Visit_our_website-brightgreen)](https://sluglab.wixsite.com/slug-team)
 
-![Ultra Conserved Elements](https://www.ultraconserved.org/assets/img/ultraconserved-header.png)
+<![Ultra Conserved Elements](https://www.ultraconserved.org/assets/img/ultraconserved-header.png) width="58%">
 
 ## Requirements :
 
