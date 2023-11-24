@@ -2,7 +2,7 @@
 
 ## GUIDE FOR UCE ANALYSIS
 
-[![Instagram Follow](https://img.shields.io/badge/Follow_us_on_Instagram-purple)](https://www.instagram.com/slug_lab/) 
+[![Instagram Follow](https://img.shields.io/badge/Follow_us-blue?logo=Instagram)](https://www.instagram.com/slug_lab/) 
 [![Website](https://img.shields.io/badge/Visit_our_website-brightgreen)](https://sluglab.wixsite.com/slug-team)
 
 ![Ultra Conserved Elements](https://www.ultraconserved.org/assets/img/ultraconserved-header.png)
