@@ -1,3 +1,5 @@
+<img src="https://pbs.twimg.com/profile_images/1656594858499362816/1vZOEQhw_400x400.jpg" width="13%"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <img src="https://upload.wikimedia.org/wikipedia/commons/e/e6/Logo_Universitat_de_Barcelona.png" width="35%"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/Logotipo_del_Ministerio_de_Ciencia%2C_Innovación_y_Universidades.svg/1280px-Logotipo_del_Ministerio_de_Ciencia%2C_Innovación_y_Universidades.svg.png" width="35%">
+
 # HETGEN1000
 
 ## GUIDE FOR UCE ANALYSIS
@@ -7,7 +9,6 @@
 
 ![Ultra Conserved Elements](https://www.ultraconserved.org/assets/img/ultraconserved-header.png)
 
-<img src="https://www.ultraconserved.org/assets/img/ultraconserved-header.png" width="35%">
 
 ## Requirements :
 
