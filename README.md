@@ -4,7 +4,8 @@
 
 [![Instagram Follow](https://img.shields.io/badge/Follow_us_on_Instagram-purple)](https://www.instagram.com/slug_lab/) 
 [![Website](https://img.shields.io/badge/Visit_our_website-brightgreen)](https://sluglab.wixsite.com/slug-team)
-![Ultra Conserved Elements]([https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.ultraconserved.org%2F&psig=AOvVaw0PjMSB9pYaRabMc3xX7cRo&ust=1700918571835000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCOjwmczd3IIDFQAAAAAdAAAAABAQ](https://www.ultraconserved.org/assets/img/ultraconserved-header.png)
+
+![Ultra Conserved Elements](https://www.ultraconserved.org/assets/img/ultraconserved-header.png)
 ![UCE Protocol](https://www.researchgate.net/profile/Yuanmeng-Zhang-2/publication/336013993/figure/fig2/AS:806757857230850@1569357470185/Generalized-workflow-of-the-UCE-pipeline.ppm)
 ### 1. PHYLUCE INSTALLATION
 
