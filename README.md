@@ -6,7 +6,7 @@
 [![Website](https://img.shields.io/badge/Visit_our_website-brightgreen)](https://sluglab.wixsite.com/slug-team)
 
 ![Ultra Conserved Elements](https://www.ultraconserved.org/assets/img/ultraconserved-header.png)
-![UCE Protocol](https://www.researchgate.net/profile/Yuanmeng-Zhang-2/publication/336013993/figure/fig2/AS:806757857230850@1569357470185/Generalized-workflow-of-the-UCE-pipeline.ppm)
+
 ### 1. PHYLUCE INSTALLATION
 
 To perform the phylogeny of the HETGEN project, we will use the Phyluce package. Therefore, the first step will be its installation via Miniconda2.
