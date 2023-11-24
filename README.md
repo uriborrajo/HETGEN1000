@@ -2,7 +2,7 @@
 
 ## GUIDE FOR UCE ANALYSIS
 
-[![Instagram Follow](https://img.shields.io/badge/Follow_on_instagram-purple)](https://www.instagram.com/slug_lab/) [![Website](https://img.shields.io/badge/Visit_our_website-brightgreen)](https://sluglab.wixsite.com/slug-team)
+[![Instagram Follow](https://img.shields.io/badge/Follow_us_on_Instagram-purple)](https://www.instagram.com/slug_lab/) [![Website](https://img.shields.io/badge/Visit_our_website-brightgreen)](https://sluglab.wixsite.com/slug-team)
 ### 1. PHYLUCE INSTALLATION
 
 To perform the phylogeny of the HETGEN project, we will use the Phyluce package. Therefore, the first step will be its installation via Miniconda2.
