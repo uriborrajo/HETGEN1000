@@ -7,6 +7,16 @@
 
 ![Ultra Conserved Elements](https://www.ultraconserved.org/assets/img/ultraconserved-header.png)
 
+## Requirements :
+
+- Phyluce version 1.7.2 or greater https://phyluce.readthedocs.io/en/latest/
+- Iqtree http://www.iqtree.org
+- Exabayes https://cme.h-its.org/exelixis/web/software/exabayes/
+- Openmpi 4.1.0-10 https://www.open-mpi.org
+- Libopenmpi-dev 4.1.0-10
+- Gcc version 10.5.0 https://gcc.gnu.org
+- Cd-hit-dup https://sites.google.com/view/cd-hit
+  
 ### 1. PHYLUCE INSTALLATION
 
 To perform the phylogeny of the HETGEN project, we will use the Phyluce package. Therefore, the first step will be its installation via Miniconda2.
