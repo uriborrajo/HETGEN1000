@@ -49,8 +49,10 @@ fastp.sh
 # Script created by Oriol Borrajo on 20 November 2023
 # https://github.com/uriborrajo/HETGEN1000/
 
-# ./fastp.sh {input PATH} {output PATH}
-# i.e. ./fastp.sh ~/Desktop/Oriol/fastq ~/Desktop/Oriol/clean-fastq
+# Usage: ./fastp.sh $1 $2
+# $1 = input PATH
+# $2 = output PATH
+# e.g. ./fastp.sh ~/Desktop/Oriol/fastq ~/Desktop/Oriol/clean-fastq
 
 conda activate phyluce-1.7.2
 mkdir -p $2
