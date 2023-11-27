@@ -451,6 +451,14 @@ begin run;
  numcoupledchains 4
 end;
 ```
+- #### ASTRAL
+```
+iqtree2 -S mafft-nexus-internal-trimmed-gblocks1-clean-50p/ --prefix loci -T AUTO --seqtype DNA -m GTR+FO*H4 -B 1500
+```
+
+```
+java -jar /home/intern/Desktop/apps/ASTRAL/astral.5.7.8.jar -i *.treefile -o astral_sptree.treefile
+```
 
 
 
