@@ -37,7 +37,7 @@ Then initialize the newly-installed Miniconda:
 ~/miniconda3/bin/conda init bash
 ~/miniconda3/bin/conda init zsh
 ```
-To verify that Miniconda is installed, close and re-open your terminal and then run ```conda list```, that will shoud produce output.
+To verify that Miniconda is installed, close and re-open your terminal and then run ```conda list```, this should produce output.
 
 The installation of Miniconda3 is only necessary to be able to separate the downloaded packages into different environments, preventing them from all mixing in the base environment. Hence, Conda allows us to create different environments where we will install Phyluce in a new environment called ```Phyluce-1.7.2``` where ```-1.7.2``` is the version installed.
 
