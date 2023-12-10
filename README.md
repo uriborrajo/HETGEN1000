@@ -18,9 +18,9 @@
 - Gcc version 10.5.0 https://gcc.gnu.org
 - Cd-hit-dup https://sites.google.com/view/cd-hit
   
-## GET STARTED
+## GETTING STARTED
 
-### 1. PHYLUCE INSTALL PROCESS
+### 1. PHYLUCE INSTALLATION
 
 Phyluce is a program initially designed to analyze data extracted from ultraconserved elements in organismal genomes. We will use this software for the analysis of our data.
 This software requires the installation of minicondaX:
@@ -53,6 +53,8 @@ Then we are ready to activate ond use the environment:
 ```
 conda activate phyluce-1.7.3
 ```
+### 2. IQ-TREE INSTALLATION
+IQ-TREE is a software that reconstruct phylogenomic trees by maximum likelihood.
 
 ### 3. COUNT THE READ DATA
 ```
@@ -486,6 +488,17 @@ iqtree2 -S mafft-nexus-internal-trimmed-gblocks1-clean-50p/ --prefix loci -T AUT
 ```
 java -jar /home/intern/Desktop/apps/ASTRAL/astral.5.7.8.jar -i *.treefile -o astral_sptree.treefile
 ```
+## REFERENCES
+
+• Crotty, S.M., Minh, B.Q., Bean, N.G., Holland, B.R., Tuke, J., Jermiin, L.S., Haeseler, A.V., 2019. GHOST: Recovering historical signal from heterotachously-evolved sequence alignments. Syst. Biol. 69, 249–264. https://doi.org/10.1093/sysbio/syz051
+
+• Wang, H.C., Minh, B.Q., Susko, S., Roger, A.J., 2018. Modeling site heterogeneity with posterior mean site frequency profiles accelerates accurate phylogenomic estimation. Syst. Biol., 67:216-235. https://doi.org/10.1093/sysbio/syx068
+
+• Kalyaanamoorthy, S., Minh, B.Q., Wong, T.K.F., Haeseler, A.V., Jermiin, L.S., 2017. ModelFinder: Fast Model Selection for Accurate Phyloge- netic Estimates, Nature Methods, 14:587–589. https://doi.org/10.1038/nmeth.4285
+
+• Faircloth, B.C., 2016. PHYLUCE is a software package for the analysis of conserved genomic loci. Bioinformatics 32, 786–788. https://doi.org/10.1093/bioinformatics/btv646.
+
+
 
 
 
