@@ -18,22 +18,42 @@
 - Gcc version 10.5.0 https://gcc.gnu.org
 - Cd-hit-dup https://sites.google.com/view/cd-hit
   
-### 1. PHYLUCE INSTALLATION
+## GET STARTED
 
-To perform the phylogeny of the HETGEN project, we will use the Phyluce package. Therefore, the first step will be its installation via Miniconda2.
+### 1. PHYLUCE INSTALL PROCESS
+
+Phyluce is a program initially designed to analyze data extracted from ultraconserved elements in organismal genomes. We will use this software for the analysis of our data.
+This software requires the installation of minicondaX:
 ```
-conda install phyluce-1.7.2
+mkdir -p ~/miniconda3
+wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda3/miniconda.sh
+bash ~/miniconda3/miniconda.sh -b -u -p ~/miniconda3
+rm -rf ~/miniconda3/miniconda.sh
 ```
-### 2. ACTIVATE PHYLUCE
-You need to activate the environment before you can use any of the Phyluce commands: 
+These commands install de latest version of the miniconda3 installer. If you want to install a different version, change the name of the .sh installer in the wget command (e.g. Miniconda3 to Miniconda2).
+
+Then initialize the newly-installed Miniconda:
 ```
-conda activate phyluce-1.7.2
+~/miniconda3/bin/conda init bash
+~/miniconda3/bin/conda init zsh
+```
+To verify that Miniconda is installed, close and re-open your terminal and then run ```conda list```, that will shoud produce output.
+
+The installation of Miniconda3 is only necessary to be able to separate the downloaded packages into different environments, preventing them from all mixing in the base environment. Hence, Conda allows us to create different environments where we will install Phyluce in a new environment called ```Phyluce-1.7.2``` where ```-1.7.2``` is the version installed.
+
+To install and create the new environment:
+
+```
+wget https://raw.githubusercontent.com/faircloth-lab/phyluce/v1.7.3/distrib/phyluce-1.7.3-py36-Linux-conda.yml
+conda env create -n phyluce-1.7.3 --file phyluce-1.7.3-py36-Linux-conda.yml
 ```
 
-If you want to leave Phyluce environment, run:
+Then we are ready to activate ond use the environment:
+
 ```
-conda deactivate
+conda activate phyluce-1.7.3
 ```
+
 ### 3. COUNT THE READ DATA
 ```
 for i in *_R1_*.fastq.gz; do echo $i; gunzip -c $i | wc -l | awk '{print $1/4}'; done
