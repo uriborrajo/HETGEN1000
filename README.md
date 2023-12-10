@@ -77,6 +77,19 @@ cd exabayes-1.5.1.tar.gz
 ./configure --enable-mpi && make
 ```
 
+### 4. CD-HIT INSTALLATION
+For CD-HIT: ```conda install -c bioconda cd-hit```
+For CD-HIT-DUP and CD-HIT-EST: ```conda install -c bioconda cd-hit-auxtools```
+
+### 5. ASTRAL INSTALLATION
+
+```
+mkdir -p Apps/Astral
+cd Apps/Astral
+wget https://github.com/smirarab/ASTRAL/raw/master/Astral.5.7.8.zip
+unzip Astral.5.7.8.zip
+```
+
 ### 3. COUNT THE READ DATA
 ```
 for i in *_R1_*.fastq.gz; do echo $i; gunzip -c $i | wc -l | awk '{print $1/4}'; done
