@@ -56,6 +56,27 @@ conda activate phyluce-1.7.3
 ### 2. IQ-TREE INSTALLATION
 IQ-TREE is a software that reconstruct phylogenomic trees by maximum likelihood.
 
+Installation:
+```
+conda install -c bioconda iqtree
+```
+### 3. EXABAYES INSTALLATION
+```
+sudo apt install gcc-10
+sudo apt install g++-10
+sudo apt-get install openmpi-bin libopenmpi-dev
+```
+```
+mkdir -p Apps/Exabayes
+cd Apps/Exabayes
+wget https://cme.h-its.org/exelixis/resource/download/software/exabayes-1.5.1.tar.gz
+tar -xvzf exabayes-1.5.1.tar.gz
+```
+```
+cd exabayes-1.5.1.tar.gz
+./configure --enable-mpi && make
+```
+
 ### 3. COUNT THE READ DATA
 ```
 for i in *_R1_*.fastq.gz; do echo $i; gunzip -c $i | wc -l | awk '{print $1/4}'; done
