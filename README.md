@@ -521,9 +521,56 @@ iqtree2 -S mafft-nexus-internal-trimmed-gblocks1-clean-50p/ --prefix loci -T AUT
 ```
 java -jar /home/intern/Desktop/apps/ASTRAL/astral.5.7.8.jar -i *.treefile -o astral_sptree.treefile
 ```
-[![NEW](https://img.shields.io/badge/New-blue?style=social)
+
+![NEW](https://img.shields.io/badge/New-blue?style=social)
 ### ZORRO
-´´´
+
+*Step 1 (on Workstation):
+```
+./zorro_mask.sh $1 $2
+```
+$2 = zorro_mask
+
+*Step 2 (on Harvard's cluster):
+```
+./zorro.py $1
+```
+$1 = zorro_mask 
+
+*Step 3 (on Workstation):
+```
+mkdir zorro_fasta
+mv zorro_mask/*.fasta zorro_fasta
+```
+```
+phyluce_align_filter_alignments --alignments zorro_fasta --output zorro_filter --input-format fasta --min-length 1 --log-path log
+```
+```
+phyluce_align_remove_locus_name_from_files --alignments zorro_filter --output zorro_clean --cores 12 --log-path log
+```
+```
+phyluce_align_get_only_loci_with_min_taxa --alignments zorro_clean --taxa X --percent 0.50 --output zorro_50p --cores 35 --log-path log
+```
+```
+phyluce_align_concatenate_alignments --alignments zorro_50p --output zorro_50p_IQTree --phylip --log-path log
+```
+```
+iqtree2 --seqtype DNA --ninit 10 -B 1500 -s zorro_50p_IQTree/zorro_50p_IQTree.phylip --prefix zorro-iqtree-GHOST-50p -m GTR+FO*H4 -T AUTO --rcluster 10 --mrate G,R,E
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 ## REFERENCES
