@@ -464,7 +464,6 @@ New command:
 iqtree2 --seqtype DNA --ninit 10 -B 1500 -s mafft-nexus-internal-trimmed-gblocks1-clean-50p-IQTree.phylip --prefix iqtree-GHOST-50p -m GTR+FO*H4 -T AUTO --rcluster 10 --mrate G,R,E
 ```
 
-
 - #### ExaBayes
 ```
 #!/bin/bash
@@ -522,6 +521,11 @@ iqtree2 -S mafft-nexus-internal-trimmed-gblocks1-clean-50p/ --prefix loci -T AUT
 ```
 java -jar /home/intern/Desktop/apps/ASTRAL/astral.5.7.8.jar -i *.treefile -o astral_sptree.treefile
 ```
+[![NEW](https://img.shields.io/badge/New-blue?style=social)
+### ZORRO
+´´´
+
+
 ## REFERENCES
 
 • Crotty, S.M., Minh, B.Q., Bean, N.G., Holland, B.R., Tuke, J., Jermiin, L.S., Haeseler, A.V., 2019. GHOST: Recovering historical signal from heterotachously-evolved sequence alignments. Syst. Biol. 69, 249–264. https://doi.org/10.1093/sysbio/syz051
