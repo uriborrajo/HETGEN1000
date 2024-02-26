@@ -513,6 +513,22 @@ begin run;
  numcoupledchains 4
 end;
 ```
+
+When run has completed, calculate these in an interactive session:
+ 
+- Check if parameters converged (ESS should be >100, PSRF should be <1.1)
+postProcParam -f ExaBayes_parameters.17taxa.0 ExaBayes_parameters.17taxa.1 -n 17params
+- Calculate standard deviation of split frequencies (aka convergence, ASDSF should be <1%)
+sdsf -f ExaBayes_topologies.run-0.24Ony-6 ExaBayes_topologies.run-1.24Ony-6
+- Compute credible set of topologies (aka frequency of diff topologies)
+credibleSet -f ExaBayes_topologies.17taxa.0 ExaBayes_topologies.17taxa.1 -n 17Cred
+- Extract bipartitions (see how well supported different nodes are)
+extractBips -f ExaBayes_topologies.17taxa.0 ExaBayes_topologies.17taxa.1 -n 17Bips
+[Output files to care about: .bipartitions = name of node; .bipartitionStatistics = support for node (check ESS)]
+- Generate consensus tree
+consense –f ExaBayes_topologies.16Taxa.0 ExaBayes_topologies.16Taxa.1 –n 16ConsTree
+
+
 - #### ASTRAL
 ```
 iqtree2 -S mafft-nexus-internal-trimmed-gblocks1-clean-50p/ --prefix loci -T AUTO --seqtype DNA -m GTR+FO*H4 -B 1500
