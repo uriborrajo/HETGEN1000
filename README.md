@@ -541,19 +541,21 @@ java -jar /home/intern/Desktop/apps/ASTRAL/astral.5.7.8.jar -i *.treefile -o ast
 ![NEW](https://img.shields.io/badge/New-blue?style=social)
 ### ZORRO
 
-*Step 1 (on Workstation):
+*Step 1 (in Workstation):
 ```
 ./zorro_mask.sh $1 $2
 ```
 $2 = zorro_mask
 
-*Step 2 (on Harvard's cluster):
+*Step 2 (in Harvard's cluster):
 ```
-./zorro.py $1
+conda activate biopython2
+cd zorro_mask
+python ../zorro.py .
 ```
 $1 = zorro_mask 
 
-*Step 3 (on Workstation):
+*Step 3 (in Workstation):
 ```
 mkdir zorro_fasta
 mv zorro_mask/*.fasta zorro_fasta
