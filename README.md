@@ -59,14 +59,14 @@ To activate the environment:
 conda activate phyluce-1.7.3
 ```
 ### 2. IQ-TREE INSTALLATION
-IQ-TREE is a computer programme used to infer phylogenetic trees by maximum likelihood. This program contains a fast and effective scholastic algorithm, which can be compared to other phylogenetic inference programs, such as RAxML and PhyML, with similar computational time (Nguyen et al., 2015). 
+IQ-TREE is a computer program used to infer phylogenetic trees by maximum likelihood. This program contains a fast and effective scholastic algorithm, which can be compared to other phylogenetic inference programs, such as RAxML and PhyML, with similar computational time (Nguyen et al., 2015). 
 
 To install IQ-TREE we will use the conda command, as it allows us to download this software program with a simple command:
 ```
 conda install -c bioconda iqtree
 ```
 ### 3. EXABAYES INSTALLATION
-ExaBayes is a bioinformatics programme for Bayesian phylogenetic analysis. It was especially inspired by MrBayes, but also applies similar approaches from BEAST. It sets up a Markov chain Monte Carlo sampling method that allows to determine parameters of the evolutionary model (e.g. branch length or substitution rates) and the posterior probability of a tree or topology (Andre J. et al., 2014).
+ExaBayes is a bioinformatics program for Bayesian phylogenetic analysis. It was especially inspired by MrBayes, but also applies similar approaches from BEAST. It sets up a Markov chain Monte Carlo sampling method that allows to determine parameters of the evolutionary model (e.g. branch length or substitution rates) and the posterior probability of a tree or topology (Andre J. et al., 2014).
 
 For the installation of ExaBayes follow the installation instructions (section 3) on the official ExaBayes website by clicking on this link: https://cme.h-its.org/exelixis/web/software/exabayes/manual/manual.html#sec-11
 
