@@ -59,13 +59,21 @@ To activate the environment:
 conda activate phyluce-1.7.3
 ```
 ### 2. IQ-TREE INSTALLATION
-IQ-TREE is a software that reconstruct phylogenomic trees by maximum likelihood.
+IQ-TREE is a computer programme used to infer phylogenetic trees by maximum likelihood. This program contains a fast and effective scholastic algorithm, which can be compared to other phylogenetic inference programs, such as RAxML and PhyML, with similar computational time (Nguyen et al., 2015). 
 
-Installation:
+To install IQ-TREE we will use the conda command, as it allows us to download this software program with a simple command:
 ```
 conda install -c bioconda iqtree
 ```
 ### 3. EXABAYES INSTALLATION
+ExaBayes is a bioinformatics programme for Bayesian phylogenetic analysis. It was especially inspired by MrBayes, but also applies similar approaches from BEAST. It sets up a Markov chain Monte Carlo sampling method that allows to determine parameters of the evolutionary model (e.g. branch length or substitution rates) and the posterior probability of a tree or topology (Andre J. et al., 2014).
+
+For the installation of ExaBayes follow the installation instructions (section 3) on the official ExaBayes website by clicking on this link: https://cme.h-its.org/exelixis/web/software/exabayes/manual/manual.html#sec-11
+
+It should be noted that the installation of ExaBayes did not work with versions higher than gcc version 10 and we had to downgrade it. 
+
+Here are the steps we used for the installation:
+
 ```
 sudo apt install gcc-10
 sudo apt install g++-10
@@ -605,6 +613,8 @@ iqtree2 --seqtype DNA --ninit 10 -B 1500 -s zorro_50p_IQTree/zorro_50p_IQTree.ph
 • Kalyaanamoorthy, S., Minh, B.Q., Wong, T.K.F., Haeseler, A.V., Jermiin, L.S., 2017. ModelFinder: Fast Model Selection for Accurate Phyloge- netic Estimates, Nature Methods, 14:587–589. https://doi.org/10.1038/nmeth.4285
 
 • Faircloth, B.C., 2016. PHYLUCE is a software package for the analysis of conserved genomic loci. Bioinformatics 32, 786–788. https://doi.org/10.1093/bioinformatics/btv646.
+
+• Andre J. Aberer, Kassian Kobert, Alexandros Stamatakis, ExaBayes: Massively Parallel Bayesian Tree Inference for the Whole-Genome Era, Molecular Biology and Evolution, Volume 31, Issue 10, October 2014, Pages 2553–2556, https://doi.org/10.1093/molbev/msu236
 
 
 
