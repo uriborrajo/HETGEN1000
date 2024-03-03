@@ -22,33 +22,38 @@
 
 ### 1. PHYLUCE INSTALLATION
 
-Phyluce is a program initially designed to analyze data extracted from ultraconserved elements in organismal genomes. We will use this software for the analysis of our data.
-This software requires the installation of minicondaX:
+Phyluce is a software package initially designed to analyse data extracted from ultra-conserved elements in the genomes of organisms. These ultraconserved elements (UCE) are highly conserved regions of the genomes of organisms, in our case organisms within the phylum Mollusca.
+
+For the present study we will use this software package to analyse data from 35 mollusc species.
+
+To use phyluce you need to have MinicondaX installed (in our case Miniconda 3):
 ```
 mkdir -p ~/miniconda3
 wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda3/miniconda.sh
 bash ~/miniconda3/miniconda.sh -b -u -p ~/miniconda3
 rm -rf ~/miniconda3/miniconda.sh
 ```
-These commands install de latest version of the miniconda3 installer. If you want to install a different version, change the name of the .sh installer in the wget command (e.g. Miniconda3 to Miniconda2).
+If you want to install another version of miniconda, just change the name of the .sh in the wget command (e.g. Miniconda3 to Miniconda2).
 
-Then initialize the newly-installed Miniconda:
+Next, you must initialise Miniconda3:
 ```
 ~/miniconda3/bin/conda init bash
 ~/miniconda3/bin/conda init zsh
 ```
-To verify that Miniconda is installed, close and re-open your terminal and then run ```conda list```, this should produce output.
+To verify that Miniconda is installed and working properly, close and reopen your terminal and then run ```conda list```, this should produce an output.
 
-The installation of Miniconda3 is only necessary to be able to separate the downloaded packages into different environments, preventing them from all mixing in the base environment. Hence, Conda allows us to create different environments where we will install Phyluce in a new environment called ```Phyluce-1.7.2``` where ```-1.7.2``` is the version installed.
+The installation of Miniconda3 is only necessary to be able to separate the downloaded packages in different environments, avoiding that they are all mixed in the base environment. Thus, Conda allows us to create different environments where we will install Phyluce in an environment called ```Phyluce-1.7.2``` where ```-1.7.2``` is the installed version.
 
-To install and create the new environment:
+To install phyluce-1.7.2 and create the new environment:
 
 ```
 wget https://raw.githubusercontent.com/faircloth-lab/phyluce/v1.7.3/distrib/phyluce-1.7.3-py36-Linux-conda.yml
 conda env create -n phyluce-1.7.3 --file phyluce-1.7.3-py36-Linux-conda.yml
 ```
 
-Then we are ready to activate ond use the environment:
+Once the software package is installed, we are ready to activate and use the corresponding environment. It should be noted that whenever we want to use phyluce software we will have to activate the environment where it is installed.
+
+To activate the environment:
 
 ```
 conda activate phyluce-1.7.3
