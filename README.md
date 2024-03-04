@@ -190,7 +190,7 @@ done
 ###### FASTQ COMBINE PAIRED END (UNPAIRED FASTQ FILES)
 For those unmatched fastq files (i.e. those files where R1 and R2 do not have the same number of reads) we will have to compare and discard the read-only data.
 
-IMPORTANT - You have to verify that the fastq files use exactly four lines per sequence, otherwise the program will not recognise these sequences.
+IMPORTANT - You have to verify that the fastq files use exactly four lines per sequence, otherwise this program will not recognise these sequences.
 
 The output of the program will be three files, the first two will contain the reads of the matching pairs and the third one will contain the reads of the matching pairs.
 
@@ -381,7 +381,7 @@ phyluce_align_seqcap_align \
 *Replace ```--taxa``` with the number of taxa you have in your analysis. Furthermore, we specify ```--log-path``` to indicate the path where we will save the command's log, so you need to create that directory using ```mkdir log```.*
 
 - #### GBLOCKS
-We are going to trim this loci using **Gblocks**
+We are going to trim these loci using **Gblocks**
 
 So we can:
 - Run gblocks trimming on the edge trimmed alignments
