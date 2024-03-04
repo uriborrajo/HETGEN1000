@@ -91,8 +91,14 @@ cd exabayes-1.5.1.tar.gz
 ```
 
 ### 4. CD-HIT INSTALLATION
-For CD-HIT: ```conda install -c bioconda cd-hit```
-For CD-HIT-DUP and CD-HIT-EST: ```conda install -c bioconda cd-hit-auxtools```
+For CD-HIT: 
+```
+conda install -c bioconda cd-hit
+```
+For CD-HIT-DUP and CD-HIT-EST: 
+```
+conda install -c bioconda cd-hit-auxtools
+```
 
 ### 5. ASTRAL INSTALLATION
 
@@ -192,11 +198,14 @@ For those unmatched fastq files (i.e. those files where R1 and R2 do not have th
 
 IMPORTANT - You have to verify that the fastq files use exactly four lines per sequence, otherwise this program will not recognise these sequences.
 
-The output of the program will be three files, the first two will contain the reads of the matching pairs and the third one will contain the reads of the matching pairs.
+The program's output will be three files, the first two contains the reads of the matching pairs and the third one the reads of the matching pairs.
 
 Usage: python fastqCombinePairedEnd.py input1 input2 separator
+
 input1 = LEFT  fastq or fastq.gz file (R1)
+
 input2 = RIGHT fastq or fastq.gz file (R2)
+
 separator
 
 ```
