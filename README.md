@@ -17,6 +17,7 @@
 - Libopenmpi-dev 4.1.0-10
 - Gcc version 10.5.0 https://gcc.gnu.org
 - Cd-hit-dup https://sites.google.com/view/cd-hit
+- Fastp https://github.com/OpenGene/fastp
   
 ## GETTING STARTED
 
@@ -58,6 +59,11 @@ To activate the environment:
 ```
 conda activate phyluce-1.7.2
 ```
+or
+```
+source activate phyluce-1.7.2
+```
+
 ### 2. IQ-TREE INSTALLATION
 IQ-TREE is a computer program used to infer phylogenetic trees by maximum likelihood. This program contains a fast and effective scholastic algorithm, which can be compared to other phylogenetic inference programs, such as RAxML and PhyML, with similar computational time (Nguyen et al., 2015). 
 
@@ -108,6 +114,13 @@ cd Apps/Astral
 wget https://github.com/smirarab/ASTRAL/raw/master/Astral.5.7.8.zip
 unzip Astral.5.7.8.zip
 ```
+
+### 6. FASTP INSTALLATION
+
+```
+conda install -c bioconda fastp
+```
+
 
 ### 3. COUNT THE READ DATA
 ```
@@ -194,7 +207,7 @@ for species_directory in "$output"/*; do
 done
 ```
 ###### FASTQ COMBINE PAIRED END (UNPAIRED FASTQ FILES)
-For those unmatched fastq files (i.e. those files where R1 and R2 do not have the same number of reads) we will have to compare and discard the read-only data.
+For those unpaired fastq files (i.e. those files where R1 and R2 do not have the same number of reads) we will have to compare and discard the read-only data.
 
 IMPORTANT - You have to verify that the fastq files use exactly four lines per sequence, otherwise this program will not recognise these sequences.
 
