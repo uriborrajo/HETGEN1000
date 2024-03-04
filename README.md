@@ -436,7 +436,24 @@ phyluce_align_get_only_loci_with_min_taxa \
     --cores 35 \
     --log-path log
 ```
-### 14. PREPARING DATA FOR DOWNSTREAM ANALYSIS
+### 14. COUNT UCEs PER SPECIES (of each matrix)
+```
+phyluce_align_convert_one_align_to_another --alignments mafft-nexus-internal-trimmed-gblocks-clean-50p --output mafft-fastas-internal-trimmed-gblocks-clean-50p --input-format nexus --output-format fasta --cores 12 --log-path log
+```
+```
+./add_tag.sh mafft-fastas-internal-trimmed-gblocks-clean-50p
+```
+```
+cd mafft-fastas-internal-trimmed-gblocks-clean-50p
+cat * >> all-fastas-50p
+```
+```
+phyluce_assembly_explode_get_fastas_file --input all-fastas-50p --output exploded-fastas-50p --by-taxon
+```
+```
+for i in exploded-fastas-50p/*.fasta; do phyluce_assembly_get_fasta_lengths --input $i --csv; done
+```
+### 15. PREPARING DATA FOR DOWNSTREAM ANALYSIS
 Make sure that you are in the correct directory ```~/taxon-sets/all```
 ```
 phyluce_align_concatenate_alignments \
@@ -445,7 +462,7 @@ phyluce_align_concatenate_alignments \
     --phylip \
     --log-path log
 ```
-### 15. DOWNSTREAM ANALYSIS
+### 16. DOWNSTREAM ANALYSIS
 - #### IQTree
 Make sure that you are in the correct directory ```~/taxon-sets/all/mafft-nexus-edge-trimmed-gblocks-clean-50p-IQTree```
 ```
