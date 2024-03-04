@@ -218,15 +218,23 @@ done < especies_sin_archivos.txt
 ### 6. SPADES
 
 Steps to crate "assembly.conf" file:
-``` cd cdhitdup ```
+```
+cd cdhitdup
+```
 
-``` echo "[samples]" > ../assembly.conf ```
+``` 
+echo "[samples]" > ../assembly.conf
+```
 
-``` for i in *; do echo "$i:intern/home/Desktop/data/cdhitdup/$i/"; done >> ../assembly.conf ```
+``` 
+for i in *; do echo "$i:intern/home/Desktop/data/cdhitdup/$i/"; done >> ../assembly.conf
+```
 
 or
 
-``` for i in *; do echo "$i:intern/home/Desktop/data/cdhitdup/$i/split-adapter-quality-trimmed/"; done >> ../assembly.conf ```
+``` 
+for i in *; do echo "$i:intern/home/Desktop/data/cdhitdup/$i/split-adapter-quality-trimmed/"; done >> ../assembly.conf
+```
 
 
 ```
@@ -239,7 +247,7 @@ phyluce_assembly_assemblo_spades \
 
 >### WARNING!!
 >
->Based on [Brant's](https://gist.github.com/brantfaircloth/e48e7e4eb9748854962863d104f94095) python script we keep UCE loci that match more than one contig.
+>Based on [Brant's](https://gist.github.com/brantfaircloth/e48e7e4eb9748854962863d104f94095) python script we kept UCE loci that match more than one contig.
 >
 >```
 >phyluce_assembly_match_contigs_to_probes \
