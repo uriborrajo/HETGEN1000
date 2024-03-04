@@ -560,13 +560,18 @@ python ../zorro.py .
 ```
 $1 = zorro_mask 
 
+```
+mkdir zorro
+mv zorro_mask/*.cut zorro
+```
+Then, scp intern...
+
 *Step 3 (Workstation):
 ```
-mkdir zorro_fasta
-mv zorro_mask/*.fasta zorro_fasta
+./from_cut_to_fasta.sh zorro
 ```
 ```
-phyluce_align_filter_alignments --alignments zorro_fasta --output zorro_filter --input-format fasta --min-length 1 --log-path log
+phyluce_align_filter_alignments --alignments zorro --output zorro_filter --input-format fasta --min-length 1 --log-path log
 ```
 ```
 phyluce_align_remove_locus_name_from_files --alignments zorro_filter --output zorro_clean --cores 12 --log-path log
