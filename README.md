@@ -47,8 +47,8 @@ The installation of Miniconda3 is only necessary to be able to separate the down
 To install phyluce-1.7.2 and create the new environment:
 
 ```
-wget https://raw.githubusercontent.com/faircloth-lab/phyluce/v1.7.3/distrib/phyluce-1.7.3-py36-Linux-conda.yml
-conda env create -n phyluce-1.7.3 --file phyluce-1.7.3-py36-Linux-conda.yml
+wget https://raw.githubusercontent.com/faircloth-lab/phyluce/v1.7.3/distrib/phyluce-1.7.2-py36-Linux-conda.yml
+conda env create -n phyluce-1.7.2 --file phyluce-1.7.2-py36-Linux-conda.yml
 ```
 
 Once the software package is installed, we are ready to activate and use the corresponding environment. It should be noted that whenever we want to use phyluce software we will have to activate the environment where it is installed.
@@ -56,7 +56,7 @@ Once the software package is installed, we are ready to activate and use the cor
 To activate the environment:
 
 ```
-conda activate phyluce-1.7.3
+conda activate phyluce-1.7.2
 ```
 ### 2. IQ-TREE INSTALLATION
 IQ-TREE is a computer program used to infer phylogenetic trees by maximum likelihood. This program contains a fast and effective scholastic algorithm, which can be compared to other phylogenetic inference programs, such as RAxML and PhyML, with similar computational time (Nguyen et al., 2015). 
