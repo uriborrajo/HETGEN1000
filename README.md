@@ -148,35 +148,39 @@ done
 ```
 #!/bin/bash
 
+# Usage: ./cd-hit-dup.sh $1 $2
+# $1 = clean-fastq
+# $2 = cdhitdup
+
 #### a. Specify input and output path
-input="/home/intern/Desktop/Oriol/clean-fastq/faltantes"
-output="$input/cdhitdup"
-mkdir -p "$output" #make dir if parents don't exist
+input="$1"
+output="$2"
+mkdir -p "$output"
 
 #### b. Loop
 for species_directory in "$input"/*; do
-  if [ -d "$species_directory" ]; then #Check if species directory exist.
-    species=$(basename "$species_directory") #Save the name of the species as $species
-    echo "================================ PROCESSING: $species ================================"
+  if [ -d "$species_directory" ]; then 
+    species=$(basename "$species_directory")
+    echo "PROCESSING: $species"
 
-    read1=$(find "$species_directory" -type f -name "*-READ1.fastq") #Find in species directory the file (-type f) named *-READ1.fastq and save it as $READ1
-    read2=$(find "$species_directory" -type f -name "*-READ2.fastq") #Find in species directory the file (-type f) named *-READ2.fastq and save it as $READ2
+    read1=$(find "$species_directory" -type f -name "*-READ1.fastq") 
+    read2=$(find "$species_directory" -type f -name "*-READ2.fastq") 
 
     if [ -n "$read" ] && [ -n "$read2" ]; then
-      output_species="$output/$species_directory" #Get output path of each species as output_species
+      output_species="$output/$species_directory" 
       mkdir -p "$output_species" #make dir if parents don't exist
       cd-hit-dup -u 30 -m false -i "$read1" -i2 "$read2" -o "$output_directory/${species}-READ1.fastq" -o2 "$output_dir/${species}-READ2.fastq" \
 #### c. Compressing output
       gzip -k "$output_species/${species}-READ1.fastq"
       gzip -k "$output_species/${species}-READ2.fastq"
 
-      echo "======================== Duplicates removed of $species ========================"
+      echo "Duplicates removed from $species"
     else
-      echo "==================== [ERROR] no READ1 & READ2: $species ===================="
+      echo "[ERROR] no READ1 & READ2: $species"
     fi
   fi
 done
-#### d. Removing unnecessary files
+#### d. Delete unnecessary files
 for species_directory in "$output"/*; do
   if [ -d "$species_directory" ]; then
     find "$species_directory" -type f ! -name "*.gz" -exec rm -fr {} \;
