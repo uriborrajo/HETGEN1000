@@ -47,7 +47,7 @@ The installation of Miniconda3 is only necessary to be able to separate the down
 To install phyluce-1.7.2 and create the new environment:
 
 ```
-wget https://raw.githubusercontent.com/faircloth-lab/phyluce/v1.7.3/distrib/phyluce-1.7.2-py36-Linux-conda.yml
+wget https://raw.githubusercontent.com/faircloth-lab/phyluce/v1.7.2/distrib/phyluce-1.7.2-py36-Linux-conda.yml
 conda env create -n phyluce-1.7.2 --file phyluce-1.7.2-py36-Linux-conda.yml
 ```
 
