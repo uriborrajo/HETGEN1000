@@ -550,6 +550,7 @@ java -jar /home/intern/Desktop/apps/ASTRAL/astral.5.7.8.jar -i *.treefile -o ast
 ```
 ./zorro_mask.sh $1 $2
 ```
+$1 = alignments (UCEs) (e.g. mafft-nexus-internal-trimmed)
 $2 = zorro_mask
 
 *Step 2 (Harvard):
