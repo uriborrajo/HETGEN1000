@@ -115,7 +115,7 @@ For the present study, only CD-HIT-DUP has been used. This is used before making
 
 
 ### 5. ASTRAL INSTALLATION
-
+ASTRAL is a java program used to estimate a phylogenetic tree by creating a set of unrooted gene trees. This program seeks to find the tree that maximises the number of induced quartet trees in gene trees that are shared by the species tree and is statistically consistent under a multispecies coalescent model.
 ```
 mkdir -p Apps/Astral
 cd Apps/Astral
