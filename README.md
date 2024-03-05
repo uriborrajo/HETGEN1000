@@ -97,14 +97,22 @@ cd exabayes-1.5.1.tar.gz
 ```
 
 ### 4. CD-HIT INSTALLATION
-For CD-HIT: 
+CD-HIT is a program that uses an algorithm to reduce sequence redundancy and improve the performance of other sequence analyses. It is based on the estimation of similarities between sequences to filter out unnecessary sequence alignments (Fu L. et al., 2012)
+
+For CD-HIT installation:
 ```
 conda install -c bioconda cd-hit
 ```
-For CD-HIT-DUP and CD-HIT-EST: 
+For CD-HIT-DUP and CD-HIT-EST installation: 
 ```
 conda install -c bioconda cd-hit-auxtools
 ```
+For the present study, only CD-HIT-DUP has been used. This is used before making assemblies with Spades.
+
+>CD-HIT is used after making assemblies with Spades.
+
+>CD-HIT-EST is used for protein, i.e. transcriptome alignments.
+
 
 ### 5. ASTRAL INSTALLATION
 
@@ -666,6 +674,8 @@ iqtree2 --seqtype DNA --ninit 10 -B 1500 -s zorro_50p_IQTree/zorro_50p_IQTree.ph
 • Andre J. Aberer, Kassian Kobert, Alexandros Stamatakis, ExaBayes: Massively Parallel Bayesian Tree Inference for the Whole-Genome Era, Molecular Biology and Evolution, Volume 31, Issue 10, October 2014, Pages 2553–2556, https://doi.org/10.1093/molbev/msu236
 
 • Lam-Tung Nguyen, Heiko A. Schmidt, Arndt von Haeseler, Bui Quang Minh, IQ-TREE: A Fast and Effective Stochastic Algorithm for Estimating Maximum-Likelihood Phylogenies, Molecular Biology and Evolution, Volume 32, Issue 1, January 2015, Pages 268–274, https://doi.org/10.1093/molbev/msu300
+
+• Fu, L., Niu, B., Zhu, Z., Wu, S., & Li, W. (2012). CD-HIT: accelerated for clustering the next-generation sequencing data. Bioinformatics (Oxford, England), 28(23), 3150–3152. https://doi.org/10.1093/bioinformatics/bts565
 
 
 
