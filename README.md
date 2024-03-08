@@ -131,6 +131,8 @@ conda install -c bioconda fastp
 
 
 ### 3. COUNT THE READ DATA
+To count the number of READS in a sequence file for a species, UNIX tools can be used. The command counts reads from R1 which should be equal to R2 otherwise we will have same total reads of two sequences (see UNPAIRED FASTQ FILES).  The command divides the output number by 4 to get the number of sequence reads.
+
 ```
 for i in *_R1_*.fastq.gz; do echo $i; gunzip -c $i | wc -l | awk '{print $1/4}'; done
 ```
