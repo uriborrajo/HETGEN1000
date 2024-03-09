@@ -131,7 +131,7 @@ conda install -c bioconda fastp
 
 
 ### 3. COUNT THE READ DATA
-To count the number of READS in a sequence file for a species, UNIX tools can be used. The command counts reads from R1 which should be equal to R2 otherwise we will have same total reads of two sequences (see UNPAIRED FASTQ FILES).  The command divides the output number by 4 to get the number of sequence reads.
+To count the number of READS in a sequence file for a species, UNIX tools can be used. The command counts reads from R1, which should be equal to R2 otherwise we will have to equal the total reads of the two sequences (see UNPAIRED FASTQ FILES).  The command divides the output number by 4 to get the number of sequence reads.
 
 ```
 for i in *_R1_*.fastq.gz; do echo $i; gunzip -c $i | wc -l | awk '{print $1/4}'; done
@@ -139,38 +139,17 @@ for i in *_R1_*.fastq.gz; do echo $i; gunzip -c $i | wc -l | awk '{print $1/4}';
 
 ### 4. FASTP
 
-fastp.sh
+To use fastp we will have to run the script ```fastp.sh```, this script uses as input the folder with the fastqs. Also, the output can be called clean-fastq to find out where the cleaned sequences are.
 
+An example for running the script would be:
 ```
-#!/bin/bash
+./fastp.sh ~/Desktop/Oriol/fastq ~/Desktop/Oriol/clean-fastq
+```
+Note that if you copy the script directly into a new shell script, you will have to give it permissions so that it can be executed.
 
-# Script created by Oriol Borrajo on 20 November 2023
-# https://github.com/uriborrajo/HETGEN1000/
-
-# Usage: ./fastp.sh $1 $2
-# $1 = input PATH
-# $2 = output PATH
-# e.g. ./fastp.sh ~/Desktop/Oriol/fastq ~/Desktop/Oriol/clean-fastq
-
-conda activate phyluce-1.7.2
-mkdir -p $2
-
-for i in $1/*; do
-    if [ -d $i ]; then
-       ssp=$(basename $i)
-       echo "PROCESSING: $ssp"
-		
-       r1=$(find $i -type f -name *_R1.fastq.gz)
-       r2=$(find $i -type f -name *_R2.fastq.gz)
-		
-       if [ -n r1 ] && [ -n r2 ]; then
-          o_spp=$2/$spp
-          mkdir -p $o_spp
-          fastp -i $r1 -I $r2 -o $o_spp/$spp-READ1.fastq -O $o_spp/$spp-READ2.fastq --trim_poly_g --correction --overrepresentation_analysis --html --thread 10 \
-			
-       fi
-    fi
-done
+To give permissions to any script:
+```
+chmod +x fastp.sh
 ```
 
 ### 5. CD-HIT-DUP
