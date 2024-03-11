@@ -65,7 +65,7 @@ source activate phyluce-1.7.2
 ```
 
 ### 2. IQ-TREE INSTALLATION
-IQ-TREE is a computer program used to infer phylogenetic trees by maximum likelihood. This program contains a fast and effective scholastic algorithm, which can be compared to other phylogenetic inference programs, such as RAxML and PhyML, with similar computational time (Nguyen et al., 2015). 
+An inference of phylogenetic trees by the maximum likelihood method is one of the programs that IQ-TREE is often used for. The program offers an accurate and time efficient scholastic algorithm, the same accuracy and time effectiveness are shared with other phylogenetic inference programs, e.g., such as RAxML and PhyML (Nguyen et al., 2015).
 
 To install IQ-TREE we will use the conda command, as it allows us to download this software program with a simple command:
 ```
@@ -97,7 +97,7 @@ cd exabayes-1.5.1.tar.gz
 ```
 
 ### 4. CD-HIT INSTALLATION
-CD-HIT is a program that uses an algorithm to reduce sequence redundancy and improve the performance of other sequence analyses. It is based on the estimation of similarities between sequences to filter out unnecessary sequence alignments (Fu L. et al., 2012)
+CD-HIT is a program that applies an algorithm to reduce size redundancy and thereby enhance the performance of advanced sequence analysis methods. It is based on the prediction of a similarity to filter out the extraneous conversion of sequences to their debugging counterparts (Fu L. et al., 2012).
 
 For CD-HIT installation:
 ```
@@ -115,13 +115,19 @@ For the present study, only CD-HIT-DUP has been used. This is used before making
 
 
 ### 5. ASTRAL INSTALLATION
-ASTRAL is a java program used to estimate a phylogenetic tree by creating a set of unrooted gene trees. This program seeks to find the tree that maximises the number of induced quartet trees in gene trees that are shared by the species tree and is statistically consistent under a multispecies coalescent model.
+The ASTRAL tool is a java-based package that is used for estimating a phylogenetic tree with a set of unrooted gene-trees. It detect the species tree that turns out to be the one which gives the majority of induced quartet trees within present gene trees, and this is a statistical approach which is compatible with a multispecies coalescent model (visit Astral's GitHub because a new version called ASTER has been released).
+
+To install Astral, we create a folder called Apps, which is going to be our central place for all the extensions and programs we need during the course.
+
+Then: 
+
 ```
 mkdir -p Apps/Astral
 cd Apps/Astral
 wget https://github.com/smirarab/ASTRAL/raw/master/Astral.5.7.8.zip
 unzip Astral.5.7.8.zip
 ```
+It should be noted that whenever we want to use Astral, we will have to specify the path where the Astral directory with the executable script of the program is located (later you will see in the commands that the path to the Astral directory is used).
 
 ### 6. FASTP INSTALLATION
 
@@ -131,7 +137,11 @@ conda install -c bioconda fastp
 
 
 ### 3. COUNT THE READ DATA
-To count the number of READS in a sequence file for a species, UNIX tools can be used. The command counts reads from R1, which should be equal to R2 otherwise we will have to equal the total reads of the two sequences (see UNPAIRED FASTQ FILES).  The command divides the output number by 4 to get the number of sequence reads.
+- To count the number of reads in a sequence file for a species, Unix tools can be used. 
+
+- This command counts reads from R1, which should be equal to R2. Otherwise, we will have to equal the total reads of the two sequences (see UNPAIRED FASTQ FILES). 
+
+- The command divides the output number by 4 to get the number of sequence reads.
 
 ```
 for i in *_R1_*.fastq.gz; do echo $i; gunzip -c $i | wc -l | awk '{print $1/4}'; done
