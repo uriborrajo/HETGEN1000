@@ -155,9 +155,7 @@ An example for running the script would be:
 ```
 ./fastp.sh ~/Desktop/Oriol/fastq ~/Desktop/Oriol/clean-fastq
 ```
-Note that if you copy the script directly into a new shell script, you will have to give it permissions so that it can be executed.
-
-To give permissions to any script:
+Note that if you copy the script directly into a new shell script, you will have to give it permissions so that it can be executed. To give it these permissions:
 ```
 chmod +x fastp.sh
 ```
