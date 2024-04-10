@@ -161,7 +161,7 @@ chmod +x fastp.sh
 ```
 
 ### 5. CD-HIT-DUP
-Before making the Spades assemblies we have to clean possible contaminations and duplicates of the raw data.
+Before making the Spades assemblies we have to clean possible contaminations and duplicates from the raw data.
 
 · Run the cd-hit-dup.sh shell script as
 ```
@@ -191,8 +191,7 @@ done < especies_sin_archivos.txt
 ```
 
 ### 6. SPADES
-
-Steps to crate "assembly.conf" file:
+To perform the Spades we have to create a configuration file (i.e. assebly.conf) containing the paths of each species so that the programme can recognise each of these species:
 ```
 cd cdhitdup
 ```
@@ -211,6 +210,7 @@ or
 for i in *; do echo "$i:intern/home/Desktop/data/cdhitdup/$i/split-adapter-quality-trimmed/"; done >> ../assembly.conf
 ```
 
+Once we have the configuration file, we can start the assembly with spades. Then we have to run the following command:
 
 ```
 phyluce_assembly_assemblo_spades \
@@ -219,56 +219,6 @@ phyluce_assembly_assemblo_spades \
     --memory 20000 \
     --cores 30 \
 ```
-
->### WARNING!!
->
->Based on [Brant's](https://gist.github.com/brantfaircloth/e48e7e4eb9748854962863d104f94095) python script we kept UCE loci that match more than one contig.
->
->```
->phyluce_assembly_match_contigs_to_probes \
->    --contigs . \
->    --probes ../../spades-assembly/Probeset-70nt.fasta \
->    --output uce-search-results \
->    --keep-duplicates duplicates.txt
->```
->```
->mkdir -p duplicates
->mv duplicates.txt duplicates/
->cd duplicates/
->```
->```
->python ./phyluce_assembly_parse_duplicates_file.py \
->    --contigs ../ \
->    --duplicates-file duplicates.txt \
->    --output duplicates.fasta \
->    --exclude-cnt 2
->```
->```
->mv duplicates.fasta ../taxon-sets/all
->```
->```
->phyluce_assembly_explode_get_fastas_file \
->    --input duplicates.fasta \
->    --output exploded-fastas \
->    --by-taxon
->```
->```
->cd exploded-fastas
->```
->```
->cat *-DUPE1.unaligned.fasta >> duplicates.fasta
->```
->```
->sed -i 's/_DUPE1//g' duplicates.fasta
->```
->```
->cd ../
->```
->```
->cat all-taxa-incomplete.fasta duplicates.fasta >> all-taxa-incomplete2.fasta
->```
-
-
 ### 8. FINDING UCE LOCI
 We want to locate which CONTIGS are in a UCE loci and remove those that are not. Hence, we need the Probeset that is in the folder *../../spades-assembly/* and is called *Probeset-70nt.fasta*. 
 
