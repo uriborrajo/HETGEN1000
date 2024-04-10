@@ -163,7 +163,7 @@ chmod +x fastp.sh
 ### 5. CD-HIT-DUP
 Before making the Spades assemblies we have to clean possible contaminations and duplicates from the raw data.
 
-· Run the cd-hit-dup.sh shell script as
+· Run the [cd-hit-dup.sh](https://github.com/uriborrajo/HETGEN1000/blob/main/cd-hit-dup.sh) shell script as
 ```
 ./cd-hit-dup.sh raw-data cdhitdup
 ```
