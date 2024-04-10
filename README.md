@@ -175,7 +175,7 @@ IMPORTANT - You have to verify that the fastq files use exactly four lines per s
 
 The program's output will be three files, the first two contains the reads of the matching pairs and the third one the reads of the matching pairs.
 
-Usage: python fastqCombinePairedEnd.py input1 input2 separator
+Usage: python [fastqCombinePairedEnd.py](https://github.com/uriborrajo/HETGEN1000/blob/main/fastqCombinePairedEnd.py) input1 input2 separator
 
 input1 = LEFT  fastq or fastq.gz file (R1)
 
