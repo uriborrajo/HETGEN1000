@@ -97,7 +97,7 @@ cd exabayes-1.5.1.tar.gz
 ```
 
 ### 4. CD-HIT INSTALLATION
-CD-HIT is a program that applies an algorithm to reduce size redundancy and thereby enhance the performance of advanced sequence analysis methods. It is based on the prediction of a similarity to filter out the extraneous conversion of sequences to their debugging counterparts (Fu L. et al., 2012).
+CD-HIT is a program that applies an algorithm to reduce redundancy in sequence data, thereby enhancing the performance of advanced sequence analysis methods. It is based on predicting similarity to filter out extraneous sequences, converting them to their non-redundant counterparts (Fu L. et al., 2012).
 
 For CD-HIT installation:
 ```
@@ -107,19 +107,19 @@ For CD-HIT-DUP and CD-HIT-EST installation:
 ```
 conda install -c bioconda cd-hit-auxtools
 ```
-For the present study, only CD-HIT-DUP has been used. This is used before making assemblies with Spades.
+For the present study, only CD-HIT-DUP has been used. This is used before making assemblies with SPAdes.
 
 >CD-HIT is used after making assemblies with Spades.
 
->CD-HIT-EST is used for protein, i.e. transcriptome alignments.
+>CD-HIT-EST is used for protein alignments, i.e., transcriptome alignments.
 
 
 ### 5. ASTRAL INSTALLATION
-The ASTRAL tool is a java-based package that is used for estimating a phylogenetic tree with a set of unrooted gene-trees. It detect the species tree that turns out to be the one which gives the majority of induced quartet trees within present gene trees, and this is a statistical approach which is compatible with a multispecies coalescent model (visit Astral's GitHub because a new version called ASTER has been released).
+The ASTRAL tool is a Java-based package used for estimating a phylogenetic tree from a set of unrooted gene trees. It detects the species tree that maximizes the number of induced quartet trees present in the gene trees, using a statistical approach compatible with a multispecies coalescent model (visit ASTRAL's GitHub because a new version called ASTER has been released).
 
-To install Astral, we create a folder called Apps, which is going to be our central place for all the extensions and programs we need during the course.
+To install ASTRAL, we create a folder called "Apps," which will serve as our central location for all the extensions and programs we need during the course.
 
-Then: 
+Then:º
 
 ```
 mkdir -p Apps/Astral
@@ -127,7 +127,7 @@ cd Apps/Astral
 wget https://github.com/smirarab/ASTRAL/raw/master/Astral.5.7.8.zip
 unzip Astral.5.7.8.zip
 ```
-It should be noted that whenever we want to use Astral, we will have to specify the path where the Astral directory with the executable script of the program is located (later you will see in the commands that the path to the Astral directory is used).
+It should be noted that whenever we want to use ASTRAL, we will have to specify the path where the ASTRAL directory with the executable script of the program is located. 
 
 ### 6. FASTP INSTALLATION
 Fastp is a fast and efficient tool for preprocessing DNA and RNA sequences in genomics and transcriptomics studies. It was developed to perform various sequencing data filtering and cleaning tasks automatically and with high speed. It includes a series of main functionalities: low quality sequence filtering, adapter trimming, error correction and short sequence removal.
@@ -137,11 +137,11 @@ To download this tool just run the following command:
 conda install -c bioconda fastp
 ```
 
-
 ### 3. COUNT THE READ DATA
-- To count the number of reads in a sequence file for a species, Unix tools can be used. 
 
-- This command counts reads from R1, which should be equal to R2. Otherwise, we will have to equal the total reads of the two sequences (see UNPAIRED FASTQ FILES). 
+- To count the number of reads in a sequence file for a species, Unix tools can be used.
+
+- This command counts reads from R1, which should be equal to R2. Otherwise, we will have to equalize the total reads of the two sequences (see [UNPAIRED FASTQ FILES](https://github.com/uriborrajo/HETGEN1000/edit/main/README.md#fastq-combine-paired-end-unpaired-fastq-files)).
 
 - The command divides the output number by 4 to get the number of sequence reads.
 
@@ -151,13 +151,13 @@ for i in *_R1_*.fastq.gz; do echo $i; gunzip -c $i | wc -l | awk '{print $1/4}';
 
 ### 4. FASTP
 
-To use fastp we will have to run the script ```fastp.sh```, this script uses as input the folder with the fastqs. Also, the output can be called clean-fastq to find out where the cleaned sequences are.
+To use fastp, we will have to run the script fastp.sh. This script uses as input the folder with the FASTQ files. The output can be directed to a folder called clean-fastq to indicate where the cleaned sequences will be stored.
 
-An example for running the script would be:
+An example of running the script would be:
 ```
 ./fastp.sh ~/Desktop/Oriol/fastq ~/Desktop/Oriol/clean-fastq
 ```
-Note that if you copy the script directly into a new shell script, you will have to give it permissions so that it can be executed. To give it these permissions:
+Note that if you copy the script directly into a new shell script, you will have to give it permissions to be executed. To give it these permissions, use:
 ```
 chmod +x fastp.sh
 ```
@@ -171,19 +171,28 @@ Before making the Spades assemblies we have to clean possible contaminations and
 ```
 
 ###### FASTQ COMBINE PAIRED END (UNPAIRED FASTQ FILES)
-For those unpaired fastq files (i.e. those files where R1 and R2 do not have the same number of reads) we will have to compare and discard the read-only data.
 
-IMPORTANT - You have to verify that the fastq files use exactly four lines per sequence, otherwise this program will not recognise these sequences.
+For those unpaired FASTQ files (i.e., those files where R1 and R2 do not have the same number of reads), we will have to compare and discard the read-only data. Otherwise, the cd-hit-dup program will not work and will not detect the second reading of the sequences.
 
-The program's output will be three files, the first two contains the reads of the matching pairs and the third one the reads of the matching pairs.
+**IMPORTANT**: You have to verify that the FASTQ files use exactly four lines per sequence; otherwise, this program will not recognize these sequences.
 
-Usage: python [fastqCombinePairedEnd.py](https://github.com/uriborrajo/HETGEN1000/blob/main/fastqCombinePairedEnd.py) input1 input2 separator
+The program's output will be three files: the first two contain the reads of the matching pairs, and the third one contains the reads of the unpaired sequences.
 
-input1 = LEFT  fastq or fastq.gz file (R1)
+Usage: 
 
-input2 = RIGHT fastq or fastq.gz file (R2)
+```
+python fastqCombinePairedEnd.py input1 input2 separator
+```
 
-separator
+- *[fastqCombinePairedEnd.py](https://github.com/uriborrajo/HETGEN1000/blob/main/fastqCombinePairedEnd.py)*
+
+- *input1* = LEFT  fastq or fastq.gz file (R1)
+
+- *input2* = RIGHT fastq or fastq.gz file (R2)
+
+- *separator*
+
+To automate the process, we need to generate a text document (.txt) specifying the species for which no cd-hit-dup output has been generated. Then, we will run the following command to enter each folder of these species and execute the fastqCombinePairedEnd.py script to match the two reads of the sequences:
 
 ```
 while read i; do \
@@ -193,10 +202,9 @@ done < especies_sin_archivos.txt
 ```
 
 ### 6. SPADES
-To perform the Spades we have to create a configuration file (i.e. assebly.conf) containing the paths of each species so that the programme can recognise each of these species:
-```
-cd cdhitdup
-```
+The Spades program implemented in Phyluce requires a configuration file that includes a header specifying the samples to be assembled ([spades]) and also the name of each species and its respective path to the folder where the sequences are located.
+
+To generate this file in a simple way, first navigate to the folder where the already cleaned cd-hit-dup sequences are located and then run the following commands:
 
 ``` 
 echo "[samples]" > ../assembly.conf
@@ -206,13 +214,13 @@ echo "[samples]" > ../assembly.conf
 for i in *; do echo "$i:intern/home/Desktop/data/cdhitdup/$i/"; done >> ../assembly.conf
 ```
 
-or
+If the folder where the sequences are located is in another folder inside the species name folder, for example, inside the split-adapter-quality-trimmed folder, execute this command instead of the previous one:
 
 ``` 
 for i in *; do echo "$i:intern/home/Desktop/data/cdhitdup/$i/split-adapter-quality-trimmed/"; done >> ../assembly.conf
 ```
 
-Once we have the configuration file, we can start the assembly with spades. Then we have to run the following command:
+After creating the configuration file, initiate the assembly with SPAdes using the following command:
 
 ```
 phyluce_assembly_assemblo_spades \
@@ -221,10 +229,15 @@ phyluce_assembly_assemblo_spades \
     --memory 20000 \
     --cores 30 \
 ```
-### 8. FINDING UCE LOCI
-We want to locate which CONTIGS are in a UCE loci and remove those that are not. Hence, we need the Probeset that is in the folder *../../spades-assembly/* and is called *Probeset-70nt.fasta*. 
+*Keep in mind that the memory and core specifications may need adjustment based on the size of the data. In this study, with 35 specimens and 2227 UCEs captured, these parameters are set accordingly.*
 
-**The probeset was provided by Dr. Juan Moles.**
+### 8. FINDING UCE LOCI
+Once we have assembled our contigs from the raw reads, it's time to identify the contigs that correspond to UCE loci and exclude those that do not.
+
+The complication from this point on lies in the organization of the folders. Therefore, I recommend creating a folder structure that best suits your needs to streamline the process.
+
+To identify the contigs corresponding to UCE loci, we need to execute the following command. In our case, we've executed it within the "contigs" folder, specifying that the probe sets are located two folders back and inside the "spades-assembly" folder:
+
 ```
 phyluce_assembly_match_contigs_to_probes \
     --contigs . \
