@@ -130,7 +130,9 @@ unzip Astral.5.7.8.zip
 It should be noted that whenever we want to use Astral, we will have to specify the path where the Astral directory with the executable script of the program is located (later you will see in the commands that the path to the Astral directory is used).
 
 ### 6. FASTP INSTALLATION
+Fastp is a fast and efficient tool for preprocessing DNA and RNA sequences in genomics and transcriptomics studies. It was developed to perform various sequencing data filtering and cleaning tasks automatically and with high speed. It includes a series of main functionalities: low quality sequence filtering, adapter trimming, error correction and short sequence removal.
 
+To download this tool just run the following command:
 ```
 conda install -c bioconda fastp
 ```
