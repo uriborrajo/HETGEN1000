@@ -74,7 +74,7 @@ conda install -c bioconda iqtree
 ### 3. EXABAYES INSTALLATION
 ExaBayes is a bioinformatics program for Bayesian phylogenetic analysis. It was especially inspired by MrBayes but also applies similar approaches from BEAST. It sets up a Markov chain Monte Carlo sampling method that allows determining parameters of the evolutionary model (e.g., branch length or substitution rates) and the posterior probability of a tree or topology (Andre J. et al., 2014).
 
-For the installation of ExaBayes, follow the installation instructions (section 3) on the official ExaBayes website by clicking on this link: [![ExaBayes Manual](https://cme.h-its.org/exelixis/web/software/exabayes/manual/manual.html#sec-3-1)].
+For the installation of ExaBayes, follow the installation instructions (section 3) on the official ExaBayes website by clicking on this link: [ExaBayes Manual](https://cme.h-its.org/exelixis/web/software/exabayes/manual/manual.html#sec-3-1).
 
 It should be noted that the installation of ExaBayes did not work with versions higher than GCC version 10, and we had to downgrade it.
 
