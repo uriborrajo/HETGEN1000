@@ -323,27 +323,13 @@ done
 Acteocina-exilis.unaligned.fasta,1295,656310,506.8030888030888,4.657000046699546,184,1477,501.0,12
 ```
 
-### 11. ALIGNING UCE LOCI
+### 10. ALIGNING UCE LOCI
 
-When taxa are "closely" related (<30-50 million years ago, perhaps), I consider edge-trimming alignments to be a reasonable approach. However, when the taxa you are interested in have a broader range of divergence times (>50 million years), you might want to consider internal-trimming.
+In the case of our study we decided to align the UCE loci with no trim.
 
-Here, we show the commands for both methods:
+To do this, we must specify in the following command the option ```--no-trim``` and in addition, we must generate a ```log``` folder with the command ```mkdir -p log``` and
+change the number of ```--taxa``` to the number of taxa they have in their taxon set.
 
-- #### EDGE TRIMMING
-```
-phyluce_align_seqcap_align \
-    --input all-taxa-incomplete.fasta \
-    --output mafft-nexus-edge-trimmed \
-    --taxa 33 \
-    --aligner mafft \
-    --cores 30 \
-    --incomplete-matrix \
-    --output-format fasta \
-    --log-path log
-```
-*Replace ```--taxa``` with the number of taxa you have in your analysis. Furthermore, we specify ```--log-path``` to indicate the path where we will save the command's log, so you need to create that directory using ```mkdir log```.*
-
-- #### INTERNAL TRIMMING
 ```
 phyluce_align_seqcap_align \
     --input all-taxa-incomplete.fasta \
@@ -356,25 +342,16 @@ phyluce_align_seqcap_align \
     --no-trim \
     --log-path log
 ```
-*Replace ```--taxa``` with the number of taxa you have in your analysis. Furthermore, we specify ```--log-path``` to indicate the path where we will save the command's log, so you need to create that directory using ```mkdir log```.*
+For masking the highly variable, ambiguous or error-prone parts of the sequences we will use two different masking programs, Gblocks and ZORRO.
 
-- #### GBLOCKS
-We are going to trim these loci using **Gblocks**
+- #### 10.1 GBLOCKS
 
-So we can:
-- Run gblocks trimming on the edge trimmed alignments
- ```
-phyluce_align_get_gblocks_trimmed_alignments_from_untrimmed \
-        --alignments mafft-nexus-edge-trimmed \
-        --output mafft-nexus-edge-trimmed-gblocks \
-        --b1 0.5 \
-        --b2 0.85 \
-        --b3 4 \
-        --b4 8 \
-        --cores 12 \
-        --log-path log
-```
-- Run gblocks trimming on the internal trimmed alignments
+Gblocks is a bioinformatics tool that enhances the quality of multiple sequence alignments in phylogenetic analysis. It is a tool which detects and removes misaligned and ambiguous portions of a DNA, RNA or protein sequence alignments. ⁤
+
+⁤Gblocks keeps only the areas of the sequences that are well and reliably aligned, which enhances the performance of the data used. ⁤
+
+Phyluce implements a command to directly execute Gblocks:
+
 ```
 phyluce_align_get_gblocks_trimmed_alignments_from_untrimmed \
         --alignments mafft-nexus-internal-trimmed \
@@ -386,11 +363,56 @@ phyluce_align_get_gblocks_trimmed_alignments_from_untrimmed \
         --cores 12 \
         --log-path log
 ```
-*higher level:  --b1 0.5 --b2 0.85 --b3 4 --b4 8  #Very conservative*
+For our study we have used three types of Gblocks, which we have called Gblocks1, Gblocks2 and Gblocks3:
 
-*mid level: --b1 0.5 --b2 0.5 --b3 6 --b4 6 #This is what I start with, and use in most pubs, higher-level*
+**GBLOCKS1**:  --b1 0.5 --b2 0.85 --b3 4 --b4 8   # very restrictive
 
-*species level: --b1 0.5 --b2 0.5 --b3 10 --b4 4  #Use this with shallow datasets (species- and population-level)*
+**GBLOCKS2**: --b1 0.5 --b2 0.5 --b3 6 --b4 6   # intermediate
+
+**GBLOCKS3**: --b1 0.5 --b2 0.5 --b3 10 --b4 4   # very conservative
+
+#### 10.2 ZORRO
+
+*Step 1 (Workstation):
+```
+./zorro_mask.sh $1 $2
+```
+$1 = alignments (UCEs) (e.g. mafft-nexus-internal-trimmed)
+$2 = zorro_mask
+
+*Step 2 (Harvard):
+```
+conda activate biopython2
+cd zorro_mask
+python ../zorro.py .
+```
+$1 = zorro_mask 
+
+```
+mkdir zorro
+mv zorro_mask/*.cut zorro
+```
+Then, scp intern...
+
+*Step 3 (Workstation):
+```
+./from_cut_to_fasta.sh zorro
+```
+```
+phyluce_align_filter_alignments --alignments zorro --output zorro_filter --input-format fasta --min-length 1 --log-path log
+```
+```
+phyluce_align_remove_locus_name_from_files --alignments zorro_filter --output zorro_clean --cores 12 --log-path log
+```
+```
+phyluce_align_get_only_loci_with_min_taxa --alignments zorro_clean --taxa X --percent 0.50 --output zorro_50p --cores 35 --log-path log
+```
+```
+phyluce_align_concatenate_alignments --alignments zorro_50p --output zorro_50p_IQTree --phylip --log-path log
+```
+```
+iqtree2 --seqtype DNA --ninit 10 -B 1500 -s zorro_50p_IQTree/zorro_50p_IQTree.phylip --prefix zorro-iqtree-GHOST-50p -m GTR+FO*H4 -T AUTO --rcluster 10 --mrate G,R,E
+```
 
 ### 12. ALIGNMENT CLEANING
 Make sure that you are in the correct directory ```~/taxon-sets/all```
@@ -541,65 +563,6 @@ iqtree2 -S mafft-nexus-internal-trimmed-gblocks1-clean-50p/ --prefix loci -T AUT
 ```
 java -jar /home/intern/Desktop/apps/ASTRAL/astral.5.7.8.jar -i *.treefile -o astral_sptree.treefile
 ```
-
-![NEW](https://img.shields.io/badge/New-blue?style=social)
-### ZORRO
-
-*Step 1 (Workstation):
-```
-./zorro_mask.sh $1 $2
-```
-$1 = alignments (UCEs) (e.g. mafft-nexus-internal-trimmed)
-$2 = zorro_mask
-
-*Step 2 (Harvard):
-```
-conda activate biopython2
-cd zorro_mask
-python ../zorro.py .
-```
-$1 = zorro_mask 
-
-```
-mkdir zorro
-mv zorro_mask/*.cut zorro
-```
-Then, scp intern...
-
-*Step 3 (Workstation):
-```
-./from_cut_to_fasta.sh zorro
-```
-```
-phyluce_align_filter_alignments --alignments zorro --output zorro_filter --input-format fasta --min-length 1 --log-path log
-```
-```
-phyluce_align_remove_locus_name_from_files --alignments zorro_filter --output zorro_clean --cores 12 --log-path log
-```
-```
-phyluce_align_get_only_loci_with_min_taxa --alignments zorro_clean --taxa X --percent 0.50 --output zorro_50p --cores 35 --log-path log
-```
-```
-phyluce_align_concatenate_alignments --alignments zorro_50p --output zorro_50p_IQTree --phylip --log-path log
-```
-```
-iqtree2 --seqtype DNA --ninit 10 -B 1500 -s zorro_50p_IQTree/zorro_50p_IQTree.phylip --prefix zorro-iqtree-GHOST-50p -m GTR+FO*H4 -T AUTO --rcluster 10 --mrate G,R,E
-```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 ## REFERENCES
 
