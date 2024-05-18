@@ -65,9 +65,9 @@ source activate phyluce-1.7.2
 ```
 
 ### 2. IQ-TREE INSTALLATION
-An inference of phylogenetic trees by the maximum likelihood method is one of the programs that IQ-TREE is often used for. The program offers an accurate and time efficient scholastic algorithm, the same accuracy and time effectiveness are shared with other phylogenetic inference programs, e.g., such as RAxML and PhyML (Nguyen et al., 2015).
+Inference of phylogenetic trees by the maximum likelihood method is one of the tasks for which the IQ-TREE program is often used. The program offers an accurate and time-efficient stochastic algorithm, sharing the same accuracy and time effectiveness with other phylogenetic inference programs, such as RAxML and PhyML (Nguyen et al., 2015).
 
-To install IQ-TREE we will use the conda command, as it allows us to download this software program with a simple command:
+To install IQ-TREE, we will use the conda command, as it allows us to download this software program with a simple command:
 ```
 conda install -c bioconda iqtree
 ```
