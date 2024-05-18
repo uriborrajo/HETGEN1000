@@ -23,36 +23,36 @@
 
 ### 1. PHYLUCE INSTALLATION
 
-Phyluce is a software package initially designed to analyse data extracted from ultra-conserved elements in the genomes of organisms. These ultraconserved elements (UCE) are highly conserved regions of the genomes of organisms, in our case organisms within the phylum Mollusca.
+Phyluce is a software package initially designed to analyze data extracted from ultra-conserved elements (UCEs) in the genomes of organisms. These UCEs are highly conserved regions of the genome, and in our case, we are studying organisms within the phylum Mollusca.
 
-For the present study we will use this software package to analyse data from 35 mollusc species.
+In the present study, we will use this software package to analyze data from 35 mollusc species.
 
-To use phyluce you need to have MinicondaX installed (in our case Miniconda 3):
+To use Phyluce, you need to have Miniconda installed (in our case, Miniconda 3):
 ```
 mkdir -p ~/miniconda3
 wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda3/miniconda.sh
 bash ~/miniconda3/miniconda.sh -b -u -p ~/miniconda3
 rm -rf ~/miniconda3/miniconda.sh
 ```
-If you want to install another version of miniconda, just change the name of the .sh in the wget command (e.g. Miniconda3 to Miniconda2).
+If you want to install another version of Miniconda, just change the name of the ```.sh``` file in the ```wget``` command (e.g., from Miniconda3 to Miniconda2).
 
-Next, you must initialise Miniconda3:
+Next, you must initialize Miniconda3:
 ```
 ~/miniconda3/bin/conda init bash
 ~/miniconda3/bin/conda init zsh
 ```
-To verify that Miniconda is installed and working properly, close and reopen your terminal and then run ```conda list```, this should produce an output.
+To verify that Miniconda is installed and working properly, close and reopen your terminal and then run ```conda list``. This should produce an output.
 
-The installation of Miniconda3 is only necessary to be able to separate the downloaded packages in different environments, avoiding that they are all mixed in the base environment. Thus, Conda allows us to create different environments where we will install Phyluce in an environment called ```Phyluce-1.7.2``` where ```-1.7.2``` is the installed version.
+The installation of Miniconda3 is necessary to separate the downloaded packages into different environments, avoiding a mix in the base environment. Conda allows us to create different environments, and we will install Phyluce in an environment called ```phyluce-1.7.2```, where ```1.7.2`` is the version installed.
 
-To install phyluce-1.7.2 and create the new environment:
+To install Phyluce 1.7.2 and create the new environment:
 
 ```
 wget https://raw.githubusercontent.com/faircloth-lab/phyluce/v1.7.2/distrib/phyluce-1.7.2-py36-Linux-conda.yml
 conda env create -n phyluce-1.7.2 --file phyluce-1.7.2-py36-Linux-conda.yml
 ```
 
-Once the software package is installed, we are ready to activate and use the corresponding environment. It should be noted that whenever we want to use phyluce software we will have to activate the environment where it is installed.
+Once the software package is installed, we are ready to activate and use the corresponding environment. Note that whenever we want to use the Phyluce software, we will have to activate the environment where it is installed.
 
 To activate the environment:
 
@@ -219,6 +219,15 @@ If the folder where the sequences are located is in another folder inside the sp
 ``` 
 for i in *; do echo "$i:intern/home/Desktop/data/cdhitdup/$i/split-adapter-quality-trimmed/"; done >> ../assembly.conf
 ```
+>An example of the conf file:
+```
+[samples]
+Lomanotus_barlettai:/home/intern/Desktop/data/UCE_clean_reads_cdhitdup/Lomanotus_barlettai
+Tubulophilinopsis_pilsbryi_ZMBN105153:/home/intern/Desktop/data/UCE_clean_reads_cdhitdup/Tubulophilinopsis_pilsbryi_ZMBN105153
+Heterodoris_sp:/home/intern/Desktop/data/UCE_clean_reads_cdhitdup/Heterodoris_sp
+Madrella_ferruginosa:/home/intern/Desktop/data/UCE_clean_reads_cdhitdup/Madrella_ferruginosa
+```
+
 
 After creating the configuration file, initiate the assembly with SPAdes using the following command:
 
@@ -245,17 +254,30 @@ phyluce_assembly_match_contigs_to_probes \
     --output uce-search-results \
 ```
 ### 9. EXTRACTING UCE LOCI
-Now that we have located UCE loci, we need to determine which taxa we want to include in our analysis.
+Having identified the UCE loci, our next step is to select the taxa for our analysis, compile a list of these taxa, and generate a configuration file that specifies which UCE loci are present in each taxon.
 
-First, we make de directory where we will use to locate the output of the "data matrix configuration file".
+To generate a list of the taxa you want to use, you can directly extract the names from an Excel file if you have one. Alternatively, if you have a folder containing the taxa you want to include, you can use the following command:
+
+```
+ls -1 .
+```
+
+We will generate a file using the ```nano``` command and name it ```taxon-set.conf```. Once the configuration file is created, we will write ```[all]``` or the name of the taxon set that we are using on the first line. Then, we will copy the previously generated list of taxa into the following rows.
+
+>An example of the conf file:
+```
+[all]
+Acteocina_exilis 
+Amphimeniidae_sp2 
+Aplysiopsis_elegans 
+Arion_vulgaris
+```
+
+To maintain good organization of our folders and files, we will create a folder to store the different taxon sets that we are creating. In our case, we will create a folder for the taxon set ```all```:
 
 ```mkdir -p taxon-sets/all```
 
-Then, we need to decide which taxa we want in our *taxon set*. Create taxon-set.conf with the taxa we want in our analysis.
-
-Once we have created the conf file, we run the following command to generate the initial list of UCE loci we enriched in each taxon:
-
-*In the command, we specify that the loci are two folders back because we are in the '/all' directory. However, if you are in a different directory, you'll need to change it to the correct path.*
+Now we can execute the following command to generate the initial list of UCE loci enriched in each taxon:
 
 ```
 phyluce_assembly_get_match_counts \
@@ -265,7 +287,9 @@ phyluce_assembly_get_match_counts \
     --incomplete-matrix \
     --output taxon-sets/all/all-taxa-incomplete.conf
 ```
-Finally, we have to use that list to extract the FASTA data for each taxon for each UCE loci:
+This will generate an output called ```all-taxa-incomplete.conf``, but we want it in FASTA format for further analysis.
+
+To do this, we need to run the following command, which will generate a file called ```all-taxa-incomplete.fasta```:
 
 ```
 phyluce_assembly_get_fastas_from_match_counts \
@@ -276,12 +300,10 @@ phyluce_assembly_get_fastas_from_match_counts \
     --incomplete-matrix all-taxa-incomplete.incomplete \
     --log-path log
 ```
+###### EXPLODING THE MONOLITHIC FASTA FILE
+If we want to analyze the statistics for each taxon, we need to separate the ```all-taxa-incomplete.fasta`` file into individual FASTA files for each taxon, each containing its respective captured UCEs.
 
-*The extracted FASTA data are in a monolithic FASTA file (all data for all organisms) named all-taxa-incomplete.fasta.*
-
-### 10. EXPLODING THE MONOLITHIC FASTA FILE
-
-Sometimes, we want to know the individual statistics on UCE assemblies for each taxon. We can do that, exploding the monolithic FASTA file into a file with the UCE loci we have enriched by taxon:
+Run the following two commands: the first one separates the file by taxa, and the second one extracts statistics.
 
 ```
 phyluce_assembly_explode_get_fastas_file \
@@ -289,18 +311,17 @@ phyluce_assembly_explode_get_fastas_file \
     --output exploded-fastas \
     --by-taxon
 ```
-Then, run the stats on those exploded files:
-
 ```
 for i in exploded-fastas/*.fasta;
 do
     phyluce_assembly_get_fasta_lengths --input $i --csv;
 done
 ```
-*samples,contigs,total bp,mean length,95 CI length,min length,max length,median legnth,contigs >1kb*
-
-*Acteocina-exilis.unaligned.fasta,1295,656310,506.8030888030888,4.657000046699546,184,1477,501.0,12*
-
+>Example of statistics output:
+```
+## samples,contigs,total bp,mean length,95 CI length,min length,max length,median legnth,contigs >1kb
+Acteocina-exilis.unaligned.fasta,1295,656310,506.8030888030888,4.657000046699546,184,1477,501.0,12
+```
 
 ### 11. ALIGNING UCE LOCI
 
