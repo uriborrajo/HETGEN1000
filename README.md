@@ -365,11 +365,11 @@ phyluce_align_get_gblocks_trimmed_alignments_from_untrimmed \
 ```
 For our study we have used three types of Gblocks, which we have called Gblocks1, Gblocks2 and Gblocks3:
 
-**GBLOCKS1**:  --b1 0.5 --b2 0.85 --b3 4 --b4 8   # very restrictive
+***GBLOCKS1***:  --b1 0.5 --b2 0.85 --b3 4 --b4 8   # very restrictive
 
-**GBLOCKS2**: --b1 0.5 --b2 0.5 --b3 6 --b4 6   # intermediate
+***GBLOCKS2***: --b1 0.5 --b2 0.5 --b3 6 --b4 6   # intermediate
 
-**GBLOCKS3**: --b1 0.5 --b2 0.5 --b3 10 --b4 4   # very conservative
+***GBLOCKS3***: --b1 0.5 --b2 0.5 --b3 10 --b4 4   # very conservative
 
 #### 10.2 ZORRO
 
