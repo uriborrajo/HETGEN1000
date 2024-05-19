@@ -400,32 +400,45 @@ For our study, we have used three configurations of Gblocks, which we have calle
 ***GBLOCKS 3***: --b1 0.5 --b2 0.5 --b3 10 --b4 4   # very conservative
 
 - #### 3.7.2 ZORRO
+Zorro is a bioinformatics tool used in phylogenomics to evaluate and improve the quality of multiple sequence alignments. Unlike Gblocks, which removes misaligned regions based on predefined criteria, Zorro provides a confidence score for each position in the alignments. This score indicates the reliability of that particular position. Positions with confidence values that are too low are excluded from the alignments by Zorro, resulting in more refined alignments and, consequently, more accurate phylogenetic analyses.
 
-*Step 1 (Workstation):
+To perform masking with Zorro, we will use the shell script [zorro_mask.sh](https://github.com/uriborrajo/HETGEN1000/blob/main/zorro_mask.sh), in which we need to specify the folder containing our alignments and the name of the output folder. In our case, the output folder is named ```zorro_mask```, as indicated in the following command:
 ```
 ./zorro_mask.sh $1 $2
 ```
-$1 = alignments (UCEs) (e.g. mafft-nexus-internal-trimmed)
-$2 = zorro_mask
+***$1*** = alignments (UCEs) (e.g. mafft-nexus-internal-trimmed)
 
-*Step 2 (Harvard):
+***$2*** = zorro_mask
+
+Next we will use the Python script [zorro.py](https://github.com/uriborrajo/HETGEN1000/blob/main/zorro.py). For the process to work, we need to place this script in the general directory and run it inside the ```zorro_mask``` folder. Below you can see the commands:
+
 ```
-conda activate biopython2
 cd zorro_mask
 python ../zorro.py .
 ```
-$1 = zorro_mask 
+***$1*** = zorro_mask 
 
+*The ```zorro_mask``` folder must contain both the ```.fasta``` and ```.fasta.mask``` files; otherwise the Python script will not work.*
+
+*Here is an example of the files that should be in the folder:*
+
+```
+-rw-rw-r--  1 intern intern  51751 abr 17 18:42 uce-998.fasta
+-rw-rw-r--  1 intern intern  25137 abr  5 00:32 uce-998.fasta.mask
+```
+Once the process is finished, we will create a folder named ```zorro``` where we will place the ```.cut``` files.
 ```
 mkdir zorro
 mv zorro_mask/*.cut zorro
 ```
-Then, scp intern...
+Now we have a folder with only the ```.cut``` files, but for the following phyluce commands to work, we must transform these files to the *FASTA* format. To do this, we run the script [from_cut_to_fasta.sh](https://github.com/uriborrajo/HETGEN1000/blob/main/from_cut_to_fasta.sh):
 
-*Step 3 (Workstation):
 ```
 ./from_cut_to_fasta.sh zorro
 ```
+
+Finally, we need to run the following commands to prepare the data for downstream analysis:
+
 ```
 phyluce_align_filter_alignments --alignments zorro --output zorro_filter --input-format fasta --min-length 1 --log-path log
 ```
