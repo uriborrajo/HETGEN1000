@@ -8,24 +8,24 @@
 ![Ultra Conserved Elements](https://www.ultraconserved.org/assets/img/ultraconserved-header.png)
 
 ## INDEX
-### 1. [Requirements](https://github.com/uriborrajo/HETGEN1000/edit/main/README.md#requirements-)
-### 2. [Getting Started](https://github.com/uriborrajo/HETGEN1000/edit/main/README.md#getting-started-1)
-#### 2.1 [Phyluce installation](https://github.com/uriborrajo/HETGEN1000/edit/main/README.md#1-phyluce-installation-1)
-#### 2.2 [IQ-TREE installation](https://github.com/uriborrajo/HETGEN1000/edit/main/README.md#2-iq-tree-installation-1)
-#### 2.3 [ExaBayes installation](https://github.com/uriborrajo/HETGEN1000/edit/main/README.md#3-exabayes-installation-1)
-#### 2.4 [CD-HIT installation](https://github.com/uriborrajo/HETGEN1000/edit/main/README.md#24-cd-hit-installation-1)
-#### 2.5 [Astral installation](https://github.com/uriborrajo/HETGEN1000/edit/main/README.md#5-astral-installation)
-#### 2.6 [Fastp installation](https://github.com/uriborrajo/HETGEN1000/edit/main/README.md#6-fastp-installation)
-### 3. [Phylogenomic Analysis](https://github.com/uriborrajo/HETGEN1000/edit/main/README.md#3-phylogenomic-analysis-1)
-#### 3.1 [Counting the read data](https://github.com/uriborrajo/HETGEN1000/edit/main/README.md#31-counting-the-read-data-1)
-#### 3.2 [Fastp](https://github.com/uriborrajo/HETGEN1000/edit/main/README.md#4-fastp)
-#### 3.3 [CD-HIT-DUP](https://github.com/uriborrajo/HETGEN1000/edit/main/README.md#5-cd-hit-dup)
-#### 3.4 [SPAdes](https://github.com/uriborrajo/HETGEN1000/edit/main/README.md#34-spades-1)
-#### 3.5 [Finding UCE loci](https://github.com/uriborrajo/HETGEN1000/edit/main/README.md#35-finding-uce-loci-1)
-#### 3.6 [Extracting UCE loci](https://github.com/uriborrajo/HETGEN1000/edit/main/README.md#9-extracting-uce-loci)
-#### 3.7 [Aligning UCE loci](https://github.com/uriborrajo/HETGEN1000/edit/main/README.md#10-aligning-uce-loci)
-##### 3.7.1 [Gblocks](https://github.com/uriborrajo/HETGEN1000/edit/main/README.md#101-gblocks)
-##### 3.7.2 [ZORRO](https://github.com/uriborrajo/HETGEN1000/edit/main/README.md#102-zorro)
+### 1. [Requirements](https://github.com/uriborrajo/HETGEN1000/tree/main#1-requirements-1)
+### 2. [Getting Started](https://github.com/uriborrajo/HETGEN1000/tree/main#2-getting-started-1)
+#### 2.1 [Phyluce installation](https://github.com/uriborrajo/HETGEN1000/tree/main#21-phyluce-installation-1)
+#### 2.2 [IQ-TREE installation](https://github.com/uriborrajo/HETGEN1000/tree/main#22-iq-tree-installation-1)
+#### 2.3 [ExaBayes installation](https://github.com/uriborrajo/HETGEN1000/tree/main#23-exabayes-installation-1)
+#### 2.4 [CD-HIT installation](https://github.com/uriborrajo/HETGEN1000/tree/main#24-cd-hit-installation-1)
+#### 2.5 [Astral installation](https://github.com/uriborrajo/HETGEN1000/tree/main#25-astral-installation-1)
+#### 2.6 [Fastp installation](https://github.com/uriborrajo/HETGEN1000/tree/main#26-fastp-installation-1)
+### 3. [Phylogenomic Analysis](https://github.com/uriborrajo/HETGEN1000/tree/main#3-phylogenomic-analysis-1)
+#### 3.1 [Counting the read data](https://github.com/uriborrajo/HETGEN1000/tree/main#31-counting-the-read-data-1)
+#### 3.2 [Fastp](https://github.com/uriborrajo/HETGEN1000/tree/main#32-fastp-1)
+#### 3.3 [CD-HIT-DUP](https://github.com/uriborrajo/HETGEN1000/tree/main#33-cd-hit-dup-1)
+#### 3.4 [SPAdes](https://github.com/uriborrajo/HETGEN1000/tree/main#34-spades-1)
+#### 3.5 [Finding UCE loci](https://github.com/uriborrajo/HETGEN1000/tree/main#35-finding-uce-loci-1)
+#### 3.6 [Extracting UCE loci](https://github.com/uriborrajo/HETGEN1000/tree/main#9-extracting-uce-loci)
+#### 3.7 [Aligning UCE loci](https://github.com/uriborrajo/HETGEN1000/tree/main#10-aligning-uce-loci)
+##### 3.7.1 [Gblocks](https://github.com/uriborrajo/HETGEN1000/tree/main#101-gblocks)
+##### 3.7.2 [ZORRO](https://github.com/uriborrajo/HETGEN1000/tree/main#102-zorro)
 
 ## 1. REQUIREMENTS 
 
@@ -273,7 +273,7 @@ phyluce_assembly_match_contigs_to_probes \
     --probes ../../spades-assembly/Probeset-70nt.fasta \
     --output uce-search-results \
 ```
-### 9. EXTRACTING UCE LOCI
+### 3.6 EXTRACTING UCE LOCI
 Having identified the UCE loci, our next step is to select the taxa for our analysis, compile a list of these taxa, and generate a configuration file that specifies which UCE loci are present in each taxon.
 
 To generate a list of the taxa you want to use, you can directly extract the names from an Excel file if you have one. Alternatively, if you have a folder containing the taxa you want to include, you can use the following command:
@@ -343,7 +343,7 @@ done
 Acteocina-exilis.unaligned.fasta,1295,656310,506.8030888030888,4.657000046699546,184,1477,501.0,12
 ```
 
-### 10. ALIGNING UCE LOCI
+### 3.7 ALIGNING UCE LOCI
 
 In the case of our study we decided to align the UCE loci with no trim.
 
@@ -364,7 +364,7 @@ phyluce_align_seqcap_align \
 ```
 For masking the highly variable, ambiguous or error-prone parts of the sequences we will use two different masking programs, Gblocks and ZORRO.
 
-- #### 10.1 GBLOCKS
+- #### 3.7.1 GBLOCKS
 
 Gblocks is a bioinformatics tool that enhances the quality of multiple sequence alignments in phylogenetic analysis. It detects and removes misaligned and ambiguous portions of DNA, RNA, or protein sequence alignments.
 
@@ -391,7 +391,7 @@ For our study, we have used three configurations of Gblocks, which we have calle
 
 ***GBLOCKS 3***: --b1 0.5 --b2 0.5 --b3 10 --b4 4   # very conservative
 
-#### 10.2 ZORRO
+- #### 3.7.2 ZORRO
 
 *Step 1 (Workstation):
 ```
