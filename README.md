@@ -26,6 +26,14 @@
 #### 3.7 [Aligning UCE loci](https://github.com/uriborrajo/HETGEN1000/tree/main#10-aligning-uce-loci)
 ##### 3.7.1 [Gblocks](https://github.com/uriborrajo/HETGEN1000/tree/main#101-gblocks)
 ##### 3.7.2 [ZORRO](https://github.com/uriborrajo/HETGEN1000/tree/main#102-zorro)
+#### 3.8 [Alignment cleaning]
+#### 3.9 [Final data Matrices]
+#### 3.10 [Preparing data for Downstream Analysis]
+### 4. [Downstram Analysis]
+#### 4.1 [IQ-TREE]
+#### 4.2 [ExaBayes]
+#### 4.3 [Astral]
+### 5. [References]
 
 ## 1. REQUIREMENTS 
 
@@ -434,7 +442,7 @@ phyluce_align_concatenate_alignments --alignments zorro_50p --output zorro_50p_I
 iqtree2 --seqtype DNA --ninit 10 -B 1500 -s zorro_50p_IQTree/zorro_50p_IQTree.phylip --prefix zorro-iqtree-GHOST-50p -m GTR+FO*H4 -T AUTO --rcluster 10 --mrate G,R,E
 ```
 
-### 12. ALIGNMENT CLEANING
+### 3.8 ALIGNMENT CLEANING
 Make sure that you are in the correct directory ```~/taxon-sets/all```
 ```
 phyluce_align_remove_locus_name_from_files \
@@ -445,7 +453,7 @@ phyluce_align_remove_locus_name_from_files \
 ```
 **We are using ```mafft-nexus-edge-trimmed-gblocks``` but you can also use ```mafft-nexus-internal-trimmed-gblocks```, depending on the decision you made in step 11.**
 
-### 13. FINAL DATA MATRICES
+### 3.9 FINAL DATA MATRICES
 Make sure that you are in the correct directory ```~/taxon-sets/all```
 ```
 phyluce_align_get_only_loci_with_min_taxa \
@@ -456,7 +464,7 @@ phyluce_align_get_only_loci_with_min_taxa \
     --cores 35 \
     --log-path log
 ```
-### 14. COUNT UCEs PER SPECIES (of each matrix)
+###### COUNT UCEs FOR EACH MATRIX
 ```
 phyluce_align_convert_one_align_to_another --alignments mafft-nexus-internal-trimmed-gblocks-clean-50p --output mafft-fastas-internal-trimmed-gblocks-clean-50p --input-format nexus --output-format fasta --cores 12 --log-path log
 ```
@@ -473,7 +481,7 @@ phyluce_assembly_explode_get_fastas_file --input all-fastas-50p --output explode
 ```
 for i in exploded-fastas-50p/*.fasta; do phyluce_assembly_get_fasta_lengths --input $i --csv; done
 ```
-### 15. PREPARING DATA FOR DOWNSTREAM ANALYSIS
+### 3.10 PREPARING DATA FOR DOWNSTREAM ANALYSIS
 Make sure that you are in the correct directory ```~/taxon-sets/all```
 ```
 phyluce_align_concatenate_alignments \
@@ -482,8 +490,8 @@ phyluce_align_concatenate_alignments \
     --phylip \
     --log-path log
 ```
-### 16. DOWNSTREAM ANALYSIS
-- #### IQTree
+## 4. DOWNSTREAM ANALYSIS
+### 4.1 IQTree
 Make sure that you are in the correct directory ```~/taxon-sets/all/mafft-nexus-edge-trimmed-gblocks-clean-50p-IQTree```
 ```
 #!/bin/bash
@@ -510,7 +518,7 @@ New command:
 iqtree2 --seqtype DNA --ninit 10 -B 1500 -s mafft-nexus-internal-trimmed-gblocks1-clean-50p-IQTree.phylip --prefix iqtree-GHOST-50p -m GTR+FO*H4 -T AUTO --rcluster 10 --mrate G,R,E
 ```
 
-- #### ExaBayes
+### 4.2 ExaBayes
 ```
 #!/bin/bash
 
@@ -575,7 +583,7 @@ extractBips -f ExaBayes_topologies.17taxa.0 ExaBayes_topologies.17taxa.1 -n 17Bi
 consense –f ExaBayes_topologies.16Taxa.0 ExaBayes_topologies.16Taxa.1 –n 16ConsTree
 
 
-- #### ASTRAL
+### 4.3 ASTRAL
 ```
 iqtree2 -S mafft-nexus-internal-trimmed-gblocks1-clean-50p/ --prefix loci -T AUTO --seqtype DNA -m GTR+FO*H4 -B 1500
 ```
@@ -584,7 +592,7 @@ iqtree2 -S mafft-nexus-internal-trimmed-gblocks1-clean-50p/ --prefix loci -T AUT
 java -jar /home/intern/Desktop/apps/ASTRAL/astral.5.7.8.jar -i *.treefile -o astral_sptree.treefile
 ```
 
-## REFERENCES
+## 5. REFERENCES
 
 • Crotty, S.M., Minh, B.Q., Bean, N.G., Holland, B.R., Tuke, J., Jermiin, L.S., Haeseler, A.V., 2019. GHOST: Recovering historical signal from heterotachously-evolved sequence alignments. Syst. Biol. 69, 249–264. https://doi.org/10.1093/sysbio/syz051
 
