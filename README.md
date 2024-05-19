@@ -7,8 +7,27 @@
 
 ![Ultra Conserved Elements](https://www.ultraconserved.org/assets/img/ultraconserved-header.png)
 
+## INDEX
+### 1. [Requirements](https://github.com/uriborrajo/HETGEN1000/edit/main/README.md#requirements-)
+### 2. [Getting Started](https://github.com/uriborrajo/HETGEN1000/edit/main/README.md#getting-started-1)
+#### 2.1 [Phyluce installation](https://github.com/uriborrajo/HETGEN1000/edit/main/README.md#1-phyluce-installation-1)
+#### 2.2 [IQ-TREE installation](https://github.com/uriborrajo/HETGEN1000/edit/main/README.md#2-iq-tree-installation-1)
+#### 2.3 [ExaBayes installation](https://github.com/uriborrajo/HETGEN1000/edit/main/README.md#3-exabayes-installation-1)
+#### 2.4 [CD-HIT installation](https://github.com/uriborrajo/HETGEN1000/edit/main/README.md#24-cd-hit-installation-1)
+#### 2.5 [Astral installation](https://github.com/uriborrajo/HETGEN1000/edit/main/README.md#5-astral-installation)
+#### 2.6 [Fastp installation](https://github.com/uriborrajo/HETGEN1000/edit/main/README.md#6-fastp-installation)
+### 3. [Phylogenomic Analysis](https://github.com/uriborrajo/HETGEN1000/edit/main/README.md#3-phylogenomic-analysis-1)
+#### 3.1 [Counting the read data](https://github.com/uriborrajo/HETGEN1000/edit/main/README.md#31-counting-the-read-data-1)
+#### 3.2 [Fastp](https://github.com/uriborrajo/HETGEN1000/edit/main/README.md#4-fastp)
+#### 3.3 [CD-HIT-DUP](https://github.com/uriborrajo/HETGEN1000/edit/main/README.md#5-cd-hit-dup)
+#### 3.4 [SPAdes](https://github.com/uriborrajo/HETGEN1000/edit/main/README.md#34-spades-1)
+#### 3.5 [Finding UCE loci](https://github.com/uriborrajo/HETGEN1000/edit/main/README.md#35-finding-uce-loci-1)
+#### 3.6 [Extracting UCE loci](https://github.com/uriborrajo/HETGEN1000/edit/main/README.md#9-extracting-uce-loci)
+#### 3.7 [Aligning UCE loci](https://github.com/uriborrajo/HETGEN1000/edit/main/README.md#10-aligning-uce-loci)
+##### 3.7.1 [Gblocks](https://github.com/uriborrajo/HETGEN1000/edit/main/README.md#101-gblocks)
+##### 3.7.2 [ZORRO](https://github.com/uriborrajo/HETGEN1000/edit/main/README.md#102-zorro)
 
-## Requirements :
+## 1. REQUIREMENTS 
 
 - Phyluce version 1.7.2 or greater https://phyluce.readthedocs.io/en/latest/
 - Iqtree http://www.iqtree.org
@@ -19,9 +38,9 @@
 - Cd-hit-dup https://sites.google.com/view/cd-hit
 - Fastp https://github.com/OpenGene/fastp
   
-## GETTING STARTED
+## 2. GETTING STARTED
 
-### 1. PHYLUCE INSTALLATION
+### 2.1 PHYLUCE INSTALLATION
 
 Phyluce is a software package initially designed to analyze data extracted from ultra-conserved elements (UCEs) in the genomes of organisms. These UCEs are highly conserved regions of the genome, and in our case, we are studying organisms within the phylum Mollusca.
 
@@ -64,14 +83,14 @@ or
 source activate phyluce-1.7.2
 ```
 
-### 2. IQ-TREE INSTALLATION
+### 2.2 IQ-TREE INSTALLATION
 Inference of phylogenetic trees by the maximum likelihood method is one of the tasks for which the IQ-TREE program is often used. The program offers an accurate and time-efficient stochastic algorithm, sharing the same accuracy and time effectiveness with other phylogenetic inference programs, such as RAxML and PhyML (Nguyen et al., 2015).
 
 To install IQ-TREE, we will use the conda command, as it allows us to download this software program with a simple command:
 ```
 conda install -c bioconda iqtree
 ```
-### 3. EXABAYES INSTALLATION
+### 2.3 EXABAYES INSTALLATION
 ExaBayes is a bioinformatics program for Bayesian phylogenetic analysis. It was especially inspired by MrBayes but also applies similar approaches from BEAST. It sets up a Markov chain Monte Carlo sampling method that allows determining parameters of the evolutionary model (e.g., branch length or substitution rates) and the posterior probability of a tree or topology (Andre J. et al., 2014).
 
 For the installation of ExaBayes, follow the installation instructions (section 3) on the official ExaBayes website by clicking on this link: [ExaBayes Manual](https://cme.h-its.org/exelixis/web/software/exabayes/manual/manual.html#sec-3-1).
@@ -96,7 +115,7 @@ cd exabayes-1.5.1.tar.gz
 ./configure --enable-mpi && make
 ```
 
-### 4. CD-HIT INSTALLATION
+### 2.4 CD-HIT INSTALLATION
 CD-HIT is a program that applies an algorithm to reduce redundancy in sequence data, thereby enhancing the performance of advanced sequence analysis methods. It is based on predicting similarity to filter out extraneous sequences, converting them to their non-redundant counterparts (Fu L. et al., 2012).
 
 For CD-HIT installation:
@@ -114,7 +133,7 @@ For the present study, only CD-HIT-DUP has been used. This is used before making
 >CD-HIT-EST is used for protein alignments, i.e., transcriptome alignments.
 
 
-### 5. ASTRAL INSTALLATION
+### 2.5 ASTRAL INSTALLATION
 The ASTRAL tool is a Java-based package used for estimating a phylogenetic tree from a set of unrooted gene trees. It detects the species tree that maximizes the number of induced quartet trees present in the gene trees, using a statistical approach compatible with a multispecies coalescent model (visit ASTRAL's GitHub because a new version called ASTER has been released).
 
 To install ASTRAL, we create a folder called "Apps," which will serve as our central location for all the extensions and programs we need during the course.
@@ -129,15 +148,16 @@ unzip Astral.5.7.8.zip
 ```
 It should be noted that whenever we want to use ASTRAL, we will have to specify the path where the ASTRAL directory with the executable script of the program is located. 
 
-### 6. FASTP INSTALLATION
+### 2.6 FASTP INSTALLATION
 Fastp is a fast and efficient tool for preprocessing DNA and RNA sequences in genomics and transcriptomics studies. It was developed to perform various sequencing data filtering and cleaning tasks automatically and with high speed. It includes a series of main functionalities: low quality sequence filtering, adapter trimming, error correction and short sequence removal.
 
 To download this tool just run the following command:
 ```
 conda install -c bioconda fastp
 ```
+## 3. PHYLOGENOMIC ANALYSIS
 
-### 3. COUNT THE READ DATA
+### 3.1 COUNTING THE READ DATA
 
 - To count the number of reads in a sequence file for a species, Unix tools can be used.
 
@@ -149,7 +169,7 @@ conda install -c bioconda fastp
 for i in *_R1_*.fastq.gz; do echo $i; gunzip -c $i | wc -l | awk '{print $1/4}'; done
 ```
 
-### 4. FASTP
+### 3.2 FASTP
 
 To use fastp, we will have to run the script fastp.sh. This script uses as input the folder with the FASTQ files. The output can be directed to a folder called clean-fastq to indicate where the cleaned sequences will be stored.
 
@@ -162,7 +182,7 @@ Note that if you copy the script directly into a new shell script, you will have
 chmod +x fastp.sh
 ```
 
-### 5. CD-HIT-DUP
+### 3.3 CD-HIT-DUP
 Before making the Spades assemblies we have to clean possible contaminations and duplicates from the raw data.
 
 · Run the [cd-hit-dup.sh](https://github.com/uriborrajo/HETGEN1000/blob/main/cd-hit-dup.sh) shell script as
@@ -201,8 +221,8 @@ python ../../../scripts/Oriol/fastqCombinePairedEnd.py ${i}-READ1.fastq ${i}-REA
 done < especies_sin_archivos.txt
 ```
 
-### 6. SPADES
-The Spades program implemented in Phyluce requires a configuration file that includes a header specifying the samples to be assembled ([spades]) and also the name of each species and its respective path to the folder where the sequences are located.
+### 3.4 SPADES
+The SPAdes program implemented in Phyluce requires a configuration file that includes a header specifying the samples to be assembled ([spades]) and also the name of each species and its respective path to the folder where the sequences are located.
 
 To generate this file in a simple way, first navigate to the folder where the already cleaned cd-hit-dup sequences are located and then run the following commands:
 
@@ -240,7 +260,7 @@ phyluce_assembly_assemblo_spades \
 ```
 *Keep in mind that the memory and core specifications may need adjustment based on the size of the data. In this study, with 35 specimens and 2227 UCEs captured, these parameters are set accordingly.*
 
-### 8. FINDING UCE LOCI
+### 3.5 FINDING UCE LOCI
 Once we have assembled our contigs from the raw reads, it's time to identify the contigs that correspond to UCE loci and exclude those that do not.
 
 The complication from this point on lies in the organization of the folders. Therefore, I recommend creating a folder structure that best suits your needs to streamline the process.
@@ -346,9 +366,9 @@ For masking the highly variable, ambiguous or error-prone parts of the sequences
 
 - #### 10.1 GBLOCKS
 
-Gblocks is a bioinformatics tool that enhances the quality of multiple sequence alignments in phylogenetic analysis. It is a tool which detects and removes misaligned and ambiguous portions of a DNA, RNA or protein sequence alignments. ⁤
+Gblocks is a bioinformatics tool that enhances the quality of multiple sequence alignments in phylogenetic analysis. It detects and removes misaligned and ambiguous portions of DNA, RNA, or protein sequence alignments.
 
-⁤Gblocks keeps only the areas of the sequences that are well and reliably aligned, which enhances the performance of the data used. ⁤
+Gblocks retains only the regions of the sequences that are well and reliably aligned, improving the performance and accuracy of the data used in phylogenetic studies.
 
 Phyluce implements a command to directly execute Gblocks:
 
@@ -363,7 +383,7 @@ phyluce_align_get_gblocks_trimmed_alignments_from_untrimmed \
         --cores 12 \
         --log-path log
 ```
-For our study we have used three types of Gblocks, which we have called Gblocks1, Gblocks2 and Gblocks3:
+For our study, we have used three configurations of Gblocks, which we have called Gblocks1, Gblocks2, and Gblocks3:
 
 ***GBLOCKS 1***:  --b1 0.5 --b2 0.85 --b3 4 --b4 8   # very restrictive
 
