@@ -26,14 +26,14 @@
 #### 3.7 [Aligning UCE loci](https://github.com/uriborrajo/HETGEN1000/tree/main#10-aligning-uce-loci)
 ##### 3.7.1 [Gblocks](https://github.com/uriborrajo/HETGEN1000/tree/main#101-gblocks)
 ##### 3.7.2 [ZORRO](https://github.com/uriborrajo/HETGEN1000/tree/main#102-zorro)
-#### 3.8 [Alignment cleaning]
-#### 3.9 [Final data Matrices]
-#### 3.10 [Preparing data for Downstream Analysis]
-### 4. [Downstram Analysis]
-#### 4.1 [IQ-TREE]
-#### 4.2 [ExaBayes]
-#### 4.3 [Astral]
-### 5. [References]
+#### 3.8 [Alignment cleaning](https://github.com/uriborrajo/HETGEN1000/tree/main?tab=readme-ov-file#38-alignment-cleaning-1)
+#### 3.9 [Final data Matrices](https://github.com/uriborrajo/HETGEN1000/tree/main?tab=readme-ov-file#39-final-data-matrices-1)
+#### 3.10 [Preparing data for Downstream Analysis](https://github.com/uriborrajo/HETGEN1000/tree/main?tab=readme-ov-file#310-preparing-data-for-downstream-analysis-1)
+### 4. [Downstram Analysis](https://github.com/uriborrajo/HETGEN1000/tree/main?tab=readme-ov-file#4-downstream-analysis)
+#### 4.1 [IQ-TREE](https://github.com/uriborrajo/HETGEN1000/tree/main?tab=readme-ov-file#41-iqtree)
+#### 4.2 [ExaBayes](https://github.com/uriborrajo/HETGEN1000/tree/main?tab=readme-ov-file#42-exabayes-1)
+#### 4.3 [Astral](https://github.com/uriborrajo/HETGEN1000/tree/main?tab=readme-ov-file#43-astral-1)
+### 5. [References](https://github.com/uriborrajo/HETGEN1000/tree/main?tab=readme-ov-file#5-references-1)
 
 ## 1. REQUIREMENTS 
 
