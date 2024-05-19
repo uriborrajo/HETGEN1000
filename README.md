@@ -568,13 +568,17 @@ consense –f ExaBayes_topologies.16Taxa.0 ExaBayes_topologies.16Taxa.1 –n 16C
 ```
 
 ### 4.3 ASTRAL
+Finally, to infer the coalescent trees, we will utilize ASTRAL, implemented in Java.
+
+To initiate the process, we first need to employ IQ-TREE to generate a tree for each gene (UCE):
 ```
 iqtree2 -S mafft-nexus-internal-trimmed-gblocks1-clean-50p/ --prefix loci -T AUTO --seqtype DNA -m GTR+FO*H4 -B 1500
 ```
-
+Subsequently, we will execute the following command to obtain the final tree from ASTRAL:
 ```
 java -jar /home/intern/Desktop/apps/ASTRAL/astral.5.7.8.jar -i *.treefile -o astral_sptree.treefile
 ```
+This command assumes that the output files from IQ-TREE, with the .treefile extension, are located in the same directory from which the ASTRAL command is executed. Be sure to adjust the path according to the actual location of your IQ-TREE output files.
 
 ## 5. REFERENCES
 
