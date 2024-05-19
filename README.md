@@ -516,97 +516,56 @@ phyluce_align_concatenate_alignments \
     --log-path log
 ```
 ## 4. DOWNSTREAM ANALYSIS
-### 4.1 IQTree
-Make sure that you are in the correct directory ```~/taxon-sets/all/mafft-nexus-edge-trimmed-gblocks-clean-50p-IQTree```
-```
-#!/bin/bash
+### 4.1 IQ-TREE
+To infer the Maximum Likelihood tree, we will use IQ-TREE. For our data, we will use the GHOST model (GTR+FO*H4), but you can change it to the model that best fits your data by changing the ```-m``` (model) parameter.
 
-# Script created by Oriol Borrajo on 20 November 2023
-# https://github.com/uriborrajo/HETGEN1000/
+Here is the command used with the new IQ-TREE (v. 2):
 
-## ./iqtree.sh {PATH} *.phylip iqtree-GHOST-50p
-cd "$1"
-echo "ENTERING: $1" 
-iqtree -st DNA -ninit 10 -bb 1500 -s "$2" -pre "$3" -m GTR+FO*H4 -rcluster 10 -mrate G,R,E
-
-## ./iqtree.sh {PATH} *.phylip *.charsets iqtree-PART-50p
-# cd "$1"
-# echo "ENTERING: $1" 
-# iqtree -st DNA -ninit 10 -bb 1500 -s "$2" -sp "$3" -pre "$4" -m MFP+MERGE -rcluster 10 -mrate G,R,E
-```
-Old command:
-```
-iqtree -st DNA -ninit 10 -bb 1500 -s mafft-nexus-edge-trimmed-gblocks-clean-50p-IQTree.phylip -pre iqtree-GHOST-50p -m GTR+FO*H4 -rcluster 10 -mrate G,R,E
-```
-New command:
 ```
 iqtree2 --seqtype DNA --ninit 10 -B 1500 -s mafft-nexus-internal-trimmed-gblocks1-clean-50p-IQTree.phylip --prefix iqtree-GHOST-50p -m GTR+FO*H4 -T AUTO --rcluster 10 --mrate G,R,E
 ```
+For the older version (v. 1), use this command:
+
+```
+iqtree -st DNA -ninit 10 -bb 1500 -s mafft-nexus-edge-trimmed-gblocks-clean-50p-IQTree.phylip -pre iqtree-GHOST-50p -m GTR+FO*H4 -rcluster 10 -mrate G,R,E
+```
 
 ### 4.2 ExaBayes
-```
-#!/bin/bash
+To infer the tree using Bayesian statistics, we will use the ExaBayes program. This program requires a significant amount of memory and is a slow process. Therefore, a compiler is used to perform parallel processes (MPI).
 
-# Script created by Oriol Borrajo on 20 November 2023
-# https://github.com/uriborrajo/HETGEN1000/
+Additionally, we will need to download the [config.nex](https://github.com/uriborrajo/HETGEN1000/blob/main/config.nex) file, which specifies the parameters and variables for our Bayesian analysis. Review this file before using it and adjust it according to your analysis requirements.
 
-## ./exabayes.sh {PATH} *.phylip config.nex
-cd "$1"
-echo "ENTERING: $1" 
-mpirun exabayes -np 4 -R 1 -C 4 -f "$2" -m DNA -c "$3" -n run1 -s 1234 -M 1 #exabayes run1
-# Total walltime elapsed: 43:30:4.35 (hh:mm:ss) -M 3-
-# Total CPU time elapsed: 1044:01:44.38 (hh:mm:ss) -M 3-
-mpirun exabayes -np 4 -R 1 -C 4 -f "$2" -m DNA -c "$3" -n run2 -s 1234 -M 1 #exabayes run2
-# Total walltime elapsed: 39:11:50.19 (hh:mm:ss) -M 1-
-# Total CPU time elapsed: 940:44:4.51 (hh:mm:ss) -M 1-
-mpirun exabayes -np 4 -R 1 -C 4 -f "$2" -m DNA -c "$3" -n run3 -s 1234 -M 1 #exabayes run3
-# Total walltime elapsed: 27:06:23.76 (hh:mm:ss) -M 1-
-# Total CPU time elapsed: 650:33:30.29 (hh:mm:ss) -M 1-
-mpirun exabayes -np 4 -R 1 -C 4 -f "$2" -m DNA -c "$3" -n run4 -s 1234 -M 1 #exabayes run4
-# Total walltime elapsed: 25:51:55.34 (hh:mm:ss) -M 1-
-# Total CPU time elapsed: 620:46:8.13 (hh:mm:ss) -M 1-
-# mpirun exabayes -np 16 -R 4 -C 4 -f "$2" -m DNA -c "$3" -n run1 -s 1234 -M 1 
+To automate the process, we have created a [script](https://github.com/uriborrajo/HETGEN1000/blob/main/exabayes.sh) that performs four executions successively. We also recommend using the ```tmux``` program or another program to manage background processes, as this is a time-consuming process (if you review the [exabayes.sh](https://github.com/uriborrajo/HETGEN1000/blob/main/exabayes.sh) script, you will see the elapsed execution time for our analysis).
 
-## ./exabayes.sh {PATH} *.phylip config.nex aln.part
-# cd "$1"
-# echo "ENTERING: $1" 
-# mpirun exabayes -np 4 -R 1 -C 4 -f "$2" -m DNA -c "$3" -q "$4" -n run1 -s 1234 -M 1 #exabayes run1 w/ partition file
-# mpirun exabayes -np 4 -R 1 -C 4 -f "$2" -m DNA -c "$3" -q "$4" -n run2 -s 1234 -M 1 #exabayes run2 w/ partition file
-# mpirun exabayes -np 4 -R 1 -C 4 -f "$2" -m DNA -c "$3" -q "$4" -n run3 -s 1234 -M 1 #exabayes run3 w/ partition file
-# mpirun exabayes -np 4 -R 1 -C 4 -f "$2" -m DNA -c "$3" -q "$4" -n run4 -s 1234 -M 1 #exabayes run4 w/ partition file
-# mpirun exabayes -np 16 -R 4 -C 4 -f "$2" -m DNA -c "$3" -q "$4" -n run1 -s 1234 -M 1
+To run the script, execute the following command:
 
 ```
-
-config.nex:
-```
-begin run;
- numruns 1
- numgen 5e6
- diagfreq 5000
- samplingfreq 500
- printfreq 100
- burninproportion 0.25
- parsimonyStart  true
- printFreq 10
- numcoupledchains 4
-end;
+./exabayes.sh alignments concatenated_matrix.phylip config.nex
 ```
 
 When run has completed, calculate these in an interactive session:
  
 - Check if parameters converged (ESS should be >100, PSRF should be <1.1)
+``` 
 postProcParam -f ExaBayes_parameters.17taxa.0 ExaBayes_parameters.17taxa.1 -n 17params
+```
 - Calculate standard deviation of split frequencies (aka convergence, ASDSF should be <1%)
+```
 sdsf -f ExaBayes_topologies.run-0.24Ony-6 ExaBayes_topologies.run-1.24Ony-6
+```
 - Compute credible set of topologies (aka frequency of diff topologies)
+```
 credibleSet -f ExaBayes_topologies.17taxa.0 ExaBayes_topologies.17taxa.1 -n 17Cred
+```
 - Extract bipartitions (see how well supported different nodes are)
+```
 extractBips -f ExaBayes_topologies.17taxa.0 ExaBayes_topologies.17taxa.1 -n 17Bips
-[Output files to care about: .bipartitions = name of node; .bipartitionStatistics = support for node (check ESS)]
+```
+*Output files to care about: .bipartitions = name of node; .bipartitionStatistics = support for node (check ESS)*
 - Generate consensus tree
+```
 consense –f ExaBayes_topologies.16Taxa.0 ExaBayes_topologies.16Taxa.1 –n 16ConsTree
-
+```
 
 ### 4.3 ASTRAL
 ```
