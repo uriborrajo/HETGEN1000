@@ -1,0 +1,11 @@
+begin run;
+ numruns 1
+ numgen 5e6
+ diagfreq 5000
+ samplingfreq 500
+ printfreq 100
+ burninproportion 0.25
+ parsimonyStart  true
+ printFreq 10
+ numcoupledchains 4
+end;
