@@ -239,13 +239,13 @@ echo "[samples]" > ../assembly.conf
 ```
 
 ``` 
-for i in *; do echo "$i:intern/home/Desktop/data/cdhitdup/$i/"; done >> ../assembly.conf
+for i in *; do echo "$i:/home/intern/Desktop/data/UCE_clean_reads_cdhitdup/$i/"; done >> ../assembly.conf
 ```
 
 If the folder where the sequences are located is in another folder inside the species name folder, for example, inside the split-adapter-quality-trimmed folder, execute this command instead of the previous one:
 
 ``` 
-for i in *; do echo "$i:intern/home/Desktop/data/cdhitdup/$i/split-adapter-quality-trimmed/"; done >> ../assembly.conf
+for i in *; do echo "$i:/home/intern/Desktop/data/UCE_clean_reads_cdhitdup/$i/split-adapter-quality-trimmed/"; done >> ../assembly.conf
 ```
 >An example of the conf file:
 ```
@@ -456,7 +456,9 @@ iqtree2 --seqtype DNA --ninit 10 -B 1500 -s zorro_50p_IQTree/zorro_50p_IQTree.ph
 ```
 
 ### 3.8 ALIGNMENT CLEANING
-Make sure that you are in the correct directory ```~/taxon-sets/all```
+For downstream analysis, we need to remove the locus name from the files. Currently, each file contains both the taxon name and the locus name. By performing this step, we will simplify the file names to include only the taxon name.
+
+To remove the locus name, use the following command:
 ```
 phyluce_align_remove_locus_name_from_files \
     --alignments mafft-nexus-internal-trimmed-gblocks \
@@ -464,10 +466,13 @@ phyluce_align_remove_locus_name_from_files \
     --cores 35 \
     --log-path log
 ```
-**We are using ```mafft-nexus-edge-trimmed-gblocks``` but you can also use ```mafft-nexus-internal-trimmed-gblocks```, depending on the decision you made in step 11.**
-
 ### 3.9 FINAL DATA MATRICES
-Make sure that you are in the correct directory ```~/taxon-sets/all```
+At this point, we are interested in minimizing noise in the data and increasing confidence in phylogenetic inferences by eliminating loci or genes that may be less informative or more susceptible to error, as well as eliminating missing data.
+
+To achieve this, we will generate an occupancy matrix with a 50% threshold. A 50% occupancy matrix means that each column of the matrix (i.e., each locus) must be present in at least 50% of the taxa to be included. This helps in reducing the noise and improving the quality of the data for phylogenetic analysis.
+
+Use the following command to perform this process:
+
 ```
 phyluce_align_get_only_loci_with_min_taxa \
     --alignments mafft-nexus-internal-trimmed-gblocks-clean \
@@ -478,12 +483,17 @@ phyluce_align_get_only_loci_with_min_taxa \
     --log-path log
 ```
 ###### COUNT UCEs FOR EACH MATRIX
+To count the UCEs retained in each species in the array, we will first need to convert the alignments to FASTA format.
 ```
 phyluce_align_convert_one_align_to_another --alignments mafft-nexus-internal-trimmed-gblocks-clean-50p --output mafft-fastas-internal-trimmed-gblocks-clean-50p --input-format nexus --output-format fasta --cores 12 --log-path log
 ```
+Next, we will tag each file with the name of the corresponding UCE using the [add_tag.sh](https://github.com/uriborrajo/HETGEN1000/blob/main/add_tag.sh) script.
 ```
 ./add_tag.sh mafft-fastas-internal-trimmed-gblocks-clean-50p
 ```
+Once all the UCEs are labeled, we need to concatenate all the files into a single monolithic file, similar to the process done previously.
+
+Use the following commands:
 ```
 cd mafft-fastas-internal-trimmed-gblocks-clean-50p
 cat * >> all-fastas-50p
@@ -495,7 +505,9 @@ phyluce_assembly_explode_get_fastas_file --input all-fastas-50p --output explode
 for i in exploded-fastas-50p/*.fasta; do phyluce_assembly_get_fasta_lengths --input $i --csv; done
 ```
 ### 3.10 PREPARING DATA FOR DOWNSTREAM ANALYSIS
-Make sure that you are in the correct directory ```~/taxon-sets/all```
+To ensure that IQ-TREE, ExaBayes, and ASTRAL can recognize our files, we need to concatenate all our UCEs from the matrix into a single file in PHYLIP format.
+
+To do this, run:
 ```
 phyluce_align_concatenate_alignments \
     --alignments mafft-nexus-internal-trimmed-gblocks-clean-50p \
