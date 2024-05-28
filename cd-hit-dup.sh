@@ -18,7 +18,7 @@ for species_directory in "$input"/*; do
     read1=$(find "$species_directory" -type f -name "*-READ1.fastq") 
     read2=$(find "$species_directory" -type f -name "*-READ2.fastq") 
 
-    if [ -n "$read" ] && [ -n "$read2" ]; then
+    if [ -n "$read1" ] && [ -n "$read2" ]; then
       output_species="$output/$species_directory" 
       mkdir -p "$output_species" #make dir if parents don't exist
       cd-hit-dup -u 30 -m false -i "$read1" -i2 "$read2" -o "$output_directory/${species}-READ1.fastq" -o2 "$output_dir/${species}-READ2.fastq" \
