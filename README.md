@@ -329,7 +329,7 @@ phyluce_assembly_get_fastas_from_match_counts \
     --log-path log
 ```
 ###### EXPLODING THE MONOLITHIC FASTA FILE
-If we want to analyze the statistics for each taxon, we need to separate the ```all-taxa-incomplete.fasta`` file into individual FASTA files for each taxon, each containing its respective captured UCEs.
+If we want to analyze the statistics for each taxon, we need to separate the ```all-taxa-incomplete.fasta``` file into individual FASTA files for each taxon, each containing its respective captured UCEs.
 
 Run the following two commands: the first one separates the file by taxa, and the second one extracts statistics.
 
