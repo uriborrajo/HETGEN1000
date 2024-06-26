@@ -596,6 +596,11 @@ This command assumes that the output files from IQ-TREE, with the .treefile exte
 
 • Fu, L., Niu, B., Zhu, Z., Wu, S., & Li, W. (2012). CD-HIT: accelerated for clustering the next-generation sequencing data. Bioinformatics (Oxford, England), 28(23), 3150–3152. https://doi.org/10.1093/bioinformatics/bts565
 
+• For this work we have used the fastqCombinePairedEnd.py (https://github.com/enormandeau/Scripts) script created by Dr. Enric Normandeau, and the seqs2occupancy.py (https://github.com/tauanajc/phylo_scripts/blob/master/seqs2occupancy.py) script created by Dr. Tauana Cunha and Dr. Bruno Medeiros.
+
+• We have also used the scripts and commands available in the PHYLUCE tutorial (https://phyluce.readthedocs.io/en/latest/tutorials/tutorial-1.html), and the script zorro.py created by Dr. Tauana Cunha that has been modified for the present study.
+
+
 
 
 
